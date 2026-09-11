@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomás Venegas — Portafolio</title>
 <meta name="description" content="Desarrollador de software y emprendedor. Portafolio de Tomás Venegas.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tomás Venegas — Portafolio">
+<meta property="og:description" content="Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.">
+<meta property="og:image" content="profile.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tomás Venegas — Portafolio">
+<meta name="twitter:description" content="Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.">
+<meta name="twitter:image" content="profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,11 +25,17 @@
 
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="#inicio" class="logo">TV</a>
+    <a href="#inicio" class="logo" aria-label="Tomás Venegas — inicio">
+      <svg class="logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11l9-8 9 8"/>
+        <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/>
+      </svg>
+    </a>
 
     <nav class="main-nav" id="mainNav">
       <a href="#sobre-mi" data-i18n="nav_about">Sobre mí</a>
       <a href="#experiencia" data-i18n="nav_experience">Experiencia</a>
+      <a href="#curriculum" data-i18n="nav_cv">Currículum</a>
       <a href="#proyectos" data-i18n="nav_projects">Proyectos</a>
       <a href="#habilidades" data-i18n="nav_skills">Habilidades</a>
       <a href="#contacto" data-i18n="nav_contact">Contacto</a>
@@ -45,6 +60,7 @@
   <section class="hero" id="inicio">
     <div class="hero-inner">
       <div class="hero-text">
+        <img src="profile.jpg" alt="Tomás Venegas" class="hero-photo">
         <p class="hero-kicker" data-i18n="hero_kicker">Portafolio</p>
         <h1 class="hero-title">
           <span class="hero-line" data-hero-line="1">Tomás</span>
@@ -100,30 +116,92 @@
       <ol class="timeline">
         <li class="timeline-item">
           <span class="timeline-date" data-i18n="exp1_date">Ago. 2025 — Presente</span>
-          <h3 class="timeline-role" data-i18n="exp1_role">Mentor / Onboarding Specialist</h3>
-          <p class="timeline-org" data-i18n="exp1_org">MTC Utah, Estados Unidos (remoto)</p>
-          <p class="timeline-desc" data-i18n="exp1_desc">
-            Ayudo a trabajadores a desarrollar habilidades de idioma y trato con prospectos, y gestiono
-            reuniones grupales con equipos de México, Estados Unidos, Brasil, Argentina, Perú, Colombia y Chile.
-          </p>
+          <h3 class="timeline-role" data-i18n="exp1_role">Technical Support &amp; Onboarding Specialist</h3>
+          <p class="timeline-org" data-i18n="exp1_org">Missionary Training Center USA (MTC) — remoto</p>
+          <ul class="timeline-bullets">
+            <li data-i18n="exp1_b1">Coordina flujos de onboarding técnico y brinda soporte continuo a usuarios, trabajando directamente con equipos de gestión en Estados Unidos en inglés, portugués y español.</li>
+            <li data-i18n="exp1_b2">Lidera tres sesiones grupales semanales multifuncionales, coordinando distintos equipos y adaptando la comunicación a diferentes necesidades de usuario.</li>
+            <li data-i18n="exp1_b3">Gestiona el ciclo completo de seguimiento y documentación de las cohortes de onboarding: registros de avance, planes de ejecución, resúmenes de mentoría y datos de CRM.</li>
+            <li data-i18n="exp1_b4">Identifica problemas recurrentes de flujo y comunicación, y desarrolla documentación y FAQ proactivas, contribuyendo a una mejora del 20% en la precisión y entrega del onboarding.</li>
+            <li data-i18n="exp1_b5">Resuelve problemas de usuarios y de flujo de trabajo, adaptándose rápidamente a cambios en software, procesos y prioridades operativas.</li>
+          </ul>
         </li>
         <li class="timeline-item">
-          <span class="timeline-date" data-i18n="exp2_date">May. 2025 — Ago. 2025</span>
-          <h3 class="timeline-role" data-i18n="exp2_role">Ropería</h3>
-          <p class="timeline-org" data-i18n="exp2_org">Clínica Universidad de Los Andes</p>
-          <p class="timeline-desc" data-i18n="exp2_desc">
-            Retiro de carros de ropa sucia y reposición de carros vacíos en los distintos pasillos y áreas de la clínica.
-          </p>
+          <span class="timeline-date" data-i18n="exp2_date">2026 — Presente</span>
+          <h3 class="timeline-role" data-i18n="exp2_role">Founder &amp; Automation Engineer — International E-commerce &amp; Import Operations</h3>
+          <p class="timeline-org" data-i18n="exp2_org">Repuestolandia</p>
+          <ul class="timeline-bullets">
+            <li data-i18n="exp2_b1">Construye un emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado para automatizar de principio a fin el proceso de abastecimiento de productos desde Brasil y su venta en Chile.</li>
+            <li data-i18n="exp2_b2">Diseñó e implementó flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.</li>
+            <li data-i18n="exp2_b3">Construyó automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.</li>
+            <li data-i18n="exp2_b4">Desarrolló verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.</li>
+            <li data-i18n="exp2_b5">Despliega y mantiene un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.</li>
+            <li data-i18n="exp2_b6">Integró la API Admin de Shopify y resolvió problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.</li>
+          </ul>
         </li>
         <li class="timeline-item">
-          <span class="timeline-date" data-i18n="exp3_date">May. 2023 — Abr. 2024</span>
-          <h3 class="timeline-role" data-i18n="exp3_role">Asistente Regional</h3>
-          <p class="timeline-org" data-i18n="exp3_org">The Church of Jesus Christ of Latter-day Saints</p>
-          <p class="timeline-desc" data-i18n="exp3_desc">
-            Apoyo administrativo y de coordinación a nivel regional.
-          </p>
+          <span class="timeline-date" data-i18n="exp3_date">Jun. 2024 — Sep. 2024</span>
+          <h3 class="timeline-role" data-i18n="exp3_role">Premium Guest Service Specialist / Trilingual Guest Relations</h3>
+          <p class="timeline-org" data-i18n="exp3_org">Valle Nevado Ski Resort, Chile</p>
+          <ul class="timeline-bullets">
+            <li data-i18n="exp3_b1">Brindó atención a huéspedes internacionales en inglés y portugués además de español, resolviendo solicitudes de servicio y problemas de comunicación en un entorno de ritmo acelerado.</li>
+            <li data-i18n="exp3_b2">Gestionó múltiples prioridades simultáneas manteniendo atención al detalle, profesionalismo y apego a los procedimientos operativos y de seguridad.</li>
+            <li data-i18n="exp3_b3">Se adaptó rápidamente a necesidades cambiantes de los huéspedes y a requerimientos operativos sensibles al tiempo.</li>
+          </ul>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-date" data-i18n="exp4_date">Feb. 2023 — Abr. 2024</span>
+          <h3 class="timeline-role" data-i18n="exp4_role">Executive Assistant to Regional Director</h3>
+          <p class="timeline-org" data-i18n="exp4_org">International Volunteer Operations, Santos, Brasil</p>
+          <ul class="timeline-bullets">
+            <li data-i18n="exp4_b1">Fue el enlace operativo y multilingüe principal de un director regional, coordinando comunicaciones, logística, documentación y procesos organizacionales en un entorno internacional.</li>
+            <li data-i18n="exp4_b2">Gestionó estructuras de apoyo, recursos y logística operativa para una comunidad multicultural de más de 150 voluntarios internacionales.</li>
+            <li data-i18n="exp4_b3">Actuó como punto de contacto principal para resolver cuellos de botella lingüísticos, operativos y de flujo de trabajo, apoyando la adopción de procedimientos organizacionales.</li>
+            <li data-i18n="exp4_b4">Realizó auditorías diarias de alto volumen sobre información de desempeño y cumplimiento, manteniendo precisión y alineación con los estándares de la organización.</li>
+            <li data-i18n="exp4_b5">Coordinó la comunicación entre stakeholders de múltiples países y trasfondos culturales, lo que exigió fuerte priorización, organización y resolución de problemas.</li>
+          </ul>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <!-- CURRÍCULUM -->
+  <section class="section" id="curriculum">
+    <div class="section-inner reveal">
+      <h2 class="section-title" data-i18n="cv_title">Currículum</h2>
+
+      <div class="cv-block">
+        <h3 class="cv-subtitle" data-i18n="cv_education_title">Educación</h3>
+        <div class="cv-education">
+          <span class="cv-education-date" data-i18n="cv_edu1_date">Nov. 2024 — Jun. 2028</span>
+          <h3 class="cv-education-role" data-i18n="cv_edu1_role">Bachelor of Science in Software Development</h3>
+          <p class="cv-education-org" data-i18n="cv_edu1_org">Brigham Young University–Idaho</p>
+          <p class="cv-education-desc" data-i18n="cv_edu1_desc">En curso.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid cv-grid">
+        <div class="skill-group">
+          <h3 data-i18n="cv_certs_title">Certificaciones</h3>
+          <p data-i18n="cv_cert1">Social Media Marketing — HubSpot Academy</p>
+          <p data-i18n="cv_cert2">Advanced English, Professional Proficiency (C2)</p>
+          <p data-i18n="cv_cert3">C2 Portuguese Proficiency (Mastery Level)</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="cv_languages_title">Idiomas</h3>
+          <p data-i18n="cv_lang1">Español — nativo</p>
+          <p data-i18n="cv_lang2">Inglés — C2</p>
+          <p data-i18n="cv_lang3">Portugués — C2</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="cv_skills_title">Habilidades técnicas</h3>
+          <p data-i18n="cv_skill1">Desarrollo: HTML, CSS, JavaScript, Python</p>
+          <p data-i18n="cv_skill2">Datos y Machine Learning: Pandas, Scikit-learn, Matplotlib, Seaborn, Random Forest</p>
+          <p data-i18n="cv_skill3">Automatización: n8n</p>
+          <p data-i18n="cv_skill4">E-commerce: Shopify</p>
+          <p data-i18n="cv_skill5">Herramientas colaborativas: CRM (entorno Microsoft), Zoom, Google Meet, Microsoft Teams</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -135,17 +213,32 @@
       <article class="project project-repuestolandia">
         <div class="project-info">
           <p class="project-kicker" data-i18n="proj1_kicker">Emprendimiento · E-commerce</p>
-          <h3 class="project-name">Repuestolandia</h3>
+          <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="project-header">
+            <img src="repuestolandia-logo.png" alt="Repuestolandia" class="project-logo">
+            <h3 class="project-name">Repuestolandia</h3>
+          </a>
           <p class="project-desc" data-i18n="proj1_desc">
-            Tienda de comercio electrónico de repuestos automotrices importados desde Brasil a Chile.
-            Diseñé un flujo de automatización 100% en n8n que conecta la tienda Shopify con el proceso
-            de importación y despacho vía Correios, reduciendo el trabajo manual de principio a fin.
+            Emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado
+            para automatizar de principio a fin el abastecimiento de productos desde Brasil y su venta en Chile.
           </p>
+          <ul class="timeline-bullets project-bullets">
+            <li data-i18n="proj1_b1">Diseñé e implementé flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.</li>
+            <li data-i18n="proj1_b2">Construí automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.</li>
+            <li data-i18n="proj1_b3">Desarrollé verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.</li>
+            <li data-i18n="proj1_b4">Despliego y mantengo un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.</li>
+            <li data-i18n="proj1_b5">Integré la API Admin de Shopify y resolví problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.</li>
+          </ul>
           <ul class="project-stack">
-            <li>Shopify</li>
+            <li>Shopify Admin API</li>
             <li>n8n</li>
-            <li>Automatización</li>
-            <li>Logística internacional</li>
+            <li>REST APIs</li>
+            <li>OAuth2</li>
+            <li>Docker</li>
+            <li>Ubuntu/DigitalOcean</li>
+            <li>Caddy</li>
+            <li>Cloudflare DNS</li>
+            <li>Google Sheets</li>
+            <li data-i18n="proj1_stack_ai">Herramientas de IA</li>
           </ul>
         </div>
       </article>
@@ -181,6 +274,19 @@
             <li>Random Forest</li>
             <li>Matplotlib / Seaborn</li>
           </ul>
+
+          <div class="collatz-explorer">
+            <p class="collatz-explorer-title" data-i18n="collatz_title">Prueba tu propio número</p>
+            <p class="collatz-explorer-desc" data-i18n="collatz_desc">Escribe cualquier entero positivo y mira su trayectoria de Collatz animarse, igual que la de n = 27 en el inicio.</p>
+            <div class="collatz-explorer-controls">
+              <input type="number" id="collatzInput" class="collatz-input" min="1" step="1" inputmode="numeric" placeholder="27" data-i18n-label="collatz_input_label" aria-label="Número entero positivo">
+              <button type="button" id="collatzRun" class="btn btn-ghost" data-i18n="collatz_run">Ver trayectoria</button>
+            </div>
+            <canvas id="collatzExplorerCanvas" class="collatz-explorer-canvas"></canvas>
+            <p class="collatz-explorer-stats" id="collatzStats" aria-live="polite"></p>
+          </div>
+
+          <a href="tesis.html" target="_blank" rel="noopener" class="btn btn-ghost project-cta" data-i18n="proj2_cta">Leer tesis completa</a>
         </div>
       </article>
     </div>
@@ -218,7 +324,13 @@
       <p class="contact-text" data-i18n="contact_text">
         Si quieres conversar sobre una oportunidad, un proyecto o simplemente saludar, escríbeme.
       </p>
-      <a href="mailto:contacto@tomasvenegas.dev" class="btn btn-primary contact-email">contacto@tomasvenegas.dev</a>
+      <div class="contact-actions">
+        <a href="mailto:venegas.osses.tomas@gmail.com" class="btn btn-primary contact-email" id="contactEmailBtn">
+          venegas.osses.tomas@gmail.com
+          <span class="contact-copied-tip" id="contactCopiedTip" data-i18n="contact_copied">¡Copiado!</span>
+        </a>
+        <a href="https://linkedin.com/in/tomas-venegas-osses-016633320" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
     </div>
   </section>
 

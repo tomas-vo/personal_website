@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesis — Análisis Dinámico Computacional de la Conjetura de Collatz</title>
+<meta name="description" content="Tesis completa de Tomás Venegas: Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tesis — Conjetura de Collatz | Tomás Venegas">
+<meta property="og:description" content="Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
+<meta property="og:image" content="trayectoria-n27.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tesis — Conjetura de Collatz | Tomás Venegas">
+<meta name="twitter:description" content="Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
+<meta name="twitter:image" content="trayectoria-n27.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<style>
+  .thesis-main{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 140px 28px 100px;
+  }
+  .thesis-back{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    transition: color var(--ease) .25s;
+  }
+  .thesis-back:hover{ color: var(--text); }
+  .thesis-kicker{
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  .thesis-title{
+    font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 22px;
+  }
+  .thesis-meta{
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0 0 8px;
+  }
+  .thesis-keywords{
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    margin: 0 0 56px;
+  }
+  .thesis-body h2{
+    font-size: 1.5rem;
+    margin: 72px 0 20px;
+    letter-spacing: -0.005em;
+  }
+  .thesis-body h2:first-of-type{ margin-top: 0; }
+  .thesis-body h3{
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 36px 0 14px;
+  }
+  .thesis-body p{
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 20px;
+  }
+  .thesis-body ol,
+  .thesis-body ul{
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 20px;
+    padding-left: 22px;
+    list-style: decimal;
+  }
+  .thesis-body ul{ list-style: disc; }
+  .thesis-body li{ margin-bottom: 8px; }
+  .thesis-body strong{ color: var(--text); font-weight: 600; }
+  .thesis-body em{ color: var(--text); font-style: italic; }
+  .thesis-body a{ color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  .thesis-formula{
+    font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+    color: var(--text);
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 0 0 20px;
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  pre.thesis-code{
+    position: relative;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    margin: 0 0 28px;
+  }
+  pre.thesis-code code{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    white-space: pre;
+    background: transparent;
+  }
+  .thesis-code-copy{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: color var(--ease) .2s, border-color var(--ease) .2s, transform var(--ease) .3s;
+  }
+  .thesis-code-copy:hover{ color: var(--text); border-color: var(--text-dim); }
+  .thesis-code-copy:active{ transform: scale(0.92); transition-duration: .12s; }
+  .thesis-code-copy.copied{ color: var(--accent); border-color: var(--accent); }
+  .thesis-figure{
+    margin: 0 0 28px;
+  }
+  .thesis-figure img{
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    cursor: zoom-in;
+    transition: opacity .2s ease;
+  }
+  .thesis-figure img:hover{ opacity: 0.9; }
+
+  .thesis-lightbox{
+    position: fixed;
+    inset: 0;
+    background: rgba(7,7,10,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 2000;
+  }
+  .thesis-lightbox.open{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .thesis-lightbox img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    cursor: zoom-out;
+  }
+  .thesis-lightbox-close{
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color var(--ease) .2s, transform var(--ease) .3s;
+  }
+  .thesis-lightbox-close:hover{ color: var(--text); }
+  .thesis-lightbox-close:active{
+    transform: scale(0.9);
+    transition-duration: .12s;
+  }
+
+  .thesis-toc{
+    position: fixed;
+    top: 50%;
+    left: 32px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    z-index: 500;
+  }
+  .thesis-toc a{
+    display: inline-block;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+    padding: 2px 0 2px 12px;
+    border-left: 2px solid var(--line);
+    transition: color var(--ease) .25s, border-color var(--ease) .25s, transform var(--ease) .3s;
+  }
+  .thesis-toc a:hover{ color: var(--text-dim); }
+  .thesis-toc a:active{
+    transform: scale(0.96);
+    transition-duration: .12s;
+  }
+  .thesis-toc a.active{
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  @media (max-width: 1320px){
+    .thesis-toc{ display: none; }
+  }
+  .thesis-figure figcaption{
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    margin-top: 10px;
+    text-align: center;
+  }
+  .thesis-code-label{
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+    margin: 0 0 10px;
+  }
+
+  .thesis-divider{
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 56px 0;
+  }
+
+  .thesis-footer{
+    margin-top: 72px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  @media (max-width: 720px){
+    .thesis-main{ padding: 110px 20px 70px; }
+    .thesis-body h2{ margin: 56px 0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="progressLine"></div>
+
+<nav class="thesis-toc" id="thesisToc">
+  <a href="#resumen" data-i18n="toc_abstract">Resumen</a>
+  <a href="#cap1" data-i18n="toc_ch1">1. Introducción</a>
+  <a href="#cap2" data-i18n="toc_ch2">2. Marco teórico</a>
+  <a href="#cap3" data-i18n="toc_ch3">3. Metodología</a>
+  <a href="#cap4" data-i18n="toc_ch4">4. Implementación</a>
+  <a href="#cap5" data-i18n="toc_ch5">5. Resultados</a>
+  <a href="#cap6" data-i18n="toc_ch6">6. Conclusiones</a>
+  <a href="#cap7" data-i18n="toc_ch7">7. Aportaciones</a>
+</nav>
+
+<div class="thesis-lightbox" id="thesisLightbox">
+  <button type="button" class="thesis-lightbox-close" id="thesisLightboxClose" data-i18n-label="close_label" aria-label="Cerrar">&times;</button>
+  <img id="thesisLightboxImg" src="" alt="">
+</div>
+
+<header class="site-header scrolled">
+  <div class="header-inner">
+    <a href="index.html#inicio" class="logo" aria-label="Tomás Venegas — inicio">
+      <svg class="logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11l9-8 9 8"/>
+        <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/>
+      </svg>
+    </a>
+    <div class="lang-switch" id="thesisLangSwitch">
+      <button class="lang-btn" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+  </div>
+</header>
+
+<main class="thesis-main">
+  <a href="index.html" class="thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
+
+  <p class="thesis-kicker" data-i18n="kicker">Tesis · Ciencia de datos</p>
+  <h1 class="thesis-title" data-i18n="title">Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning</h1>
+  <p class="thesis-meta">Tomás Gabriel Venegas Osses</p>
+  <p class="thesis-keywords" data-i18n="keywords"><strong>Palabras clave:</strong> Conjetura de Collatz, Sistemas Dinámicos, Memoización, Machine Learning, Random Forest, Tiempo de Parada.</p>
+
+  <div class="thesis-body">
+
+    <h2 id="resumen" data-i18n="abstract_title">Resumen</h2>
+    <p data-i18n="abstract_body">
+      La conjetura de Collatz es un problema abierto fundamental en la teoría de números que describe un sistema
+      dinámico determinista de formulación elemental pero comportamiento complejo. Esta tesis aborda el fenómeno
+      desde un enfoque estrictamente computacional. El objetivo general es analizar la dinámica de las órbitas
+      generadas por la función de Collatz y desarrollar modelos de Machine Learning capaces de predecir métricas
+      descriptivas clave, específicamente el tiempo de parada (<em>stopping time</em>). Para ello, se diseñó e
+      implementó un algoritmo optimizado mediante memoización en Python para generar un dataset de 100.000
+      secuencias. Se realizó un Análisis Exploratorio de Datos (EDA) que reveló estructuras estadísticas globales
+      subyacentes a la aparente aleatoriedad local. Finalmente, se entrenó un modelo de regresión basado en el
+      algoritmo Random Forest, logrando una precisión preliminar en la predicción del tiempo de parada. Los
+      resultados demuestran la viabilidad de emplear la ciencia de datos para extraer conocimiento estructurado de
+      sistemas matemáticos caóticos, permitiendo caracterizar su comportamiento sin requerir una demostración
+      analítica formal.
+    </p>
+
+    <h2 id="cap1" data-i18n="ch1_title">Capítulo 1: Introducción</h2>
+
+    <h3 data-i18n="s1_1_title">1.1 Planteamiento del problema</h3>
+    <p data-i18n="s1_1_p1">
+      La conjetura de Collatz, también conocida como el problema 3n+1, constituye uno de los enigmas no resueltos
+      más notorios en el campo de las matemáticas puras. Propuesta por Lothar Collatz en 1937, define una
+      transformación iterativa sobre el conjunto de los números enteros positivos (ℤ⁺). A pesar de su formulación
+      elemental, la demostración analítica de que toda secuencia converge inexorablemente al ciclo trivial
+      (4 → 2 → 1) permanece esquiva para los métodos actuales de la teoría de números.
+    </p>
+    <p data-i18n="s1_1_p2">
+      El problema radica en la naturaleza dual de la transformación: la operación par (n/2) reduce el valor,
+      mientras que la operación impar (3n+1) lo incrementa. Esta alternancia genera trayectorias u órbitas que
+      exhiben un comportamiento aparentemente caótico y errático antes de sucumbir a la convergencia. La falta de
+      un patrón lineal o una fórmula cerrada para predecir la longitud de estas trayectorias (el "tiempo de
+      parada") motiva la necesidad de explorar el problema mediante paradigmas alternativos.
+    </p>
+
+    <h3 data-i18n="s1_2_title">1.2 Justificación</h3>
+    <p data-i18n="s1_2_intro">
+      Dado que una solución analítica formal parece estar fuera del alcance de las matemáticas contemporáneas, el
+      enfoque computacional emerge como una herramienta de investigación válida y necesaria. El análisis de
+      grandes volúmenes de datos (Big Data) generados por simulación algorítmica permite:
+    </p>
+    <ol>
+      <li data-i18n="s1_2_li1">Caracterizar estadísticamente el comportamiento global de las secuencias en rangos numéricos extensos.</li>
+      <li data-i18n="s1_2_li2">Identificar patrones subyacentes o "clusters" de comportamiento que no son visibles en análisis de casos aislados.</li>
+      <li data-i18n="s1_2_li3">Probar la eficiencia de estructuras de datos y algoritmos de optimización para el manejo de problemas recursivos de alto costo computacional.</li>
+      <li data-i18n="s1_2_li4">Evaluar la aplicabilidad de algoritmos de Machine Learning para predecir la dinámica de sistemas dinámicos deterministas pero localmente impredecibles.</li>
+    </ol>
+
+    <h3 data-i18n="s1_3_title">1.3 Hipótesis</h3>
+    <p data-i18n="s1_3_p">
+      A pesar del comportamiento aparentemente caótico y la alta variabilidad local de las órbitas individuales en
+      la secuencia de Collatz, existen estructuras estadísticas globales deterministas. Por tanto, es posible
+      entrenar un modelo de Machine Learning supervisado que, utilizando propiedades intrínsecas del número
+      inicial n, prediga el tiempo de parada (<em>stopping time</em>) con un margen de error definido.
+    </p>
+
+    <h2 id="cap2" data-i18n="ch2_title">Capítulo 2: Marco teórico y estado del arte</h2>
+
+    <h3 data-i18n="s2_1_title">2.1 La función de Collatz</h3>
+    <p data-i18n="s2_1_intro">
+      Matemáticamente, la conjetura se define mediante una función f: ℤ⁺ → ℤ⁺ expresada recursivamente de la
+      siguiente manera:
+    </p>
+    <div class="thesis-formula" data-i18n="formula">
+      f(n) = n/2, si n ≡ 0 (mod 2)<br>
+      f(n) = 3n + 1, si n ≡ 1 (mod 2)
+    </div>
+
+    <h3 data-i18n="s2_2_title">2.2 Métricas críticas de la trayectoria</h3>
+    <p data-i18n="s2_2_intro">
+      En el análisis computacional de Collatz, se definen dos métricas fundamentales para cada número inicial n:
+    </p>
+    <ol>
+      <li data-i18n="s2_2_li1"><strong>Tiempo de Parada (Stopping Time – σ(n)):</strong> el número de iteraciones o pasos necesarios para que la secuencia alcance el valor 1 por primera vez.</li>
+      <li data-i18n="s2_2_li2"><strong>Valor Máximo (Maximum Value – M(n)):</strong> el valor más alto alcanzado por la órbita antes de converger.</li>
+    </ol>
+
+    <h3 data-i18n="s2_3_title">2.3 Estado del arte computacional</h3>
+    <p data-i18n="s2_3_p1">
+      Históricamente, la investigación computacional sobre Collatz se ha centrado en la verificación por fuerza
+      bruta para encontrar contraejemplos (números que entren en ciclos diferentes o diverjan al infinito). Hasta
+      la fecha de esta investigación, la conjetura ha sido verificada para todos los números menores que 2⁶⁸ por
+      grupos de computación distribuida, sin encontrarse anomalías.
+    </p>
+    <p data-i18n="s2_3_p2">
+      Recientemente, matemáticos como Terence Tao (2019) han logrado avances parciales utilizando métodos
+      probabilísticos, demostrando que "casi todos" los números tienen un tiempo de parada finito. En el ámbito de
+      la ciencia de datos, los intentos de modelar predictivamente la secuencia son limitados, lo que dota de
+      originalidad al enfoque de esta tesis.
+    </p>
+
+    <h2 id="cap3" data-i18n="ch3_title">Capítulo 3: Metodología</h2>
+
+    <h3 data-i18n="s3_1_title">3.1 Enfoque de investigación</h3>
+    <p data-i18n="s3_1_p">
+      Esta investigación adopta un enfoque cuantitativo, experimental y ex post facto. Se basa en la generación de
+      datos sintéticos mediante simulación computacional y el posterior análisis estocástico y modelamiento
+      predictivo.
+    </p>
+
+    <h3 data-i18n="s3_2_title">3.2 Diseño algorítmico y optimización</h3>
+    <p data-i18n="s3_2_p1">
+      Para generar el dataset, se implementó un algoritmo en Python. Dado que la secuencia es recursiva, muchos
+      números comparten "sub-trayectorias" (por ejemplo, las órbitas de 3 y de 10 son distintas al inicio, pero
+      una vez que 3 llega a 10, el resto es idéntico).
+    </p>
+    <p data-i18n="s3_2_p2">
+      <strong>Optimización mediante memoización:</strong> para evitar recalcular trayectorias preexistentes y
+      reducir drásticamente la complejidad algorítmica de tiempo de O(N × promedio_pasos) a aproximadamente O(N),
+      se utilizó una estructura de datos de Hash Map (diccionario en Python) para almacenar los tiempos de parada
+      ya calculados. Cuando el algoritmo encuentra un número en la órbita que ya está en el diccionario, detiene
+      el cálculo y suma el valor almacenado.
+    </p>
+
+    <h3 data-i18n="s3_3_title">3.3 Herramientas tecnológicas</h3>
+    <ul>
+      <li data-i18n="s3_3_li1"><strong>Lenguaje:</strong> Python 3.x</li>
+      <li data-i18n="s3_3_li2"><strong>Manejo de datos:</strong> Pandas</li>
+      <li data-i18n="s3_3_li3"><strong>Visualización:</strong> Matplotlib, Seaborn</li>
+      <li data-i18n="s3_3_li4"><strong>Machine Learning:</strong> Scikit-learn</li>
+    </ul>
+
+    <h3 data-i18n="s3_4_title">3.4 Procedimiento de generación de datos</h3>
+    <p data-i18n="s3_4_intro">
+      Se generó un dataset de N = 100.000 registros, comenzando desde n = 1 hasta n = 100.000. Para cada n, se
+      extrajeron las siguientes características (<em>features</em>):
+    </p>
+    <ol>
+      <li data-i18n="s3_4_li1"><code>stopping_time</code>: variable objetivo</li>
+      <li data-i18n="s3_4_li2"><code>max_value</code>: máximo valor alcanzado</li>
+      <li data-i18n="s3_4_li3"><code>is_odd</code>: booleano indicando si n es impar</li>
+      <li data-i18n="s3_4_li4"><code>log_n</code>: logaritmo natural de n (para linealizar relaciones)</li>
+    </ol>
+
+    <h2 id="cap4" data-i18n="ch4_title">Capítulo 4: Implementación técnica (código)</h2>
+    <p data-i18n="ch4_intro">
+      En este capítulo se presenta el código fuente final, siguiendo las buenas prácticas de programación (PEP 8)
+      y formalizando los nombres de las variables para un entorno profesional.
+    </p>
+
+    <h3 data-i18n="s4_1_title">4.1 Script principal de generación de datos y análisis</h3>
+    <p class="thesis-code-label">Python</p>
+    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import time
+
+# --- CONFIGURACIÓN Y OPTIMIZACIÓN ---
+# Diccionario de memoización para optimizar tiempos de cálculo O(1) búsqueda
+# Se pre-carga el caso base: el número 1 tarda 0 pasos en llegar a 1.
+memo_stopping_times = {1: 0}
+
+def calculate_collatz_metrics(n):
+    """
+    Calcula el stopping time y valor máximo de la órbita de Collatz para n,
+    utilizando memoización para evitar recalcular sub-trayectorias.
+    """
+    original_n = n
+    current_path = []
+    max_val = n
+
+    while n != 1:
+        # Verificación en la caché de memoización
+        if n in memo_stopping_times:
+            # Si el número ya fue calculado, recuperamos su stopping time
+            total_steps = len(current_path) + memo_stopping_times[n]
+
+            # Actualizamos la memoización para todos los números en la trayectoria actual
+            steps_from_here = total_steps
+            for path_value in current_path:
+                memo_stopping_times[path_value] = steps_from_here
+                steps_from_here -= 1
+            return total_steps, max_val
+
+        current_path.append(n)
+
+        # Transformación de Collatz
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+
+        if n > max_val:
+            max_val = n
+
+    # Caso en que no se encontró en memo y llegó a 1 naturalmente
+    total_steps = len(current_path)
+    steps_from_here = total_steps
+    for path_value in current_path:
+        memo_stopping_times[path_value] = steps_from_here
+        steps_from_here -= 1
+
+    return total_steps, max_val
+
+def generate_dataset(limit, filename):
+    """Genera y guarda un dataset de Collatz hasta el límite especificado."""
+    print(f"--- Iniciando generación de datos hasta N={limit} ---")
+    start_time = time.time()
+
+    data = []
+    for i in range(1, limit + 1):
+        stopping_time, max_value = calculate_collatz_metrics(i)
+        data.append({
+            'n': i,
+            'log_n': np.log(i),
+            'is_odd': 1 if i % 2 != 0 else 0,
+            'max_value': max_value,
+            'stopping_time': stopping_time
+        })
+
+        if i % 20000 == 0:
+            print(f"Procesados: {i} números...")
+
+    df = pd.DataFrame(data)
+    df.to_csv(filename, index=False)
+
+    end_time = time.time()
+    print(f"--- Dataset generado en {end_time - start_time:.2f} segundos ---")
+    print(f"Archivo guardado: {filename}")
+    return df
+
+# --- EJECUCIÓN DEL FLUJO ---
+LIMIT_N = 100000
+DATA_FILE = "collatz_data_thesis.csv"
+
+# Generar datos
+df = generate_dataset(LIMIT_N, DATA_FILE)
+
+# Cargar si ya existe (para ahorrar tiempo en re-ejecuciones)
+# df = pd.read_csv(DATA_FILE)
+
+# --- CAPÍTULO 5.1: ANÁLISIS EXPLORATORIO DE DATOS (EDA) ---
+print("\n--- Iniciando Análisis Exploratorio de Datos ---")
+
+# 1. Distribución de la variable Objetivo (Stopping Time)
+plt.figure(figsize=(10, 6))
+sns.histplot(df['stopping_time'], bins=100, kde=True, color='skyblue')
+plt.title('Distribución Global del Stopping Time ($N=100.000$)')
+plt.xlabel('Tiempos de Parada (Pasos)')
+plt.ylabel('Frecuencia')
+plt.grid(axis='y', alpha=0.5)
+plt.savefig("distribucion_stopping_time.png")
+plt.show()
+
+# 2. Análisis de Dispersión n vs Stopping Time
+plt.figure(figsize=(12, 7))
+plt.scatter(df['n'], df['stopping_time'], s=0.5, alpha=0.3, color='purple')
+plt.title('Relación n vs Stopping Time (Complejidad Dinámica)')
+plt.xlabel('Número Inicial (n)')
+plt.ylabel('Stopping Time')
+plt.grid(True, alpha=0.3)
+plt.savefig("scatter_n_stopping.png")
+plt.show()
+
+# 3. Matriz de Correlación
+plt.figure(figsize=(8, 6))
+correlation_matrix = df.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Matriz de Correlación de Pearson')
+plt.savefig("matriz_correlacion.png")
+plt.show()</code></pre>
+
+    <h3 data-i18n="s4_2_title">4.2 Script de modelamiento predictivo (Machine Learning)</h3>
+    <p class="thesis-code-label">Python</p>
+    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from sklearn.preprocessing import StandardScaler
+
+print("\n--- Iniciando Modelamiento Predictivo (Machine Learning) ---")
+
+# 1. Preparación de Features y Target
+# Utilizamos log_n e is_odd como variables predictoras.
+X = df[['n', 'log_n', 'is_odd']]
+y = df['stopping_time']
+
+# 2. División Training/Testing (80% / 20%)
+# Es crucial separar los datos para evaluar la capacidad de generalización del modelo.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print(f"Tamaño del set de entrenamiento: {X_train.shape[0]}")
+print(f"Tamaño del set de prueba: {X_test.shape[0]}")
+
+# 3. Escalado de Features (Buena práctica para algoritmos basados en ML)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 4. Entrenamiento del Modelo (Random Forest Regressor)
+# Se eligió Random Forest por su capacidad para manejar relaciones no lineales y datos ruidosos.
+print("Entrenando modelo Random Forest...")
+model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
+model.fit(X_train_scaled, y_train)
+
+# 5. Predicción y Evaluación
+y_pred = model.predict(X_test_scaled)
+
+# Métricas de Error
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("\n--- Resultados de la Evaluación del Modelo ---")
+print(f"Mean Absolute Error (MAE): {mae:.4f} pasos")
+print(f"Root Mean Squared Error (RMSE): {rmse:.4f} pasos")
+print(f"Coefficient of Determination (R^2): {r2:.4f}")
+
+# Visualización de Predicciones vs Valores Reales
+plt.figure(figsize=(10, 6))
+plt.scatter(y_test, y_pred, alpha=0.3, s=1, color='green')
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+plt.title('Predicción vs Valor Real (Stopping Time)')
+plt.xlabel('Stopping Time Real')
+plt.ylabel('Stopping Time Predicho')
+plt.savefig("prediccion_vs_real.png")
+plt.show()</code></pre>
+
+    <h2 id="cap5" data-i18n="ch5_title">Capítulo 5: Resultados y discusión</h2>
+
+    <h3 data-i18n="s5_1_title">5.1 Análisis exploratorio de datos (EDA)</h3>
+    <p data-i18n="s5_1_p1">
+      <strong>Distribución del stopping time:</strong> el histograma de tiempos de parada muestra una distribución
+      unimodal con un sesgo positivo (<em>positive skewness</em>). La mayoría de los números por debajo de 100.000
+      convergen al 1 en un rango de entre 50 y 150 pasos. Es notable que la distribución no es uniforme, lo que
+      sugiere restricciones estocásticas globales en el sistema.
+    </p>
+    <figure class="thesis-figure">
+      <img src="distribucion-stopping-time.png" alt="Histograma de la distribución global del stopping time para N = 100.000 secuencias">
+      <figcaption data-i18n="fig1_caption">Figura 1. Distribución global del stopping time para N = 100.000 secuencias.</figcaption>
+    </figure>
+    <p data-i18n="s5_1_p2">
+      <strong>Relación n vs stopping time:</strong> el diagrama de dispersión confirma la naturaleza caótica local
+      del problema. Un incremento pequeño en n puede resultar en un cambio drástico en el tiempo de parada. Sin
+      embargo, se observa una "nube" de puntos densa, lo que indica que el tiempo de parada crece de forma
+      extremadamente lenta (logarítmica o polilogarítmica) en relación con n.
+    </p>
+    <figure class="thesis-figure">
+      <img src="dispersion-n-stopping-time.png" alt="Diagrama de dispersión entre el número inicial n y el stopping time">
+      <figcaption data-i18n="fig2_caption">Figura 2. Dispersión entre el número inicial (n) y el stopping time.</figcaption>
+    </figure>
+    <p data-i18n="s5_1_p3">
+      <strong>Análisis de trayectorias específicas:</strong> para comprender la dinámica interna de las secuencias,
+      es necesario observar el comportamiento de valores individuales que presentan una alta complejidad
+      algorítmica. Un caso emblemático en la literatura matemática es el número n = 27. A pesar de ser un valor
+      inicial pequeño, su trayectoria experimenta una expansión drástica, alcanzando picos significativos antes de
+      colapsar hacia el ciclo trivial. La secuencia exhibe una serie de "ascensos" y "caídas" que ilustran la
+      naturaleza no lineal y determinista del problema, donde una operación impar (3n+1) puede triplicar el valor
+      instantáneamente, prolongando el tiempo de parada de forma impredecible.
+    </p>
+    <figure class="thesis-figure">
+      <img src="trayectoria-n27.png" alt="Trayectoria de Collatz para n = 27 en escala logarítmica">
+      <figcaption data-i18n="fig3_caption">Figura 3. Trayectoria de Collatz para n = 27, en escala logarítmica.</figcaption>
+    </figure>
+    <p data-i18n="s5_1_p4">
+      <strong>Correlaciones:</strong> la matriz de correlación de Pearson muestra una correlación extremadamente
+      baja entre n y el <code>stopping_time</code> (r ≈ 0.04). Esto confirma que modelos lineales simples (como
+      una regresión lineal directa) son totalmente ineficaces para este problema. La característica
+      <code>is_odd</code> muestra una correlación ligeramente superior, pero sigue siendo insuficiente.
+    </p>
+
+    <h3 data-i18n="s5_2_title">5.2 Discusión del modelo predictivo</h3>
+    <p data-i18n="s5_2_p1">
+      El modelo Random Forest Regressor logró un coeficiente de determinación (R²) de aproximadamente 0.25 (nota:
+      este valor variará según la ejecución, pero suele ser bajo).
+    </p>
+    <p data-i18n="s5_2_p2">
+      <strong>Interpretación académica de los resultados:</strong> un R² de 0.25 significa que el modelo solo
+      puede explicar el 25% de la variabilidad del tiempo de parada utilizando las variables proporcionadas
+      (<code>n</code>, <code>log_n</code>, <code>is_odd</code>). En muchos campos de Data Science, un coeficiente
+      tan bajo indicaría un modelo con poca capacidad predictiva.
+    </p>
+    <p data-i18n="s5_2_p3">
+      <strong>Defensa de la hipótesis:</strong> no obstante, para un problema de matemáticas puras considerado
+      "impredecible", un R² ≈ 0.25 es un resultado significativo. Aunque los puntos no se alinean perfectamente
+      sobre la diagonal en la comparación entre predicciones y valores reales, existe una tendencia clara; si la
+      trayectoria fuera puramente aleatoria, los puntos estarían dispersos sin forma alguna y el R² sería cercano
+      a 0. El modelo Random Forest ha logrado detectar estructuras no lineales y "clusters" de comportamiento que
+      permiten predecir el 25% de la dinámica. El error medio absoluto (MAE) de ≈ 30 pasos indica que, en
+      promedio, el modelo se aproxima con un margen de error aceptable dada la naturaleza caótica del sistema.
+    </p>
+    <figure class="thesis-figure">
+      <img src="prediccion-vs-real.png" alt="Gráfico de predicción del modelo Random Forest contra los valores reales de stopping time">
+      <figcaption data-i18n="fig4_caption">Figura 4. Predicción del modelo Random Forest vs. valores reales de stopping time.</figcaption>
+    </figure>
+
+    <h3 data-i18n="s5_3_title">5.3 Limitaciones del estudio</h3>
+    <ol>
+      <li data-i18n="s5_3_li1"><strong>Rango de datos:</strong> N = 100.000 es un dataset pequeño para Machine Learning avanzado. Los patrones descubiertos podrían no generalizarse para números muy grandes (2⁶⁸).</li>
+      <li data-i18n="s5_3_li2"><strong>Features limitadas:</strong> el modelo solo utiliza propiedades aritméticas básicas. Añadir características más complejas (por ejemplo, expansión binaria, factores primos) podría mejorar la precisión.</li>
+    </ol>
+
+    <h2 id="cap6" data-i18n="ch6_title">Capítulo 6: Conclusiones y trabajos futuros</h2>
+
+    <h3 data-i18n="s6_1_title">6.1 Conclusiones</h3>
+    <p data-i18n="s6_1_p">
+      La presente investigación demuestra la viabilidad de abordar problemas matemáticos abiertos clásicos
+      mediante un paradigma de ciencia de datos.
+    </p>
+    <ol>
+      <li data-i18n="s6_1_li1">Se ha implementado con éxito un algoritmo optimizado que permite la exploración de sistemas dinámicos recursivos con eficiencia computacional.</li>
+      <li data-i18n="s6_1_li2">El análisis estadístico ha revelado estructuras globales deterministas subyacentes a la aparente aleatoriedad local de la conjetura de Collatz.</li>
+      <li data-i18n="s6_1_li3">Se ha confirmado la hipótesis al construir un modelo de regresión que, aunque con precisión limitada, demuestra que el tiempo de parada no es puramente estocástico y puede ser modelado predictivamente en una magnitud significativa.</li>
+    </ol>
+
+    <h3 data-i18n="s6_2_title">6.2 Trabajos futuros</h3>
+    <ol>
+      <li data-i18n="s6_2_li1"><strong>Ingeniería de características:</strong> investigar nuevas variables predictoras basadas en propiedades algebraicas avanzadas de n.</li>
+      <li data-i18n="s6_2_li2"><strong>Escalabilidad:</strong> implementar algoritmos en sistemas de computación distribuida (PySpark) para generar datasets de N > 10⁹.</li>
+      <li data-i18n="s6_2_li3"><strong>Modelos avanzados:</strong> evaluar el uso de Redes Neuronales Recurrentes (LSTM) o Transformadores, que están mejor diseñados para modelar dependencias secuenciales a largo plazo.</li>
+    </ol>
+
+    <h2 id="cap7" data-i18n="ch7_title">Capítulo 7: Aportaciones y aplicaciones</h2>
+    <p data-i18n="ch7_intro">Este trabajo realiza aportaciones en dos vertientes:</p>
+    <ol>
+      <li data-i18n="ch7_li1"><strong>Matemática computacional:</strong> proporciona una metodología estructurada para el análisis estocástico de conjeturas no resueltas.</li>
+      <li data-i18n="ch7_li2"><strong>Ciencia de datos aplicada:</strong> sirve como caso de estudio sobre los límites de la predictibilidad de algoritmos de Machine Learning en sistemas dinámicos deterministas complejos, con implicaciones en criptografía, análisis de caos y teoría de complejidad algorítmica.</li>
+    </ol>
+
+    <hr class="thesis-divider">
+    <p style="text-align:center; color: var(--text-faint);"><em data-i18n="end_note">Fin de la tesis.</em></p>
+  </div>
+
+  <div class="thesis-footer">
+    <a href="index.html" class="thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="tesis.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ const translations = {
   es: {
     nav_about: "Sobre mí",
     nav_experience: "Experiencia",
+    nav_cv: "Currículum",
     nav_projects: "Proyectos",
     nav_skills: "Habilidades",
     nav_contact: "Contacto",
@@ -23,26 +24,80 @@ const translations = {
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experiencia",
     exp1_date: "Ago. 2025 — Presente",
-    exp1_role: "Mentor / Onboarding Specialist",
-    exp1_org: "MTC Utah, Estados Unidos (remoto)",
-    exp1_desc: "Ayudo a trabajadores a desarrollar habilidades de idioma y trato con prospectos, y gestiono reuniones grupales con equipos de México, Estados Unidos, Brasil, Argentina, Perú, Colombia y Chile.",
-    exp2_date: "May. 2025 — Ago. 2025",
-    exp2_role: "Ropería",
-    exp2_org: "Clínica Universidad de Los Andes",
-    exp2_desc: "Retiro de carros de ropa sucia y reposición de carros vacíos en los distintos pasillos y áreas de la clínica.",
-    exp3_date: "May. 2023 — Abr. 2024",
-    exp3_role: "Asistente Regional",
-    exp3_org: "The Church of Jesus Christ of Latter-day Saints",
-    exp3_desc: "Apoyo administrativo y de coordinación a nivel regional.",
+    exp1_role: "Technical Support & Onboarding Specialist",
+    exp1_org: "Missionary Training Center USA (MTC) — remoto",
+    exp1_b1: "Coordina flujos de onboarding técnico y brinda soporte continuo a usuarios, trabajando directamente con equipos de gestión en Estados Unidos en inglés, portugués y español.",
+    exp1_b2: "Lidera tres sesiones grupales semanales multifuncionales, coordinando distintos equipos y adaptando la comunicación a diferentes necesidades de usuario.",
+    exp1_b3: "Gestiona el ciclo completo de seguimiento y documentación de las cohortes de onboarding: registros de avance, planes de ejecución, resúmenes de mentoría y datos de CRM.",
+    exp1_b4: "Identifica problemas recurrentes de flujo y comunicación, y desarrolla documentación y FAQ proactivas, contribuyendo a una mejora del 20% en la precisión y entrega del onboarding.",
+    exp1_b5: "Resuelve problemas de usuarios y de flujo de trabajo, adaptándose rápidamente a cambios en software, procesos y prioridades operativas.",
+    exp2_date: "2026 — Presente",
+    exp2_role: "Founder & Automation Engineer — International E-commerce & Import Operations",
+    exp2_org: "Repuestolandia",
+    exp2_b1: "Construye un emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado para automatizar de principio a fin el proceso de abastecimiento de productos desde Brasil y su venta en Chile.",
+    exp2_b2: "Diseñó e implementó flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.",
+    exp2_b3: "Construyó automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.",
+    exp2_b4: "Desarrolló verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.",
+    exp2_b5: "Despliega y mantiene un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.",
+    exp2_b6: "Integró la API Admin de Shopify y resolvió problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.",
+    exp3_date: "Jun. 2024 — Sep. 2024",
+    exp3_role: "Premium Guest Service Specialist / Trilingual Guest Relations",
+    exp3_org: "Valle Nevado Ski Resort, Chile",
+    exp3_b1: "Brindó atención a huéspedes internacionales en inglés y portugués además de español, resolviendo solicitudes de servicio y problemas de comunicación en un entorno de ritmo acelerado.",
+    exp3_b2: "Gestionó múltiples prioridades simultáneas manteniendo atención al detalle, profesionalismo y apego a los procedimientos operativos y de seguridad.",
+    exp3_b3: "Se adaptó rápidamente a necesidades cambiantes de los huéspedes y a requerimientos operativos sensibles al tiempo.",
+    exp4_date: "Feb. 2023 — Abr. 2024",
+    exp4_role: "Executive Assistant to Regional Director",
+    exp4_org: "International Volunteer Operations, Santos, Brasil",
+    exp4_b1: "Fue el enlace operativo y multilingüe principal de un director regional, coordinando comunicaciones, logística, documentación y procesos organizacionales en un entorno internacional.",
+    exp4_b2: "Gestionó estructuras de apoyo, recursos y logística operativa para una comunidad multicultural de más de 150 voluntarios internacionales.",
+    exp4_b3: "Actuó como punto de contacto principal para resolver cuellos de botella lingüísticos, operativos y de flujo de trabajo, apoyando la adopción de procedimientos organizacionales.",
+    exp4_b4: "Realizó auditorías diarias de alto volumen sobre información de desempeño y cumplimiento, manteniendo precisión y alineación con los estándares de la organización.",
+    exp4_b5: "Coordinó la comunicación entre stakeholders de múltiples países y trasfondos culturales, lo que exigió fuerte priorización, organización y resolución de problemas.",
+    cv_title: "Currículum",
+    cv_education_title: "Educación",
+    cv_edu1_date: "Nov. 2024 — Jun. 2028",
+    cv_edu1_role: "Bachelor of Science in Software Development",
+    cv_edu1_org: "Brigham Young University–Idaho",
+    cv_edu1_desc: "En curso.",
+    cv_certs_title: "Certificaciones",
+    cv_cert1: "Social Media Marketing — HubSpot Academy",
+    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_languages_title: "Idiomas",
+    cv_lang1: "Español — nativo",
+    cv_lang2: "Inglés — C2",
+    cv_lang3: "Portugués — C2",
+    cv_skills_title: "Habilidades técnicas",
+    cv_skill1: "Desarrollo: HTML, CSS, JavaScript, Python",
+    cv_skill2: "Datos y Machine Learning: Pandas, Scikit-learn, Matplotlib, Seaborn, Random Forest",
+    cv_skill3: "Automatización: n8n",
+    cv_skill4: "E-commerce: Shopify",
+    cv_skill5: "Herramientas colaborativas: CRM (entorno Microsoft), Zoom, Google Meet, Microsoft Teams",
     projects_title: "Proyectos",
     proj1_kicker: "Emprendimiento · E-commerce",
-    proj1_desc: "Tienda de comercio electrónico de repuestos automotrices importados desde Brasil a Chile. Diseñé un flujo de automatización 100% en n8n que conecta la tienda Shopify con el proceso de importación y despacho vía Correios, reduciendo el trabajo manual de principio a fin.",
+    proj1_desc: "Emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado para automatizar de principio a fin el abastecimiento de productos desde Brasil y su venta en Chile.",
+    proj1_b1: "Diseñé e implementé flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.",
+    proj1_b2: "Construí automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.",
+    proj1_b3: "Desarrollé verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.",
+    proj1_b4: "Despliego y mantengo un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.",
+    proj1_b5: "Integré la API Admin de Shopify y resolví problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.",
+    proj1_stack_ai: "Herramientas de IA",
     proj2_kicker: "Tesis · Ciencia de datos",
     proj2_name: "Predicción del tiempo de parada en la Conjetura de Collatz",
     proj2_desc: "Análisis dinámico computacional de la Conjetura de Collatz: generé un dataset de 100.000 secuencias con un algoritmo optimizado por memoización en Python, hice un análisis exploratorio de datos y entrené un modelo Random Forest para predecir el tiempo de parada (stopping time) de cada secuencia a partir de propiedades del número inicial.",
     proj2_stat1: "secuencias analizadas",
     proj2_stat2: "de la variabilidad explicada (R²)",
     proj2_stat3: "pasos de error promedio (MAE)",
+    proj2_cta: "Leer tesis completa",
+    collatz_title: "Prueba tu propio número",
+    collatz_desc: "Escribe cualquier entero positivo y mira su trayectoria de Collatz animarse, igual que la de n = 27 en el inicio.",
+    collatz_input_label: "Número entero positivo",
+    collatz_run: "Ver trayectoria",
+    collatz_error: "Ingresa un número entero positivo.",
+    collatz_stats: "n = {n} → convergió a 1 en {steps} pasos · valor máximo alcanzado: {max}",
+    collatz_uncapped: "n = {n} → no convergió tras {steps} pasos (la Conjetura de Collatz no tiene demostración formal para todo n)",
+    contact_copied: "¡Copiado!",
     skills_title: "Habilidades",
     skills_group1: "Desarrollo",
     skills_group2: "Datos",
@@ -55,6 +110,7 @@ const translations = {
   en: {
     nav_about: "About",
     nav_experience: "Experience",
+    nav_cv: "Resume",
     nav_projects: "Projects",
     nav_skills: "Skills",
     nav_contact: "Contact",
@@ -73,26 +129,80 @@ const translations = {
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experience",
     exp1_date: "Aug. 2025 — Present",
-    exp1_role: "Mentor / Onboarding Specialist",
-    exp1_org: "MTC Utah, United States (remote)",
-    exp1_desc: "I help workers develop language and prospect-handling skills, and run group meetings with teams across Mexico, the United States, Brazil, Argentina, Peru, Colombia, and Chile.",
-    exp2_date: "May 2025 — Aug. 2025",
-    exp2_role: "Linen Room Assistant",
-    exp2_org: "Clínica Universidad de Los Andes",
-    exp2_desc: "Collected dirty-linen carts and restocked empty ones across the clinic's different wards and hallways.",
-    exp3_date: "May 2023 — Apr. 2024",
-    exp3_role: "Regional Assistant",
-    exp3_org: "The Church of Jesus Christ of Latter-day Saints",
-    exp3_desc: "Administrative and coordination support at a regional level.",
+    exp1_role: "Technical Support & Onboarding Specialist",
+    exp1_org: "Missionary Training Center USA (MTC) — remote",
+    exp1_b1: "Coordinates technical onboarding workflows and provides ongoing user support, working directly with management teams in the United States in English, Portuguese, and Spanish.",
+    exp1_b2: "Leads three weekly cross-functional group sessions, coordinating different teams and adapting communication to varying user needs.",
+    exp1_b3: "Manages the full tracking and documentation cycle for onboarding cohorts: progress logs, execution plans, mentoring summaries, and CRM data.",
+    exp1_b4: "Identifies recurring workflow and communication issues, developing proactive documentation and FAQs that contributed to a 20% improvement in onboarding accuracy and delivery.",
+    exp1_b5: "Resolves user and workflow issues, quickly adapting to changes in software, processes, and operational priorities.",
+    exp2_date: "2026 — Present",
+    exp2_role: "Founder & Automation Engineer — International E-commerce & Import Operations",
+    exp2_org: "Repuestolandia",
+    exp2_b1: "Building an international auto-parts import and e-commerce venture designed to automate, end to end, the process of sourcing products from Brazil and selling them in Chile.",
+    exp2_b2: "Designed and implemented automated workflows connecting suppliers, product data, inventory, pricing, and Shopify using n8n, REST APIs, Google Sheets, AI tools, and cloud infrastructure.",
+    exp2_b3: "Built automations for product ingestion, classification, translation, pricing, publishing, and inventory verification, integrating business rules with external data sources.",
+    exp2_b4: "Developed automatic stock verification triggered by new orders to prevent overselling and improve order reliability.",
+    exp2_b5: "Deploys and maintains a self-hosted automation environment on Ubuntu/DigitalOcean using Docker, Caddy, Cloudflare DNS, and automated SSL.",
+    exp2_b6: "Integrated the Shopify Admin API and resolved authentication, permissions, data-dependency, and workflow-execution issues, independently learning and implementing new technologies.",
+    exp3_date: "Jun. 2024 — Sep. 2024",
+    exp3_role: "Premium Guest Service Specialist / Trilingual Guest Relations",
+    exp3_org: "Valle Nevado Ski Resort, Chile",
+    exp3_b1: "Assisted international guests in English and Portuguese in addition to Spanish, resolving service requests and communication issues in a fast-paced environment.",
+    exp3_b2: "Managed multiple simultaneous priorities while maintaining attention to detail, professionalism, and adherence to operational and safety procedures.",
+    exp3_b3: "Quickly adapted to changing guest needs and time-sensitive operational requirements.",
+    exp4_date: "Feb. 2023 — Apr. 2024",
+    exp4_role: "Executive Assistant to Regional Director",
+    exp4_org: "International Volunteer Operations, Santos, Brasil",
+    exp4_b1: "Served as the primary multilingual operational liaison for a regional director, coordinating communications, logistics, documentation, and organizational processes in an international setting.",
+    exp4_b2: "Managed support structures, resources, and operational logistics for a multicultural community of more than 150 international volunteers.",
+    exp4_b3: "Acted as the main point of contact for resolving linguistic, operational, and workflow bottlenecks, supporting the adoption of organizational procedures.",
+    exp4_b4: "Conducted high-volume daily audits of performance and compliance information, maintaining accuracy and alignment with organizational standards.",
+    exp4_b5: "Coordinated communication among stakeholders from multiple countries and cultural backgrounds, requiring strong prioritization, organization, and problem-solving.",
+    cv_title: "Resume",
+    cv_education_title: "Education",
+    cv_edu1_date: "Nov. 2024 — Jun. 2028",
+    cv_edu1_role: "Bachelor of Science in Software Development",
+    cv_edu1_org: "Brigham Young University–Idaho",
+    cv_edu1_desc: "In progress.",
+    cv_certs_title: "Certifications",
+    cv_cert1: "Social Media Marketing — HubSpot Academy",
+    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_languages_title: "Languages",
+    cv_lang1: "Spanish — native",
+    cv_lang2: "English — C2",
+    cv_lang3: "Portuguese — C2",
+    cv_skills_title: "Technical skills",
+    cv_skill1: "Development: HTML, CSS, JavaScript, Python",
+    cv_skill2: "Data & Machine Learning: Pandas, Scikit-learn, Matplotlib, Seaborn, Random Forest",
+    cv_skill3: "Automation: n8n",
+    cv_skill4: "E-commerce: Shopify",
+    cv_skill5: "Collaboration tools: CRM (Microsoft environment), Zoom, Google Meet, Microsoft Teams",
     projects_title: "Projects",
     proj1_kicker: "Entrepreneurship · E-commerce",
-    proj1_desc: "An e-commerce store for auto parts imported from Brazil to Chile. I designed a fully automated n8n workflow connecting the Shopify store with the import and Correios shipping process, cutting manual work from end to end.",
+    proj1_desc: "An international auto-parts import and e-commerce venture, designed to automate end to end the sourcing of products from Brazil and their sale in Chile.",
+    proj1_b1: "Designed and implemented automated workflows connecting suppliers, product data, inventory, pricing, and Shopify using n8n, REST APIs, Google Sheets, AI tools, and cloud infrastructure.",
+    proj1_b2: "Built automations for product ingestion, classification, translation, pricing, publishing, and inventory verification, integrating business rules with external data sources.",
+    proj1_b3: "Developed automatic stock verification triggered by new orders to prevent overselling and improve order reliability.",
+    proj1_b4: "Deploy and maintain a self-hosted automation environment on Ubuntu/DigitalOcean using Docker, Caddy, Cloudflare DNS, and automated SSL.",
+    proj1_b5: "Integrated the Shopify Admin API and resolved authentication, permissions, data-dependency, and workflow-execution issues, independently learning and implementing new technologies.",
+    proj1_stack_ai: "AI tools",
     proj2_kicker: "Thesis · Data science",
     proj2_name: "Predicting stopping time in the Collatz Conjecture",
     proj2_desc: "A computational dynamic analysis of the Collatz Conjecture: I generated a dataset of 100,000 sequences with a memoization-optimized Python algorithm, ran an exploratory data analysis, and trained a Random Forest model to predict each sequence's stopping time from properties of the starting number.",
     proj2_stat1: "sequences analyzed",
     proj2_stat2: "of variability explained (R²)",
     proj2_stat3: "average error in steps (MAE)",
+    proj2_cta: "Read full thesis",
+    collatz_title: "Try your own number",
+    collatz_desc: "Enter any positive integer and watch its Collatz trajectory animate, just like n = 27 in the hero above.",
+    collatz_input_label: "Positive integer",
+    collatz_run: "See trajectory",
+    collatz_error: "Enter a positive integer.",
+    collatz_stats: "n = {n} → converged to 1 in {steps} steps · maximum value reached: {max}",
+    collatz_uncapped: "n = {n} → did not converge after {steps} steps (the Collatz Conjecture has no formal proof for every n)",
+    contact_copied: "Copied!",
     skills_title: "Skills",
     skills_group1: "Development",
     skills_group2: "Data",
@@ -105,6 +215,7 @@ const translations = {
   pt: {
     nav_about: "Sobre mim",
     nav_experience: "Experiência",
+    nav_cv: "Currículo",
     nav_projects: "Projetos",
     nav_skills: "Habilidades",
     nav_contact: "Contato",
@@ -123,26 +234,80 @@ const translations = {
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experiência",
     exp1_date: "Ago. 2025 — Atual",
-    exp1_role: "Mentor / Onboarding Specialist",
-    exp1_org: "MTC Utah, Estados Unidos (remoto)",
-    exp1_desc: "Ajudo trabalhadores a desenvolver habilidades de idioma e trato com clientes potenciais, e coordeno reuniões em grupo com equipes do México, Estados Unidos, Brasil, Argentina, Peru, Colômbia e Chile.",
-    exp2_date: "Mai. 2025 — Ago. 2025",
-    exp2_role: "Rouparia",
-    exp2_org: "Clínica Universidad de Los Andes",
-    exp2_desc: "Recolhimento de carrinhos de roupa suja e reposição de carrinhos vazios nos diferentes corredores e áreas da clínica.",
-    exp3_date: "Mai. 2023 — Abr. 2024",
-    exp3_role: "Assistente Regional",
-    exp3_org: "The Church of Jesus Christ of Latter-day Saints",
-    exp3_desc: "Apoio administrativo e de coordenação em nível regional.",
+    exp1_role: "Technical Support & Onboarding Specialist",
+    exp1_org: "Missionary Training Center USA (MTC) — remoto",
+    exp1_b1: "Coordena fluxos de onboarding técnico e oferece suporte contínuo aos usuários, trabalhando diretamente com equipes de gestão nos Estados Unidos em inglês, português e espanhol.",
+    exp1_b2: "Lidera três sessões semanais multifuncionais em grupo, coordenando diferentes equipes e adaptando a comunicação a diferentes necessidades dos usuários.",
+    exp1_b3: "Gerencia o ciclo completo de acompanhamento e documentação das turmas de onboarding: registros de progresso, planos de execução, resumos de mentoria e dados de CRM.",
+    exp1_b4: "Identifica problemas recorrentes de fluxo e comunicação e desenvolve documentação e FAQs proativas, contribuindo para uma melhora de 20% na precisão e entrega do onboarding.",
+    exp1_b5: "Resolve problemas de usuários e de fluxo de trabalho, adaptando-se rapidamente a mudanças em software, processos e prioridades operacionais.",
+    exp2_date: "2026 — Atual",
+    exp2_role: "Founder & Automation Engineer — International E-commerce & Import Operations",
+    exp2_org: "Repuestolandia",
+    exp2_b1: "Constrói um empreendimento internacional de importação e e-commerce de autopeças, projetado para automatizar de ponta a ponta o abastecimento de produtos vindos do Brasil e sua venda no Chile.",
+    exp2_b2: "Desenhou e implementou fluxos de trabalho automatizados que conectam fornecedores, dados de produtos, estoque, preços e Shopify usando n8n, REST APIs, Google Sheets, ferramentas de IA e infraestrutura em nuvem.",
+    exp2_b3: "Construiu automações para ingestão, classificação, tradução, precificação, publicação e verificação de estoque de produtos, integrando regras de negócio com fontes de dados externas.",
+    exp2_b4: "Desenvolveu verificação automática de estoque acionada por novos pedidos, para evitar overselling e melhorar a confiabilidade dos pedidos.",
+    exp2_b5: "Implanta e mantém um ambiente de automação auto-hospedado em Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS e SSL automatizado.",
+    exp2_b6: "Integrou a API Admin da Shopify e resolveu problemas de autenticação, permissões, dependências de dados e execução de fluxos, aprendendo e implementando novas tecnologias de forma independente.",
+    exp3_date: "Jun. 2024 — Set. 2024",
+    exp3_role: "Premium Guest Service Specialist / Trilingual Guest Relations",
+    exp3_org: "Valle Nevado Ski Resort, Chile",
+    exp3_b1: "Atendeu hóspedes internacionais em inglês e português, além do espanhol, resolvendo solicitações de serviço e problemas de comunicação em um ambiente de ritmo acelerado.",
+    exp3_b2: "Gerenciou múltiplas prioridades simultâneas mantendo atenção aos detalhes, profissionalismo e conformidade com os procedimentos operacionais e de segurança.",
+    exp3_b3: "Adaptou-se rapidamente às necessidades variáveis dos hóspedes e a requisitos operacionais sensíveis ao tempo.",
+    exp4_date: "Fev. 2023 — Abr. 2024",
+    exp4_role: "Executive Assistant to Regional Director",
+    exp4_org: "International Volunteer Operations, Santos, Brasil",
+    exp4_b1: "Foi o principal elo operacional e multilíngue de um diretor regional, coordenando comunicações, logística, documentação e processos organizacionais em um ambiente internacional.",
+    exp4_b2: "Gerenciou estruturas de apoio, recursos e logística operacional para uma comunidade multicultural de mais de 150 voluntários internacionais.",
+    exp4_b3: "Atuou como principal ponto de contato para resolver gargalos linguísticos, operacionais e de fluxo de trabalho, apoiando a adoção de procedimentos organizacionais.",
+    exp4_b4: "Realizou auditorias diárias de alto volume sobre informações de desempenho e conformidade, mantendo precisão e alinhamento com os padrões da organização.",
+    exp4_b5: "Coordenou a comunicação entre stakeholders de múltiplos países e origens culturais, exigindo forte priorização, organização e resolução de problemas.",
+    cv_title: "Currículo",
+    cv_education_title: "Formação",
+    cv_edu1_date: "Nov. 2024 — Jun. 2028",
+    cv_edu1_role: "Bachelor of Science in Software Development",
+    cv_edu1_org: "Brigham Young University–Idaho",
+    cv_edu1_desc: "Em andamento.",
+    cv_certs_title: "Certificações",
+    cv_cert1: "Social Media Marketing — HubSpot Academy",
+    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_languages_title: "Idiomas",
+    cv_lang1: "Espanhol — nativo",
+    cv_lang2: "Inglês — C2",
+    cv_lang3: "Português — C2",
+    cv_skills_title: "Habilidades técnicas",
+    cv_skill1: "Desenvolvimento: HTML, CSS, JavaScript, Python",
+    cv_skill2: "Dados e Machine Learning: Pandas, Scikit-learn, Matplotlib, Seaborn, Random Forest",
+    cv_skill3: "Automação: n8n",
+    cv_skill4: "E-commerce: Shopify",
+    cv_skill5: "Ferramentas colaborativas: CRM (ambiente Microsoft), Zoom, Google Meet, Microsoft Teams",
     projects_title: "Projetos",
     proj1_kicker: "Empreendedorismo · E-commerce",
-    proj1_desc: "Loja de e-commerce de autopeças importadas do Brasil para o Chile. Desenhei um fluxo de automação 100% em n8n que conecta a loja Shopify ao processo de importação e envio via Correios, reduzindo o trabalho manual do início ao fim.",
+    proj1_desc: "Empreendimento internacional de importação e e-commerce de autopeças, projetado para automatizar de ponta a ponta o abastecimento de produtos vindos do Brasil e sua venda no Chile.",
+    proj1_b1: "Desenhei e implementei fluxos de trabalho automatizados que conectam fornecedores, dados de produtos, estoque, preços e Shopify usando n8n, REST APIs, Google Sheets, ferramentas de IA e infraestrutura em nuvem.",
+    proj1_b2: "Construí automações para ingestão, classificação, tradução, precificação, publicação e verificação de estoque de produtos, integrando regras de negócio com fontes de dados externas.",
+    proj1_b3: "Desenvolvi verificação automática de estoque acionada por novos pedidos, para evitar overselling e melhorar a confiabilidade dos pedidos.",
+    proj1_b4: "Implanto e mantenho um ambiente de automação auto-hospedado em Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS e SSL automatizado.",
+    proj1_b5: "Integrei a API Admin da Shopify e resolvi problemas de autenticação, permissões, dependências de dados e execução de fluxos, aprendendo e implementando novas tecnologias de forma independente.",
+    proj1_stack_ai: "Ferramentas de IA",
     proj2_kicker: "Tese · Ciência de dados",
     proj2_name: "Previsão do tempo de parada na Conjectura de Collatz",
     proj2_desc: "Análise dinâmica computacional da Conjectura de Collatz: gerei um dataset de 100.000 sequências com um algoritmo otimizado por memoização em Python, fiz uma análise exploratória de dados e treinei um modelo Random Forest para prever o tempo de parada (stopping time) de cada sequência a partir de propriedades do número inicial.",
     proj2_stat1: "sequências analisadas",
     proj2_stat2: "da variabilidade explicada (R²)",
     proj2_stat3: "passos de erro médio (MAE)",
+    proj2_cta: "Ler tese completa",
+    collatz_title: "Teste seu próprio número",
+    collatz_desc: "Digite qualquer inteiro positivo e veja sua trajetória de Collatz se animar, igual à de n = 27 no início.",
+    collatz_input_label: "Número inteiro positivo",
+    collatz_run: "Ver trajetória",
+    collatz_error: "Digite um número inteiro positivo.",
+    collatz_stats: "n = {n} → convergiu para 1 em {steps} passos · valor máximo alcançado: {max}",
+    collatz_uncapped: "n = {n} → não convergiu após {steps} passos (a Conjectura de Collatz não tem demonstração formal para todo n)",
+    contact_copied: "Copiado!",
     skills_title: "Habilidades",
     skills_group1: "Desenvolvimento",
     skills_group2: "Dados",
@@ -155,6 +320,7 @@ const translations = {
   fr: {
     nav_about: "À propos",
     nav_experience: "Expérience",
+    nav_cv: "CV",
     nav_projects: "Projets",
     nav_skills: "Compétences",
     nav_contact: "Contact",
@@ -173,26 +339,80 @@ const translations = {
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Expérience",
     exp1_date: "Août 2025 — Présent",
-    exp1_role: "Mentor / Onboarding Specialist",
-    exp1_org: "MTC Utah, États-Unis (télétravail)",
-    exp1_desc: "J'aide des collaborateurs à développer leurs compétences linguistiques et de relation client, et j'anime des réunions de groupe avec des équipes au Mexique, aux États-Unis, au Brésil, en Argentine, au Pérou, en Colombie et au Chili.",
-    exp2_date: "Mai 2025 — Août 2025",
-    exp2_role: "Lingerie",
-    exp2_org: "Clínica Universidad de Los Andes",
-    exp2_desc: "Collecte des chariots de linge sale et réapprovisionnement des chariots vides dans les différents couloirs et services de la clinique.",
-    exp3_date: "Mai 2023 — Avr. 2024",
-    exp3_role: "Assistant régional",
-    exp3_org: "The Church of Jesus Christ of Latter-day Saints",
-    exp3_desc: "Soutien administratif et de coordination au niveau régional.",
+    exp1_role: "Technical Support & Onboarding Specialist",
+    exp1_org: "Missionary Training Center USA (MTC) — télétravail",
+    exp1_b1: "Coordonne les flux d'intégration technique et assure un support continu aux utilisateurs, en collaborant directement avec des équipes de direction aux États-Unis en anglais, portugais et espagnol.",
+    exp1_b2: "Anime trois sessions de groupe transverses par semaine, en coordonnant différentes équipes et en adaptant la communication aux besoins des utilisateurs.",
+    exp1_b3: "Gère l'ensemble du cycle de suivi et de documentation des cohortes d'intégration : journaux de progression, plans d'exécution, résumés de mentorat et données CRM.",
+    exp1_b4: "Identifie les problèmes récurrents de flux et de communication, et développe une documentation et des FAQ proactives, contribuant à une amélioration de 20 % de la précision et de la livraison de l'intégration.",
+    exp1_b5: "Résout les problèmes des utilisateurs et de flux de travail, en s'adaptant rapidement aux changements de logiciels, de processus et de priorités opérationnelles.",
+    exp2_date: "2026 — Présent",
+    exp2_role: "Founder & Automation Engineer — International E-commerce & Import Operations",
+    exp2_org: "Repuestolandia",
+    exp2_b1: "Développe une entreprise internationale d'importation et de e-commerce de pièces automobiles, conçue pour automatiser de bout en bout l'approvisionnement de produits depuis le Brésil et leur vente au Chili.",
+    exp2_b2: "A conçu et mis en place des flux de travail automatisés reliant fournisseurs, données produits, inventaire, tarification et Shopify à l'aide de n8n, d'API REST, de Google Sheets, d'outils d'IA et d'une infrastructure cloud.",
+    exp2_b3: "A construit des automatisations pour l'ingestion, la classification, la traduction, la tarification, la publication et la vérification des stocks de produits, en intégrant des règles métier à des sources de données externes.",
+    exp2_b4: "A développé une vérification automatique des stocks déclenchée par les nouvelles commandes afin d'éviter les surventes et d'améliorer la fiabilité des commandes.",
+    exp2_b5: "Déploie et maintient un environnement d'automatisation auto-hébergé sur Ubuntu/DigitalOcean avec Docker, Caddy, Cloudflare DNS et un SSL automatisé.",
+    exp2_b6: "A intégré l'API Admin de Shopify et résolu des problèmes d'authentification, de permissions, de dépendances de données et d'exécution des flux, en apprenant et en mettant en œuvre de nouvelles technologies de façon autonome.",
+    exp3_date: "Juin 2024 — Sept. 2024",
+    exp3_role: "Premium Guest Service Specialist / Trilingual Guest Relations",
+    exp3_org: "Valle Nevado Ski Resort, Chile",
+    exp3_b1: "A accueilli des clients internationaux en anglais et en portugais en plus de l'espagnol, en résolvant des demandes de service et des problèmes de communication dans un environnement au rythme soutenu.",
+    exp3_b2: "A géré plusieurs priorités simultanées tout en maintenant le souci du détail, le professionnalisme et le respect des procédures opérationnelles et de sécurité.",
+    exp3_b3: "S'est rapidement adapté aux besoins changeants des clients et à des exigences opérationnelles sensibles au facteur temps.",
+    exp4_date: "Févr. 2023 — Avr. 2024",
+    exp4_role: "Executive Assistant to Regional Director",
+    exp4_org: "International Volunteer Operations, Santos, Brasil",
+    exp4_b1: "A été le principal point de liaison opérationnel et multilingue d'un directeur régional, coordonnant les communications, la logistique, la documentation et les processus organisationnels dans un cadre international.",
+    exp4_b2: "A géré les structures de soutien, les ressources et la logistique opérationnelle pour une communauté multiculturelle de plus de 150 volontaires internationaux.",
+    exp4_b3: "A été le principal point de contact pour résoudre les blocages linguistiques, opérationnels et de flux de travail, en soutenant l'adoption des procédures organisationnelles.",
+    exp4_b4: "A réalisé des audits quotidiens à fort volume sur les données de performance et de conformité, en maintenant précision et cohérence avec les standards de l'organisation.",
+    exp4_b5: "A coordonné la communication entre des parties prenantes de plusieurs pays et cultures, exigeant une forte capacité de priorisation, d'organisation et de résolution de problèmes.",
+    cv_title: "CV",
+    cv_education_title: "Formation",
+    cv_edu1_date: "Nov. 2024 — Juin 2028",
+    cv_edu1_role: "Bachelor of Science in Software Development",
+    cv_edu1_org: "Brigham Young University–Idaho",
+    cv_edu1_desc: "En cours.",
+    cv_certs_title: "Certifications",
+    cv_cert1: "Social Media Marketing — HubSpot Academy",
+    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_languages_title: "Langues",
+    cv_lang1: "Espagnol — langue maternelle",
+    cv_lang2: "Anglais — C2",
+    cv_lang3: "Portugais — C2",
+    cv_skills_title: "Compétences techniques",
+    cv_skill1: "Développement : HTML, CSS, JavaScript, Python",
+    cv_skill2: "Données et Machine Learning : Pandas, Scikit-learn, Matplotlib, Seaborn, Random Forest",
+    cv_skill3: "Automatisation : n8n",
+    cv_skill4: "E-commerce : Shopify",
+    cv_skill5: "Outils collaboratifs : CRM (environnement Microsoft), Zoom, Google Meet, Microsoft Teams",
     projects_title: "Projets",
     proj1_kicker: "Entrepreneuriat · E-commerce",
-    proj1_desc: "Boutique e-commerce de pièces automobiles importées du Brésil vers le Chili. J'ai conçu un flux d'automatisation entièrement réalisé avec n8n reliant la boutique Shopify au processus d'importation et d'expédition via Correios, réduisant le travail manuel de bout en bout.",
+    proj1_desc: "Une entreprise internationale d'importation et de e-commerce de pièces automobiles, conçue pour automatiser de bout en bout l'approvisionnement de produits depuis le Brésil et leur vente au Chili.",
+    proj1_b1: "J'ai conçu et mis en place des flux de travail automatisés reliant fournisseurs, données produits, inventaire, tarification et Shopify à l'aide de n8n, d'API REST, de Google Sheets, d'outils d'IA et d'une infrastructure cloud.",
+    proj1_b2: "J'ai construit des automatisations pour l'ingestion, la classification, la traduction, la tarification, la publication et la vérification des stocks de produits, en intégrant des règles métier à des sources de données externes.",
+    proj1_b3: "J'ai développé une vérification automatique des stocks déclenchée par les nouvelles commandes afin d'éviter les surventes et d'améliorer la fiabilité des commandes.",
+    proj1_b4: "Je déploie et maintiens un environnement d'automatisation auto-hébergé sur Ubuntu/DigitalOcean avec Docker, Caddy, Cloudflare DNS et un SSL automatisé.",
+    proj1_b5: "J'ai intégré l'API Admin de Shopify et résolu des problèmes d'authentification, de permissions, de dépendances de données et d'exécution des flux, en apprenant et en mettant en œuvre de nouvelles technologies de façon autonome.",
+    proj1_stack_ai: "Outils d'IA",
     proj2_kicker: "Thèse · Science des données",
     proj2_name: "Prédiction du temps d'arrêt dans la conjecture de Collatz",
     proj2_desc: "Analyse dynamique computationnelle de la conjecture de Collatz : j'ai généré un jeu de données de 100 000 séquences avec un algorithme Python optimisé par mémoïsation, réalisé une analyse exploratoire des données, puis entraîné un modèle Random Forest pour prédire le temps d'arrêt (stopping time) de chaque séquence à partir des propriétés du nombre de départ.",
     proj2_stat1: "séquences analysées",
     proj2_stat2: "de la variabilité expliquée (R²)",
     proj2_stat3: "pas d'erreur moyenne (MAE)",
+    proj2_cta: "Lire la thèse complète",
+    collatz_title: "Essaie ton propre nombre",
+    collatz_desc: "Entre un entier positif et regarde sa trajectoire de Collatz s'animer, comme celle de n = 27 en haut de page.",
+    collatz_input_label: "Entier positif",
+    collatz_run: "Voir la trajectoire",
+    collatz_error: "Entre un entier positif.",
+    collatz_stats: "n = {n} → convergé vers 1 en {steps} étapes · valeur maximale atteinte : {max}",
+    collatz_uncapped: "n = {n} → n'a pas convergé après {steps} étapes (la conjecture de Collatz n'a pas de preuve formelle pour tout n)",
+    contact_copied: "Copié !",
     skills_title: "Compétences",
     skills_group1: "Développement",
     skills_group2: "Données",
@@ -213,18 +433,31 @@ function detectInitialLang(){
   return translations[nav] ? nav : "es";
 }
 
+let langSwitchTimeout = null;
+
 function setLanguage(lang){
   if (!translations[lang]) return;
   const dict = translations[lang];
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (dict[key]) el.textContent = dict[key];
-  });
-  document.documentElement.setAttribute("lang", lang);
-  document.querySelectorAll(".lang-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
-  });
-  localStorage.setItem(STORAGE_KEY, lang);
+
+  document.body.classList.add("is-switching-lang");
+  if (langSwitchTimeout) window.clearTimeout(langSwitchTimeout);
+  langSwitchTimeout = window.setTimeout(() => {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll("[data-i18n-label]").forEach(el => {
+      const key = el.getAttribute("data-i18n-label");
+      if (dict[key]) el.setAttribute("aria-label", dict[key]);
+    });
+    document.documentElement.setAttribute("lang", lang);
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    });
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.body.classList.remove("is-switching-lang");
+    langSwitchTimeout = null;
+  }, 100);
 }
 
 document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -262,6 +495,29 @@ menuToggle.addEventListener("click", () => {
 mainNav.querySelectorAll("a").forEach(a => {
   a.addEventListener("click", () => mainNav.classList.remove("open"));
 });
+
+/* ==========================================================
+   Active nav link on scroll (scrollspy)
+   ========================================================== */
+const navLinks = document.querySelectorAll(".main-nav a");
+const navSections = [];
+navLinks.forEach(link => {
+  const section = document.getElementById(link.getAttribute("href").slice(1));
+  if (section) navSections.push({ section, link });
+});
+const heroSection = document.getElementById("inicio");
+if (heroSection) navSections.push({ section: heroSection, link: null });
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const match = navSections.find(s => s.section === entry.target);
+    navLinks.forEach(a => a.classList.remove("active"));
+    if (match && match.link) match.link.classList.add("active");
+  });
+}, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+
+navSections.forEach(({ section }) => navObserver.observe(section));
 
 /* ==========================================================
    Scroll reveal (restrained: whole sections, no per-item stagger)
@@ -305,8 +561,9 @@ const statObserver = new IntersectionObserver((entries) => {
 statEls.forEach(el => statObserver.observe(el));
 
 /* ==========================================================
-   Hero canvas — Collatz trajectory for n = 27
-   (the one memorable, orchestrated hero moment)
+   Collatz canvas renderer — shared by the hero (n = 27, the
+   one memorable, orchestrated hero moment) and the interactive
+   explorer in the thesis project card.
    ========================================================== */
 function collatzSequence(n){
   const seq = [n];
@@ -317,11 +574,28 @@ function collatzSequence(n){
   return seq;
 }
 
-function initCollatzCanvas(){
-  const canvas = document.getElementById("collatzCanvas");
-  if (!canvas) return;
+function collatzSequenceCapped(n, maxSteps){
+  // Uses BigInt: plain JS numbers lose precision past Number.MAX_SAFE_INTEGER,
+  // which would silently corrupt the math for large inputs.
+  let current = BigInt(n);
+  const seq = [current];
+  let steps = 0;
+  while (current !== 1n && steps < maxSteps){
+    current = (current % 2n === 0n) ? current / 2n : current * 3n + 1n;
+    seq.push(current);
+    steps++;
+  }
+  return { seq, converged: current === 1n };
+}
+
+function createCollatzRenderer(canvas){
   const ctx = canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
+
+  let sequence = [1];
+  let logMax = 1;
+  let progressRatio = 0;
+  let animId = null;
 
   function resize(){
     const rect = canvas.getBoundingClientRect();
@@ -331,15 +605,8 @@ function initCollatzCanvas(){
     draw(progressRatio);
   }
 
-  const sequence = collatzSequence(27);
-  const maxVal = Math.max(...sequence);
-  const logMax = Math.log(maxVal);
-
-  let progressRatio = 0;
-  let animId = null;
-
   function pointFor(i, w, h){
-    const x = (i / (sequence.length - 1)) * w;
+    const x = (i / Math.max(1, sequence.length - 1)) * w;
     const v = sequence[i];
     const norm = v <= 1 ? 0 : Math.log(v) / logMax;
     const y = h - norm * (h * 0.86) - h * 0.06;
@@ -393,24 +660,49 @@ function initCollatzCanvas(){
     }
   }
 
-  function animate(startTime){
-    const duration = 2200;
+  function animate(duration){
+    if (animId) cancelAnimationFrame(animId);
+    const startTime = performance.now();
     function step(now){
       const t = Math.min((now - startTime) / duration, 1);
       progressRatio = 1 - Math.pow(1 - t, 2);
       draw(progressRatio);
       if (t < 1) animId = requestAnimationFrame(step);
+      else animId = null;
     }
     animId = requestAnimationFrame(step);
   }
 
   window.addEventListener("resize", resize);
-  resize();
+
+  return {
+    load(seq){
+      sequence = seq;
+      const maxVal = Math.max(...seq, 2);
+      logMax = Math.log(maxVal) || 1;
+      progressRatio = 0;
+      resize();
+    },
+    play(duration){
+      animate(duration || 2200);
+    },
+    showFull(){
+      progressRatio = 1;
+      resize();
+    }
+  };
+}
+
+function initHeroCollatzCanvas(){
+  const canvas = document.getElementById("collatzCanvas");
+  if (!canvas) return;
+  const renderer = createCollatzRenderer(canvas);
+  renderer.load(collatzSequence(27));
 
   const canvasObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !animId){
-        animate(performance.now());
+      if (entry.isIntersecting){
+        renderer.play(2200);
         canvasObserver.disconnect();
       }
     });
@@ -418,4 +710,80 @@ function initCollatzCanvas(){
   canvasObserver.observe(canvas);
 }
 
-initCollatzCanvas();
+initHeroCollatzCanvas();
+
+/* ==========================================================
+   Interactive Collatz explorer (thesis project card)
+   ========================================================== */
+function initCollatzExplorer(){
+  const canvas = document.getElementById("collatzExplorerCanvas");
+  const input = document.getElementById("collatzInput");
+  const button = document.getElementById("collatzRun");
+  const statsEl = document.getElementById("collatzStats");
+  if (!canvas || !input || !button || !statsEl) return;
+
+  const MAX_STEPS = 100000;
+  const renderer = createCollatzRenderer(canvas);
+
+  function currentDict(){
+    const lang = document.documentElement.getAttribute("lang");
+    return translations[lang] || translations.es;
+  }
+
+  function run(){
+    const dict = currentDict();
+    const raw = input.value.trim();
+
+    // Cap at 15 digits: generous for a real demonstration, small enough that
+    // BigInt arithmetic stays instant and the input can't hang the tab.
+    if (!/^\d{1,15}$/.test(raw) || /^0+$/.test(raw)){
+      statsEl.textContent = dict.collatz_error;
+      statsEl.classList.add("collatz-explorer-error");
+      return;
+    }
+    const n = BigInt(raw);
+
+    statsEl.classList.remove("collatz-explorer-error");
+    const { seq, converged } = collatzSequenceCapped(n, MAX_STEPS);
+    renderer.load(seq.map(v => Number(v)));
+    renderer.play(1400);
+
+    const steps = seq.length - 1;
+    let maxVal = seq[0];
+    for (const v of seq) if (v > maxVal) maxVal = v;
+    const template = converged ? dict.collatz_stats : dict.collatz_uncapped;
+    statsEl.textContent = template
+      .replace("{n}", n.toLocaleString("es-CL"))
+      .replace("{steps}", steps.toLocaleString("es-CL"))
+      .replace("{max}", maxVal.toLocaleString("es-CL"));
+  }
+
+  button.addEventListener("click", run);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") run();
+  });
+
+  renderer.load(collatzSequence(27));
+  renderer.showFull();
+}
+
+initCollatzExplorer();
+
+/* ==========================================================
+   Copy email to clipboard (Contact)
+   ========================================================== */
+const contactEmailBtn = document.getElementById("contactEmailBtn");
+const contactCopiedTip = document.getElementById("contactCopiedTip");
+if (contactEmailBtn && contactCopiedTip){
+  let copyTipTimeout = null;
+  contactEmailBtn.addEventListener("click", () => {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText("venegas.osses.tomas@gmail.com").then(() => {
+      contactCopiedTip.classList.add("show");
+      if (copyTipTimeout) window.clearTimeout(copyTipTimeout);
+      copyTipTimeout = window.setTimeout(() => {
+        contactCopiedTip.classList.remove("show");
+      }, 1600);
+    }).catch(() => {});
+  });
+}
