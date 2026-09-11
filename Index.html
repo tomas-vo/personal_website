@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomás Venegas — Portafolio</title>
+<meta name="description" content="Desarrollador de software y emprendedor. Portafolio de Tomás Venegas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="progress-line" id="progressLine"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#inicio" class="logo">TV</a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#sobre-mi" data-i18n="nav_about">Sobre mí</a>
+      <a href="#experiencia" data-i18n="nav_experience">Experiencia</a>
+      <a href="#proyectos" data-i18n="nav_projects">Proyectos</a>
+      <a href="#habilidades" data-i18n="nav_skills">Habilidades</a>
+      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+    </nav>
+
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-kicker" data-i18n="hero_kicker">Portafolio</p>
+        <h1 class="hero-title">
+          <span class="hero-line" data-hero-line="1">Tomás</span>
+          <span class="hero-line" data-hero-line="2">Venegas</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.</p>
+        <div class="hero-actions">
+          <a href="#proyectos" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
+          <a href="#contacto" class="btn btn-ghost" data-i18n="hero_cta_contact">Contactarme</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <canvas id="collatzCanvas"></canvas>
+        <p class="hero-visual-caption" data-i18n="hero_visual_caption">Trayectoria de Collatz para n = 27</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="section" id="sobre-mi">
+    <div class="section-inner reveal">
+      <h2 class="section-title" data-i18n="about_title">Sobre mí</h2>
+      <div class="about-grid">
+        <p class="about-text" data-i18n="about_text">
+          Tengo 23 años y estudio un Bachelor of Science in Software Development en Brigham Young University–Idaho.
+          Combino el desarrollo de software con el emprendimiento: hoy trabajo ayudando a equipos a mejorar sus
+          habilidades de forma remota, y en paralelo administro mi propia tienda de comercio electrónico.
+          Me interesa especialmente la automatización de procesos y el análisis de datos aplicado a problemas
+          reales, desde logística de importación hasta preguntas abiertas de matemáticas.
+        </p>
+        <div class="about-facts">
+          <div class="fact">
+            <span class="fact-label" data-i18n="about_fact_education">Educación</span>
+            <span class="fact-value" data-i18n="about_fact_education_value">B.S. Software Development, BYU–Idaho (2024–2028)</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label" data-i18n="about_fact_languages">Idiomas</span>
+            <span class="fact-value" data-i18n="about_fact_languages_value">Español · Inglés (C2) · Portugués (C2)</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label" data-i18n="about_fact_certs">Certificaciones</span>
+            <span class="fact-value" data-i18n="about_fact_certs_value">Social Media Marketing — HubSpot Academy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="section section-alt" id="experiencia">
+    <div class="section-inner reveal">
+      <h2 class="section-title" data-i18n="exp_title">Experiencia</h2>
+      <ol class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-date" data-i18n="exp1_date">Ago. 2025 — Presente</span>
+          <h3 class="timeline-role" data-i18n="exp1_role">Mentor / Onboarding Specialist</h3>
+          <p class="timeline-org" data-i18n="exp1_org">MTC Utah, Estados Unidos (remoto)</p>
+          <p class="timeline-desc" data-i18n="exp1_desc">
+            Ayudo a trabajadores a desarrollar habilidades de idioma y trato con prospectos, y gestiono
+            reuniones grupales con equipos de México, Estados Unidos, Brasil, Argentina, Perú, Colombia y Chile.
+          </p>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-date" data-i18n="exp2_date">May. 2025 — Ago. 2025</span>
+          <h3 class="timeline-role" data-i18n="exp2_role">Ropería</h3>
+          <p class="timeline-org" data-i18n="exp2_org">Clínica Universidad de Los Andes</p>
+          <p class="timeline-desc" data-i18n="exp2_desc">
+            Retiro de carros de ropa sucia y reposición de carros vacíos en los distintos pasillos y áreas de la clínica.
+          </p>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-date" data-i18n="exp3_date">May. 2023 — Abr. 2024</span>
+          <h3 class="timeline-role" data-i18n="exp3_role">Asistente Regional</h3>
+          <p class="timeline-org" data-i18n="exp3_org">The Church of Jesus Christ of Latter-day Saints</p>
+          <p class="timeline-desc" data-i18n="exp3_desc">
+            Apoyo administrativo y de coordinación a nivel regional.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section class="section" id="proyectos">
+    <div class="section-inner reveal">
+      <h2 class="section-title" data-i18n="projects_title">Proyectos</h2>
+
+      <article class="project project-repuestolandia">
+        <div class="project-info">
+          <p class="project-kicker" data-i18n="proj1_kicker">Emprendimiento · E-commerce</p>
+          <h3 class="project-name">Repuestolandia</h3>
+          <p class="project-desc" data-i18n="proj1_desc">
+            Tienda de comercio electrónico de repuestos automotrices importados desde Brasil a Chile.
+            Diseñé un flujo de automatización 100% en n8n que conecta la tienda Shopify con el proceso
+            de importación y despacho vía Correios, reduciendo el trabajo manual de principio a fin.
+          </p>
+          <ul class="project-stack">
+            <li>Shopify</li>
+            <li>n8n</li>
+            <li>Automatización</li>
+            <li>Logística internacional</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="project project-thesis">
+        <div class="project-info">
+          <p class="project-kicker" data-i18n="proj2_kicker">Tesis · Ciencia de datos</p>
+          <h3 class="project-name" data-i18n="proj2_name">Predicción del tiempo de parada en la Conjetura de Collatz</h3>
+          <p class="project-desc" data-i18n="proj2_desc">
+            Análisis dinámico computacional de la Conjetura de Collatz: generé un dataset de 100.000
+            secuencias con un algoritmo optimizado por memoización en Python, hice un análisis
+            exploratorio de datos y entrené un modelo Random Forest para predecir el tiempo de parada
+            (stopping time) de cada secuencia a partir de propiedades del número inicial.
+          </p>
+          <div class="project-stats">
+            <div class="stat">
+              <span class="stat-number" data-count="100000">0</span>
+              <span class="stat-label" data-i18n="proj2_stat1">secuencias analizadas</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="25" data-suffix="%">0%</span>
+              <span class="stat-label" data-i18n="proj2_stat2">de la variabilidad explicada (R²)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-count="30" data-prefix="≈">0</span>
+              <span class="stat-label" data-i18n="proj2_stat3">pasos de error promedio (MAE)</span>
+            </div>
+          </div>
+          <ul class="project-stack">
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>Scikit-learn</li>
+            <li>Random Forest</li>
+            <li>Matplotlib / Seaborn</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="section section-alt" id="habilidades">
+    <div class="section-inner reveal">
+      <h2 class="section-title" data-i18n="skills_title">Habilidades</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3 data-i18n="skills_group1">Desarrollo</h3>
+          <p>HTML · CSS · JavaScript · Python</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="skills_group2">Datos</h3>
+          <p>Pandas · Scikit-learn · Matplotlib · Seaborn</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="skills_group3">Automatización</h3>
+          <p>n8n · Shopify · CRM (entorno Microsoft)</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="skills_group4">Comunicación</h3>
+          <p>Zoom · Google Meet · Teams · Español · Inglés · Portugués</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <div class="section-inner reveal contact-inner">
+      <h2 class="section-title" data-i18n="contact_title">Conversemos</h2>
+      <p class="contact-text" data-i18n="contact_text">
+        Si quieres conversar sobre una oportunidad, un proyecto o simplemente saludar, escríbeme.
+      </p>
+      <a href="mailto:contacto@tomasvenegas.dev" class="btn btn-primary contact-email">contacto@tomasvenegas.dev</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p data-i18n="footer_text">Hecho por Tomás Venegas.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
