@@ -19,7 +19,7 @@ const translations = {
     about_fact_education: "Educación",
     about_fact_education_value: "B.S. Software Development, BYU–Idaho (2024–2028)",
     about_fact_languages: "Idiomas",
-    about_fact_languages_value: "Español · Inglés (C2) · Portugués (C2)",
+    about_fact_languages_value: "Español · Inglés (C1-C2) · Portugués (C2)",
     about_fact_certs: "Certificaciones",
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experiencia",
@@ -62,8 +62,9 @@ const translations = {
     cv_edu1_desc: "En curso.",
     cv_certs_title: "Certificaciones",
     cv_cert1: "Social Media Marketing — HubSpot Academy",
-    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert2: "Certificate of Language Ability — English Speaking (C2)",
     cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_view_certs: "Ver certificados →",
     cv_languages_title: "Idiomas",
     cv_lang1: "Español — nativo",
     cv_lang2: "Inglés — C2",
@@ -83,6 +84,7 @@ const translations = {
     proj1_b4: "Despliego y mantengo un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.",
     proj1_b5: "Integré la API Admin de Shopify y resolví problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.",
     proj1_stack_ai: "Herramientas de IA",
+    proj1_cta: "Ver tienda",
     proj2_kicker: "Tesis · Ciencia de datos",
     proj2_name: "Predicción del tiempo de parada en la Conjetura de Collatz",
     proj2_desc: "Análisis dinámico computacional de la Conjetura de Collatz: generé un dataset de 100.000 secuencias con un algoritmo optimizado por memoización en Python, hice un análisis exploratorio de datos y entrené un modelo Random Forest para predecir el tiempo de parada (stopping time) de cada secuencia a partir de propiedades del número inicial.",
@@ -124,7 +126,7 @@ const translations = {
     about_fact_education: "Education",
     about_fact_education_value: "B.S. Software Development, BYU–Idaho (2024–2028)",
     about_fact_languages: "Languages",
-    about_fact_languages_value: "Spanish · English (C2) · Portuguese (C2)",
+    about_fact_languages_value: "Spanish · English (C1-C2) · Portuguese (C2)",
     about_fact_certs: "Certifications",
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experience",
@@ -167,8 +169,9 @@ const translations = {
     cv_edu1_desc: "In progress.",
     cv_certs_title: "Certifications",
     cv_cert1: "Social Media Marketing — HubSpot Academy",
-    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert2: "Certificate of Language Ability — English Speaking (C2)",
     cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_view_certs: "View certificates →",
     cv_languages_title: "Languages",
     cv_lang1: "Spanish — native",
     cv_lang2: "English — C2",
@@ -188,6 +191,7 @@ const translations = {
     proj1_b4: "Deploy and maintain a self-hosted automation environment on Ubuntu/DigitalOcean using Docker, Caddy, Cloudflare DNS, and automated SSL.",
     proj1_b5: "Integrated the Shopify Admin API and resolved authentication, permissions, data-dependency, and workflow-execution issues, independently learning and implementing new technologies.",
     proj1_stack_ai: "AI tools",
+    proj1_cta: "Visit store",
     proj2_kicker: "Thesis · Data science",
     proj2_name: "Predicting stopping time in the Collatz Conjecture",
     proj2_desc: "A computational dynamic analysis of the Collatz Conjecture: I generated a dataset of 100,000 sequences with a memoization-optimized Python algorithm, ran an exploratory data analysis, and trained a Random Forest model to predict each sequence's stopping time from properties of the starting number.",
@@ -229,7 +233,7 @@ const translations = {
     about_fact_education: "Formação",
     about_fact_education_value: "B.S. Software Development, BYU–Idaho (2024–2028)",
     about_fact_languages: "Idiomas",
-    about_fact_languages_value: "Espanhol · Inglês (C2) · Português (C2)",
+    about_fact_languages_value: "Espanhol · Inglês (C1-C2) · Português (C2)",
     about_fact_certs: "Certificações",
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Experiência",
@@ -272,8 +276,9 @@ const translations = {
     cv_edu1_desc: "Em andamento.",
     cv_certs_title: "Certificações",
     cv_cert1: "Social Media Marketing — HubSpot Academy",
-    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert2: "Certificate of Language Ability — English Speaking (C2)",
     cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_view_certs: "Ver certificados →",
     cv_languages_title: "Idiomas",
     cv_lang1: "Espanhol — nativo",
     cv_lang2: "Inglês — C2",
@@ -293,6 +298,7 @@ const translations = {
     proj1_b4: "Implanto e mantenho um ambiente de automação auto-hospedado em Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS e SSL automatizado.",
     proj1_b5: "Integrei a API Admin da Shopify e resolvi problemas de autenticação, permissões, dependências de dados e execução de fluxos, aprendendo e implementando novas tecnologias de forma independente.",
     proj1_stack_ai: "Ferramentas de IA",
+    proj1_cta: "Ver loja",
     proj2_kicker: "Tese · Ciência de dados",
     proj2_name: "Previsão do tempo de parada na Conjectura de Collatz",
     proj2_desc: "Análise dinâmica computacional da Conjectura de Collatz: gerei um dataset de 100.000 sequências com um algoritmo otimizado por memoização em Python, fiz uma análise exploratória de dados e treinei um modelo Random Forest para prever o tempo de parada (stopping time) de cada sequência a partir de propriedades do número inicial.",
@@ -334,7 +340,7 @@ const translations = {
     about_fact_education: "Formation",
     about_fact_education_value: "B.S. Software Development, BYU–Idaho (2024–2028)",
     about_fact_languages: "Langues",
-    about_fact_languages_value: "Espagnol · Anglais (C2) · Portugais (C2)",
+    about_fact_languages_value: "Espagnol · Anglais (C1-C2) · Portugais (C2)",
     about_fact_certs: "Certifications",
     about_fact_certs_value: "Social Media Marketing — HubSpot Academy",
     exp_title: "Expérience",
@@ -377,8 +383,9 @@ const translations = {
     cv_edu1_desc: "En cours.",
     cv_certs_title: "Certifications",
     cv_cert1: "Social Media Marketing — HubSpot Academy",
-    cv_cert2: "Advanced English, Professional Proficiency (C2)",
+    cv_cert2: "Certificate of Language Ability — English Speaking (C2)",
     cv_cert3: "C2 Portuguese Proficiency (Mastery Level)",
+    cv_view_certs: "Voir les certificats →",
     cv_languages_title: "Langues",
     cv_lang1: "Espagnol — langue maternelle",
     cv_lang2: "Anglais — C2",
@@ -398,6 +405,7 @@ const translations = {
     proj1_b4: "Je déploie et maintiens un environnement d'automatisation auto-hébergé sur Ubuntu/DigitalOcean avec Docker, Caddy, Cloudflare DNS et un SSL automatisé.",
     proj1_b5: "J'ai intégré l'API Admin de Shopify et résolu des problèmes d'authentification, de permissions, de dépendances de données et d'exécution des flux, en apprenant et en mettant en œuvre de nouvelles technologies de façon autonome.",
     proj1_stack_ai: "Outils d'IA",
+    proj1_cta: "Voir la boutique",
     proj2_kicker: "Thèse · Science des données",
     proj2_name: "Prédiction du temps d'arrêt dans la conjecture de Collatz",
     proj2_desc: "Analyse dynamique computationnelle de la conjecture de Collatz : j'ai généré un jeu de données de 100 000 séquences avec un algorithme Python optimisé par mémoïsation, réalisé une analyse exploratoire des données, puis entraîné un modèle Random Forest pour prédire le temps d'arrêt (stopping time) de chaque séquence à partir des propriétés du nombre de départ.",
@@ -785,5 +793,50 @@ if (contactEmailBtn && contactCopiedTip){
         contactCopiedTip.classList.remove("show");
       }, 1600);
     }).catch(() => {});
+  });
+}
+
+/* ==========================================================
+   Spotlight on project cards (cursor-following glow,
+   fine-pointer only — rAF-throttled, cheap: two custom
+   properties on one element per frame)
+   ========================================================== */
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+  document.querySelectorAll(".project").forEach(card => {
+    let frame = null;
+    card.addEventListener("mousemove", (e) => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+        frame = null;
+      });
+    });
+  });
+}
+
+/* ==========================================================
+   Magnetic hero CTA (subtle pull toward the cursor, capped
+   displacement, fine-pointer only, respects reduced motion)
+   ========================================================== */
+const magneticWrap = document.getElementById("magneticWrap");
+if (
+  magneticWrap &&
+  window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+){
+  const MAX_OFFSET = 10;
+  const magneticBtn = magneticWrap.querySelector(".btn");
+  magneticWrap.addEventListener("mousemove", (e) => {
+    const rect = magneticBtn.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+    const x = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, dx * 0.3));
+    const y = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, dy * 0.3));
+    magneticWrap.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  magneticWrap.addEventListener("mouseleave", () => {
+    magneticWrap.style.transform = "";
   });
 }

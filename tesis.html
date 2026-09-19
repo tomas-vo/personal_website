@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tesis — Análisis Dinámico Computacional de la Conjetura de Collatz</title>
 <meta name="description" content="Tesis completa de Tomás Venegas: Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tesis — Conjetura de Collatz | Tomás Venegas">
 <meta property="og:description" content="Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
-<meta property="og:image" content="trayectoria-n27.png">
+<meta property="og:image" content="images/trayectoria-n27.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tesis — Conjetura de Collatz | Tomás Venegas">
 <meta name="twitter:description" content="Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning.">
-<meta name="twitter:image" content="trayectoria-n27.png">
+<meta name="twitter:image" content="images/trayectoria-n27.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 <style>
   .thesis-main{
@@ -26,15 +26,8 @@
     padding: 140px 28px 100px;
   }
   .thesis-back{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.88rem;
-    color: var(--text-dim);
     margin-bottom: 40px;
-    transition: color var(--ease) .25s;
   }
-  .thesis-back:hover{ color: var(--text); }
   .thesis-kicker{
     font-size: 0.85rem;
     color: var(--accent);
@@ -302,7 +295,7 @@
 </header>
 
 <main class="thesis-main">
-  <a href="index.html" class="thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
+  <a href="index.html" class="btn btn-accent thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
 
   <p class="thesis-kicker" data-i18n="kicker">Tesis · Ciencia de datos</p>
   <h1 class="thesis-title" data-i18n="title">Análisis Dinámico Computacional y Modelamiento Predictivo del Tiempo de Parada en la Secuencia de Collatz mediante Técnicas de Machine Learning</h1>
@@ -639,7 +632,7 @@ plt.show()</code></pre>
       sugiere restricciones estocásticas globales en el sistema.
     </p>
     <figure class="thesis-figure">
-      <img src="distribucion-stopping-time.png" alt="Histograma de la distribución global del stopping time para N = 100.000 secuencias">
+      <img src="images/distribucion-stopping-time.png" alt="Histograma de la distribución global del stopping time para N = 100.000 secuencias">
       <figcaption data-i18n="fig1_caption">Figura 1. Distribución global del stopping time para N = 100.000 secuencias.</figcaption>
     </figure>
     <p data-i18n="s5_1_p2">
@@ -649,7 +642,7 @@ plt.show()</code></pre>
       extremadamente lenta (logarítmica o polilogarítmica) en relación con n.
     </p>
     <figure class="thesis-figure">
-      <img src="dispersion-n-stopping-time.png" alt="Diagrama de dispersión entre el número inicial n y el stopping time">
+      <img src="images/dispersion-n-stopping-time.png" alt="Diagrama de dispersión entre el número inicial n y el stopping time">
       <figcaption data-i18n="fig2_caption">Figura 2. Dispersión entre el número inicial (n) y el stopping time.</figcaption>
     </figure>
     <p data-i18n="s5_1_p3">
@@ -662,7 +655,7 @@ plt.show()</code></pre>
       instantáneamente, prolongando el tiempo de parada de forma impredecible.
     </p>
     <figure class="thesis-figure">
-      <img src="trayectoria-n27.png" alt="Trayectoria de Collatz para n = 27 en escala logarítmica">
+      <img src="images/trayectoria-n27.png" alt="Trayectoria de Collatz para n = 27 en escala logarítmica">
       <figcaption data-i18n="fig3_caption">Figura 3. Trayectoria de Collatz para n = 27, en escala logarítmica.</figcaption>
     </figure>
     <p data-i18n="s5_1_p4">
@@ -693,7 +686,7 @@ plt.show()</code></pre>
       promedio, el modelo se aproxima con un margen de error aceptable dada la naturaleza caótica del sistema.
     </p>
     <figure class="thesis-figure">
-      <img src="prediccion-vs-real.png" alt="Gráfico de predicción del modelo Random Forest contra los valores reales de stopping time">
+      <img src="images/prediccion-vs-real.png" alt="Gráfico de predicción del modelo Random Forest contra los valores reales de stopping time">
       <figcaption data-i18n="fig4_caption">Figura 4. Predicción del modelo Random Forest vs. valores reales de stopping time.</figcaption>
     </figure>
 
@@ -735,13 +728,13 @@ plt.show()</code></pre>
   </div>
 
   <div class="thesis-footer">
-    <a href="index.html" class="thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
+    <a href="index.html" class="btn btn-accent thesis-back" data-i18n="back_link">&larr; Volver al portafolio</a>
   </div>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 <script>hljs.highlightAll();</script>
-<script src="tesis.js"></script>
+<script src="scripts/tesis.js"></script>
 </body>
 </html>

@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomás Venegas — Portafolio</title>
 <meta name="description" content="Desarrollador de software y emprendedor. Portafolio de Tomás Venegas.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tomás Venegas — Portafolio">
 <meta property="og:description" content="Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.">
-<meta property="og:image" content="profile.jpg">
+<meta property="og:image" content="images/profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tomás Venegas — Portafolio">
 <meta name="twitter:description" content="Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.">
-<meta name="twitter:image" content="profile.jpg">
+<meta name="twitter:image" content="images/profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
@@ -60,7 +60,7 @@
   <section class="hero" id="inicio">
     <div class="hero-inner">
       <div class="hero-text">
-        <img src="profile.jpg" alt="Tomás Venegas" class="hero-photo">
+        <img src="images/profile.jpg" alt="Tomás Venegas" class="hero-photo">
         <p class="hero-kicker" data-i18n="hero_kicker">Portafolio</p>
         <h1 class="hero-title">
           <span class="hero-line" data-hero-line="1">Tomás</span>
@@ -68,7 +68,9 @@
         </h1>
         <p class="hero-subtitle" data-i18n="hero_subtitle">Desarrollador de software y emprendedor. Construyo productos, automatizaciones y análisis de datos.</p>
         <div class="hero-actions">
-          <a href="#proyectos" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
+          <div class="magnetic-wrap" id="magneticWrap">
+            <a href="#proyectos" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
+          </div>
           <a href="#contacto" class="btn btn-ghost" data-i18n="hero_cta_contact">Contactarme</a>
         </div>
       </div>
@@ -117,7 +119,10 @@
         <li class="timeline-item">
           <span class="timeline-date" data-i18n="exp1_date">Ago. 2025 — Presente</span>
           <h3 class="timeline-role" data-i18n="exp1_role">Technical Support &amp; Onboarding Specialist</h3>
-          <p class="timeline-org" data-i18n="exp1_org">Missionary Training Center USA (MTC) — remoto</p>
+          <p class="timeline-org">
+            <img src="images/logo-mtc.png" alt="" class="timeline-org-logo">
+            <span data-i18n="exp1_org">Missionary Training Center USA (MTC) — remoto</span>
+          </p>
           <ul class="timeline-bullets">
             <li data-i18n="exp1_b1">Coordina flujos de onboarding técnico y brinda soporte continuo a usuarios, trabajando directamente con equipos de gestión en Estados Unidos en inglés, portugués y español.</li>
             <li data-i18n="exp1_b2">Lidera tres sesiones grupales semanales multifuncionales, coordinando distintos equipos y adaptando la comunicación a diferentes necesidades de usuario.</li>
@@ -129,7 +134,10 @@
         <li class="timeline-item">
           <span class="timeline-date" data-i18n="exp2_date">2026 — Presente</span>
           <h3 class="timeline-role" data-i18n="exp2_role">Founder &amp; Automation Engineer — International E-commerce &amp; Import Operations</h3>
-          <p class="timeline-org" data-i18n="exp2_org">Repuestolandia</p>
+          <p class="timeline-org">
+            <img src="images/repuestolandia-logo.png" alt="" class="timeline-org-logo">
+            <span data-i18n="exp2_org">Repuestolandia</span>
+          </p>
           <ul class="timeline-bullets">
             <li data-i18n="exp2_b1">Construye un emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado para automatizar de principio a fin el proceso de abastecimiento de productos desde Brasil y su venta en Chile.</li>
             <li data-i18n="exp2_b2">Diseñó e implementó flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.</li>
@@ -142,7 +150,10 @@
         <li class="timeline-item">
           <span class="timeline-date" data-i18n="exp3_date">Jun. 2024 — Sep. 2024</span>
           <h3 class="timeline-role" data-i18n="exp3_role">Premium Guest Service Specialist / Trilingual Guest Relations</h3>
-          <p class="timeline-org" data-i18n="exp3_org">Valle Nevado Ski Resort, Chile</p>
+          <p class="timeline-org">
+            <img src="images/logo-valle-nevado.png" alt="" class="timeline-org-logo">
+            <span data-i18n="exp3_org">Valle Nevado Ski Resort, Chile</span>
+          </p>
           <ul class="timeline-bullets">
             <li data-i18n="exp3_b1">Brindó atención a huéspedes internacionales en inglés y portugués además de español, resolviendo solicitudes de servicio y problemas de comunicación en un entorno de ritmo acelerado.</li>
             <li data-i18n="exp3_b2">Gestionó múltiples prioridades simultáneas manteniendo atención al detalle, profesionalismo y apego a los procedimientos operativos y de seguridad.</li>
@@ -152,7 +163,10 @@
         <li class="timeline-item">
           <span class="timeline-date" data-i18n="exp4_date">Feb. 2023 — Abr. 2024</span>
           <h3 class="timeline-role" data-i18n="exp4_role">Executive Assistant to Regional Director</h3>
-          <p class="timeline-org" data-i18n="exp4_org">International Volunteer Operations, Santos, Brasil</p>
+          <p class="timeline-org">
+            <img src="images/logo-santos.png" alt="" class="timeline-org-logo">
+            <span data-i18n="exp4_org">International Volunteer Operations, Santos, Brasil</span>
+          </p>
           <ul class="timeline-bullets">
             <li data-i18n="exp4_b1">Fue el enlace operativo y multilingüe principal de un director regional, coordinando comunicaciones, logística, documentación y procesos organizacionales en un entorno internacional.</li>
             <li data-i18n="exp4_b2">Gestionó estructuras de apoyo, recursos y logística operativa para una comunidad multicultural de más de 150 voluntarios internacionales.</li>
@@ -175,8 +189,11 @@
         <div class="cv-education">
           <span class="cv-education-date" data-i18n="cv_edu1_date">Nov. 2024 — Jun. 2028</span>
           <h3 class="cv-education-role" data-i18n="cv_edu1_role">Bachelor of Science in Software Development</h3>
-          <p class="cv-education-org" data-i18n="cv_edu1_org">Brigham Young University–Idaho</p>
-          <p class="cv-education-desc" data-i18n="cv_edu1_desc">En curso.</p>
+          <p class="cv-education-org">
+            <img src="images/logo-byu-idaho.png" alt="" class="timeline-org-logo">
+            <span data-i18n="cv_edu1_org">Brigham Young University–Idaho</span>
+            <span class="cv-education-status" data-i18n="cv_edu1_desc">En curso.</span>
+          </p>
         </div>
       </div>
 
@@ -186,6 +203,7 @@
           <p data-i18n="cv_cert1">Social Media Marketing — HubSpot Academy</p>
           <p data-i18n="cv_cert2">Advanced English, Professional Proficiency (C2)</p>
           <p data-i18n="cv_cert3">C2 Portuguese Proficiency (Mastery Level)</p>
+          <a href="certificados.html" target="_blank" rel="noopener" class="btn btn-accent cv-cert-link" data-i18n="cv_view_certs">Ver certificados →</a>
         </div>
         <div class="skill-group">
           <h3 data-i18n="cv_languages_title">Idiomas</h3>
@@ -214,7 +232,7 @@
         <div class="project-info">
           <p class="project-kicker" data-i18n="proj1_kicker">Emprendimiento · E-commerce</p>
           <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="project-header">
-            <img src="repuestolandia-logo.png" alt="Repuestolandia" class="project-logo">
+            <img src="images/repuestolandia-logo.png" alt="Repuestolandia" class="project-logo">
             <h3 class="project-name">Repuestolandia</h3>
           </a>
           <p class="project-desc" data-i18n="proj1_desc">
@@ -240,6 +258,11 @@
             <li>Google Sheets</li>
             <li data-i18n="proj1_stack_ai">Herramientas de IA</li>
           </ul>
+
+          <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="btn btn-accent project-cta">
+            <span data-i18n="proj1_cta">Ver tienda</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
         </div>
       </article>
 
@@ -286,7 +309,10 @@
             <p class="collatz-explorer-stats" id="collatzStats" aria-live="polite"></p>
           </div>
 
-          <a href="tesis.html" target="_blank" rel="noopener" class="btn btn-ghost project-cta" data-i18n="proj2_cta">Leer tesis completa</a>
+          <a href="tesis.html" target="_blank" rel="noopener" class="btn btn-accent project-cta">
+            <span data-i18n="proj2_cta">Leer tesis completa</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
         </div>
       </article>
     </div>
@@ -296,7 +322,7 @@
   <section class="section section-alt" id="habilidades">
     <div class="section-inner reveal">
       <h2 class="section-title" data-i18n="skills_title">Habilidades</h2>
-      <div class="skills-grid">
+      <div class="skills-grid skills-bento">
         <div class="skill-group">
           <h3 data-i18n="skills_group1">Desarrollo</h3>
           <p>HTML · CSS · JavaScript · Python</p>
@@ -340,6 +366,6 @@
   <p data-i18n="footer_text">Hecho por Tomás Venegas.</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
