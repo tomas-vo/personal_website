@@ -795,6 +795,7 @@ if (contactEmailBtn && contactCopiedTip){
     }).catch(() => {});
   });
 }
+<<<<<<<< HEAD:scripts/script.js
 
 /* ==========================================================
    Spotlight on project cards (cursor-following glow,
@@ -840,3 +841,5 @@ if (
     magneticWrap.style.transform = "";
   });
 }
+========
+>>>>>>>> 70eaeb5976c18ff3713125779035fe28bee4a63e:script.js
