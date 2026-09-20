@@ -567,6 +567,132 @@ body.is-switching-lang [data-i18n]{
 .project-cta{
   margin-top: 24px;
 }
+.project-two-col{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.project-two-col-text{
+  flex: 1 1 58%;
+  min-width: 0;
+}
+.project-two-col-visual{
+  flex: 1 1 42%;
+}
+.project-thesis-chart{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Flow diagram (Repuestolandia automation pipeline) */
+.flow-diagram{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.flow-node{
+  background: var(--bg-elevated);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flow-node-title{
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.flow-node-sub{
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+.flow-node-accent{
+  border-color: var(--accent);
+  background: rgba(124,111,242,0.08);
+}
+.flow-node-accent .flow-node-title{ color: var(--accent); }
+.flow-connector{
+  width: 1px;
+  height: 26px;
+  background: var(--line-strong);
+  margin: 6px auto;
+  position: relative;
+}
+.flow-connector::after{
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--line-strong);
+}
+.flow-node-expandable{ cursor: default; outline-offset: 4px; }
+.flow-node-hint{
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  font-style: italic;
+  display: none;
+}
+.flow-node-details-wrap{
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.flow-node-details{
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 0;
+  text-align: left;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+  overflow: hidden;
+}
+.flow-node-details li{ padding-left: 14px; position: relative; }
+.flow-node-details li::before{
+  content: '·';
+  position: absolute; left: 2px; top: -1px;
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1;
+}
+@media (hover: hover) and (pointer: fine){
+  .flow-node-hint{ display: block; }
+  .flow-node-expandable .flow-node-details-wrap{
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .55s var(--ease);
+  }
+  .flow-node-expandable .flow-node-details{
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .3s ease, transform .4s var(--ease);
+  }
+  .flow-node-expandable:hover .flow-node-details-wrap,
+  .flow-node-expandable:focus .flow-node-details-wrap,
+  .flow-node-expandable:focus-within .flow-node-details-wrap{
+    grid-template-rows: 1fr;
+  }
+  .flow-node-expandable:hover .flow-node-details,
+  .flow-node-expandable:focus .flow-node-details,
+  .flow-node-expandable:focus-within .flow-node-details{
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .08s;
+  }
+  .flow-node-expandable:hover .flow-node-hint,
+  .flow-node-expandable:focus .flow-node-hint{
+    display: none;
+  }
+}
 .project-bullets{
   max-width: 68ch;
   margin-bottom: 22px;
@@ -797,6 +923,8 @@ body.is-switching-lang [data-i18n]{
   .about-grid{ grid-template-columns: 1fr; }
   .about-facts{ border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
   .skills-grid{ grid-template-columns: repeat(2, 1fr); }
+  .project-two-col{ flex-direction: column; align-items: stretch; gap: 28px; }
+  .project-two-col-visual{ flex-basis: auto; }
 }
 
 @media (max-width: 720px){

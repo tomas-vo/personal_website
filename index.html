@@ -230,34 +230,82 @@
 
       <article class="project project-repuestolandia">
         <div class="project-info">
-          <p class="project-kicker" data-i18n="proj1_kicker">Emprendimiento · E-commerce</p>
-          <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="project-header">
-            <img src="images/repuestolandia-logo.png" alt="Repuestolandia" class="project-logo">
-            <h3 class="project-name">Repuestolandia</h3>
-          </a>
-          <p class="project-desc" data-i18n="proj1_desc">
-            Emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado
-            para automatizar de principio a fin el abastecimiento de productos desde Brasil y su venta en Chile.
-          </p>
-          <ul class="timeline-bullets project-bullets">
-            <li data-i18n="proj1_b1">Diseñé e implementé flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.</li>
-            <li data-i18n="proj1_b2">Construí automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.</li>
-            <li data-i18n="proj1_b3">Desarrollé verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.</li>
-            <li data-i18n="proj1_b4">Despliego y mantengo un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.</li>
-            <li data-i18n="proj1_b5">Integré la API Admin de Shopify y resolví problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.</li>
-          </ul>
-          <ul class="project-stack">
-            <li>Shopify Admin API</li>
-            <li>n8n</li>
-            <li>REST APIs</li>
-            <li>OAuth2</li>
-            <li>Docker</li>
-            <li>Ubuntu/DigitalOcean</li>
-            <li>Caddy</li>
-            <li>Cloudflare DNS</li>
-            <li>Google Sheets</li>
-            <li data-i18n="proj1_stack_ai">Herramientas de IA</li>
-          </ul>
+          <div class="project-two-col">
+            <div class="project-two-col-text">
+              <p class="project-kicker" data-i18n="proj1_kicker">Emprendimiento · E-commerce</p>
+              <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="project-header">
+                <img src="images/repuestolandia-logo.png" alt="Repuestolandia" class="project-logo">
+                <h3 class="project-name">Repuestolandia</h3>
+              </a>
+              <p class="project-desc" data-i18n="proj1_desc">
+                Emprendimiento internacional de importación y e-commerce de repuestos automotrices, diseñado
+                para automatizar de principio a fin el abastecimiento de productos desde Brasil y su venta en Chile.
+              </p>
+              <ul class="timeline-bullets project-bullets">
+                <li data-i18n="proj1_b1">Diseñé e implementé flujos de trabajo automatizados que conectan proveedores, datos de productos, inventario, precios y Shopify usando n8n, REST APIs, Google Sheets, herramientas de IA e infraestructura en la nube.</li>
+                <li data-i18n="proj1_b2">Construí automatizaciones para ingesta, clasificación, traducción, fijación de precios, publicación y verificación de inventario de productos, integrando reglas de negocio con fuentes de datos externas.</li>
+                <li data-i18n="proj1_b3">Desarrollé verificación automática de stock activada por nuevos pedidos, para prevenir sobreventa y mejorar la confiabilidad de los pedidos.</li>
+                <li data-i18n="proj1_b4">Despliego y mantengo un entorno de automatización autoalojado en Ubuntu/DigitalOcean usando Docker, Caddy, Cloudflare DNS y SSL automatizado.</li>
+                <li data-i18n="proj1_b5">Integré la API Admin de Shopify y resolví problemas de autenticación, permisos, dependencias de datos y ejecución de flujos, aprendiendo e implementando nuevas tecnologías de forma independiente.</li>
+              </ul>
+              <ul class="project-stack">
+                <li>Shopify Admin API</li>
+                <li>n8n</li>
+                <li>REST APIs</li>
+                <li>OAuth2</li>
+                <li>Docker</li>
+                <li>Ubuntu/DigitalOcean</li>
+                <li>Caddy</li>
+                <li>Cloudflare DNS</li>
+                <li>Google Sheets</li>
+                <li data-i18n="proj1_stack_ai">Herramientas de IA</li>
+              </ul>
+            </div>
+            <div class="project-two-col-visual">
+              <div class="flow-diagram">
+                <div class="flow-node">
+                  <span class="flow-node-title" data-i18n="proj1_flow_node1_title">Proveedores</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node1_sub">Brasil</span>
+                </div>
+                <div class="flow-connector"></div>
+                <div class="flow-node flow-node-accent flow-node-expandable" tabindex="0">
+                  <span class="flow-node-title">n8n</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node2_sub">Automatización end-to-end</span>
+                  <span class="flow-node-hint" data-i18n="proj1_flow_hint">Pasa el cursor para ver el detalle</span>
+                  <div class="flow-node-details-wrap">
+                    <ul class="flow-node-details">
+                      <li data-i18n="proj1_flow_detail1">Scraping de productos desde los proveedores</li>
+                      <li data-i18n="proj1_flow_detail2">Traducción automática de nombres (portugués → español)</li>
+                      <li data-i18n="proj1_flow_detail3">Conversión de valores BRL → CLP</li>
+                      <li data-i18n="proj1_flow_detail4">Cálculo del precio final para el cliente</li>
+                      <li data-i18n="proj1_flow_detail5">Registro en Google Sheets del margen y cada gasto por separado</li>
+                      <li data-i18n="proj1_flow_detail6">Verificación de stock en el proveedor al recibir un pedido: si no hay stock, marca el producto como agotado en Shopify y notifica para gestionar el reembolso</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flow-connector"></div>
+                <div class="flow-node">
+                  <span class="flow-node-title">Shopify</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node3_sub">Publicación · Stock</span>
+                </div>
+                <div class="flow-connector"></div>
+                <div class="flow-node">
+                  <span class="flow-node-title">Correios Brasil</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node4_sub">Envío nacional — origen</span>
+                </div>
+                <div class="flow-connector"></div>
+                <div class="flow-node">
+                  <span class="flow-node-title">Correos de Chile</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node5_sub">Envío nacional — destino</span>
+                </div>
+                <div class="flow-connector"></div>
+                <div class="flow-node">
+                  <span class="flow-node-title" data-i18n="proj1_flow_node6_title">Cliente</span>
+                  <span class="flow-node-sub" data-i18n="proj1_flow_node6_sub">Chile</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <a href="https://repuestolandia.cl" target="_blank" rel="noopener" class="btn btn-accent project-cta">
             <span data-i18n="proj1_cta">Ver tienda</span>
@@ -268,35 +316,42 @@
 
       <article class="project project-thesis">
         <div class="project-info">
-          <p class="project-kicker" data-i18n="proj2_kicker">Tesis · Ciencia de datos</p>
-          <h3 class="project-name" data-i18n="proj2_name">Predicción del tiempo de parada en la Conjetura de Collatz</h3>
-          <p class="project-desc" data-i18n="proj2_desc">
-            Análisis dinámico computacional de la Conjetura de Collatz: generé un dataset de 100.000
-            secuencias con un algoritmo optimizado por memoización en Python, hice un análisis
-            exploratorio de datos y entrené un modelo Random Forest para predecir el tiempo de parada
-            (stopping time) de cada secuencia a partir de propiedades del número inicial.
-          </p>
-          <div class="project-stats">
-            <div class="stat">
-              <span class="stat-number" data-count="100000">0</span>
-              <span class="stat-label" data-i18n="proj2_stat1">secuencias analizadas</span>
+          <div class="project-two-col">
+            <div class="project-two-col-text">
+              <p class="project-kicker" data-i18n="proj2_kicker">Tesis · Ciencia de datos</p>
+              <h3 class="project-name" data-i18n="proj2_name">Predicción del tiempo de parada en la Conjetura de Collatz</h3>
+              <p class="project-desc" data-i18n="proj2_desc">
+                Análisis dinámico computacional de la Conjetura de Collatz: generé un dataset de 100.000
+                secuencias con un algoritmo optimizado por memoización en Python, hice un análisis
+                exploratorio de datos y entrené un modelo Random Forest para predecir el tiempo de parada
+                (stopping time) de cada secuencia a partir de propiedades del número inicial.
+              </p>
+              <div class="project-stats">
+                <div class="stat">
+                  <span class="stat-number" data-count="100000">0</span>
+                  <span class="stat-label" data-i18n="proj2_stat1">secuencias analizadas</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number" data-count="25" data-suffix="%">0%</span>
+                  <span class="stat-label" data-i18n="proj2_stat2">de la variabilidad explicada (R²)</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number" data-count="30" data-prefix="≈">0</span>
+                  <span class="stat-label" data-i18n="proj2_stat3">pasos de error promedio (MAE)</span>
+                </div>
+              </div>
+              <ul class="project-stack">
+                <li>Python</li>
+                <li>Pandas</li>
+                <li>Scikit-learn</li>
+                <li>Random Forest</li>
+                <li>Matplotlib / Seaborn</li>
+              </ul>
             </div>
-            <div class="stat">
-              <span class="stat-number" data-count="25" data-suffix="%">0%</span>
-              <span class="stat-label" data-i18n="proj2_stat2">de la variabilidad explicada (R²)</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number" data-count="30" data-prefix="≈">0</span>
-              <span class="stat-label" data-i18n="proj2_stat3">pasos de error promedio (MAE)</span>
+            <div class="project-two-col-visual">
+              <img src="images/dispersion-n-stopping-time-dark.png" alt="Gráfico de dispersión: número inicial n versus tiempo de parada, para 100.000 secuencias de Collatz" class="project-thesis-chart">
             </div>
           </div>
-          <ul class="project-stack">
-            <li>Python</li>
-            <li>Pandas</li>
-            <li>Scikit-learn</li>
-            <li>Random Forest</li>
-            <li>Matplotlib / Seaborn</li>
-          </ul>
 
           <div class="collatz-explorer">
             <p class="collatz-explorer-title" data-i18n="collatz_title">Prueba tu propio número</p>
