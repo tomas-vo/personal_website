@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tomas-vo.github.io/personal_website/sitemap.xml
