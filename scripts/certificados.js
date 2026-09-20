@@ -348,7 +348,9 @@ function setCertsLanguage(lang){
   });
   document.documentElement.setAttribute("lang", lang);
   document.querySelectorAll(".lang-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    const isActive = btn.getAttribute("data-lang") === lang;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-pressed", String(isActive));
   });
   localStorage.setItem(CERTS_STORAGE_KEY, lang);
 }

@@ -96,7 +96,8 @@ const thesisTranslations = {
     toc_ch6: "6. Conclusiones",
     toc_ch7: "7. Aportaciones",
     copy_code: "Copiar código",
-    close_label: "Cerrar"
+    close_label: "Cerrar",
+    figure_zoom_label: "Ampliar imagen"
   },
   en: {
     back_link: "&larr; Back to portfolio",
@@ -190,7 +191,8 @@ const thesisTranslations = {
     toc_ch6: "6. Conclusions",
     toc_ch7: "7. Contributions",
     copy_code: "Copy code",
-    close_label: "Close"
+    close_label: "Close",
+    figure_zoom_label: "Enlarge image"
   },
   pt: {
     back_link: "&larr; Voltar ao portfólio",
@@ -284,7 +286,8 @@ const thesisTranslations = {
     toc_ch6: "6. Conclusões",
     toc_ch7: "7. Contribuições",
     copy_code: "Copiar código",
-    close_label: "Fechar"
+    close_label: "Fechar",
+    figure_zoom_label: "Ampliar imagem"
   },
   fr: {
     back_link: "&larr; Retour au portfolio",
@@ -378,7 +381,8 @@ const thesisTranslations = {
     toc_ch6: "6. Conclusions",
     toc_ch7: "7. Contributions",
     copy_code: "Copier le code",
-    close_label: "Fermer"
+    close_label: "Fermer",
+    figure_zoom_label: "Agrandir l'image"
   }
 };
 
@@ -410,7 +414,9 @@ function setThesisLanguage(lang){
     });
     document.documentElement.setAttribute("lang", lang);
     document.querySelectorAll(".lang-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      const isActive = btn.getAttribute("data-lang") === lang;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
     });
     localStorage.setItem(THESIS_STORAGE_KEY, lang);
     document.body.classList.remove("is-switching-lang");
@@ -470,17 +476,28 @@ const thesisLightboxImg = document.getElementById("thesisLightboxImg");
 const thesisLightboxClose = document.getElementById("thesisLightboxClose");
 
 if (thesisLightbox && thesisLightboxImg && thesisLightboxClose){
-  function openLightbox(src, alt){
+  let lightboxTrigger = null;
+
+  function openLightbox(src, alt, trigger){
     thesisLightboxImg.src = src;
     thesisLightboxImg.alt = alt;
     thesisLightbox.classList.add("open");
+    lightboxTrigger = trigger || null;
+    thesisLightboxClose.focus();
   }
   function closeLightbox(){
     thesisLightbox.classList.remove("open");
+    if (lightboxTrigger) lightboxTrigger.focus();
   }
 
   document.querySelectorAll(".thesis-figure img").forEach(img => {
-    img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    img.addEventListener("click", () => openLightbox(img.src, img.alt, img));
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openLightbox(img.src, img.alt, img);
+      }
+    });
   });
   thesisLightboxClose.addEventListener("click", closeLightbox);
   thesisLightbox.addEventListener("click", (e) => {

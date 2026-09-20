@@ -520,7 +520,9 @@ function setLanguage(lang){
     });
     document.documentElement.setAttribute("lang", lang);
     document.querySelectorAll(".lang-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      const isActive = btn.getAttribute("data-lang") === lang;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
     });
     localStorage.setItem(STORAGE_KEY, lang);
     document.body.classList.remove("is-switching-lang");
@@ -558,10 +560,14 @@ const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
 
 menuToggle.addEventListener("click", () => {
-  mainNav.classList.toggle("open");
+  const isOpen = mainNav.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
 });
 mainNav.querySelectorAll("a").forEach(a => {
-  a.addEventListener("click", () => mainNav.classList.remove("open"));
+  a.addEventListener("click", () => {
+    mainNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
 });
 
 /* ==========================================================

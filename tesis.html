@@ -286,10 +286,10 @@
       </svg>
     </a>
     <div class="lang-switch" id="thesisLangSwitch">
-      <button class="lang-btn" data-lang="es">ES</button>
-      <button class="lang-btn" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="pt">PT</button>
-      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="es" aria-label="Español" aria-pressed="false">ES</button>
+      <button class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">EN</button>
+      <button class="lang-btn" data-lang="pt" aria-label="Português" aria-pressed="false">PT</button>
+      <button class="lang-btn" data-lang="fr" aria-label="Français" aria-pressed="false">FR</button>
     </div>
   </div>
 </header>
@@ -445,7 +445,7 @@
 
     <h3 data-i18n="s4_1_title">4.1 Script principal de generación de datos y análisis</h3>
     <p class="thesis-code-label">Python</p>
-    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">import pandas as pd
+    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -568,7 +568,7 @@ plt.show()</code></pre>
 
     <h3 data-i18n="s4_2_title">4.2 Script de modelamiento predictivo (Machine Learning)</h3>
     <p class="thesis-code-label">Python</p>
-    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">from sklearn.model_selection import train_test_split
+    <pre class="thesis-code"><button type="button" class="thesis-code-copy" data-i18n-label="copy_code" aria-label="Copiar código"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button><code class="language-python">from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.preprocessing import StandardScaler
@@ -632,7 +632,7 @@ plt.show()</code></pre>
       sugiere restricciones estocásticas globales en el sistema.
     </p>
     <figure class="thesis-figure">
-      <img src="images/distribucion-stopping-time.png" alt="Histograma de la distribución global del stopping time para N = 100.000 secuencias">
+      <img src="images/distribucion-stopping-time.png" alt="Histograma de la distribución global del stopping time para N = 100.000 secuencias" tabindex="0" role="button" data-i18n-label="figure_zoom_label" aria-label="Ampliar imagen">
       <figcaption data-i18n="fig1_caption">Figura 1. Distribución global del stopping time para N = 100.000 secuencias.</figcaption>
     </figure>
     <p data-i18n="s5_1_p2">
@@ -642,7 +642,7 @@ plt.show()</code></pre>
       extremadamente lenta (logarítmica o polilogarítmica) en relación con n.
     </p>
     <figure class="thesis-figure">
-      <img src="images/dispersion-n-stopping-time.png" alt="Diagrama de dispersión entre el número inicial n y el stopping time">
+      <img src="images/dispersion-n-stopping-time.png" alt="Diagrama de dispersión entre el número inicial n y el stopping time" tabindex="0" role="button" data-i18n-label="figure_zoom_label" aria-label="Ampliar imagen">
       <figcaption data-i18n="fig2_caption">Figura 2. Dispersión entre el número inicial (n) y el stopping time.</figcaption>
     </figure>
     <p data-i18n="s5_1_p3">
@@ -655,7 +655,7 @@ plt.show()</code></pre>
       instantáneamente, prolongando el tiempo de parada de forma impredecible.
     </p>
     <figure class="thesis-figure">
-      <img src="images/trayectoria-n27.png" alt="Trayectoria de Collatz para n = 27 en escala logarítmica">
+      <img src="images/trayectoria-n27.png" alt="Trayectoria de Collatz para n = 27 en escala logarítmica" tabindex="0" role="button" data-i18n-label="figure_zoom_label" aria-label="Ampliar imagen">
       <figcaption data-i18n="fig3_caption">Figura 3. Trayectoria de Collatz para n = 27, en escala logarítmica.</figcaption>
     </figure>
     <p data-i18n="s5_1_p4">
@@ -686,7 +686,7 @@ plt.show()</code></pre>
       promedio, el modelo se aproxima con un margen de error aceptable dada la naturaleza caótica del sistema.
     </p>
     <figure class="thesis-figure">
-      <img src="images/prediccion-vs-real.png" alt="Gráfico de predicción del modelo Random Forest contra los valores reales de stopping time">
+      <img src="images/prediccion-vs-real.png" alt="Gráfico de predicción del modelo Random Forest contra los valores reales de stopping time" tabindex="0" role="button" data-i18n-label="figure_zoom_label" aria-label="Ampliar imagen">
       <figcaption data-i18n="fig4_caption">Figura 4. Predicción del modelo Random Forest vs. valores reales de stopping time.</figcaption>
     </figure>
 
