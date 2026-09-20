@@ -1,0 +1,16 @@
+# macOS / Windows filesystem junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE local settings
+.vscode/
+.idea/
+.claude/settings.local.json
+
+# Environment variables / local secrets
+.env
+.env.local
+.env.*.local
+
+# Dependency directories (in case tooling is added later)
+node_modules/
