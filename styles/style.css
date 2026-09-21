@@ -120,10 +120,11 @@ body.is-switching-lang [data-i18n]{
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: 0.02em;
-  margin-right: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  padding: 13px;
+  margin: -13px auto -13px -13px;
   transition: color var(--ease) .25s, transform var(--ease) .3s;
 }
 .logo:hover{ color: var(--accent); }
@@ -950,11 +951,22 @@ body.is-switching-lang [data-i18n]{
   }
   .menu-toggle{ display: flex; width: 44px; height: 44px; }
   .header-inner{ padding: 0 20px; }
+  .lang-switch{ gap: 4px; }
   .lang-btn{ padding: 9px 14px; font-size: 0.8rem; }
+  .main-nav a{ padding: 11px 0; }
   .section{ padding: 90px 20px; }
   .hero{ padding: 110px 20px 50px; }
   .hero-photo{ width: 140px; height: 140px; }
   .timeline-org-logo{ width: 48px; height: 48px; }
+}
+
+/* Very narrow phones (iPhone SE, older/small Android): the header
+   bar (logo + lang switch + hamburger) doesn't fit at 720px sizing,
+   so it gets tightened further here. */
+@media (max-width: 380px){
+  .header-inner{ gap: 14px; padding: 0 16px; }
+  .lang-switch{ gap: 2px; }
+  .lang-btn{ padding: 8px 10px; font-size: 0.76rem; }
 }
 
 @media (max-width: 520px){
