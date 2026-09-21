@@ -926,6 +926,7 @@ body.is-switching-lang [data-i18n]{
   .about-facts{ border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
   .skills-grid{ grid-template-columns: repeat(2, 1fr); }
   .project-two-col{ flex-direction: column; align-items: stretch; gap: 28px; }
+  .project-two-col-text{ flex-basis: auto; }
   .project-two-col-visual{ flex-basis: auto; }
 }
 
