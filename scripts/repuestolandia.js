@@ -1320,3 +1320,21 @@ if (rlGlossPopover){
   document.addEventListener("scroll", () => { if (rlGlossActiveBtn) rlGlossClose(); }, { passive: true, capture: true });
   window.addEventListener("resize", () => { if (rlGlossActiveBtn) rlGlossClose(); });
 }
+
+/* ==========================================================
+   Video de fondo del hero: solo se carga en pantallas anchas
+   y si el usuario no pide reducir movimiento
+   ========================================================== */
+const rlHeroVideo = document.getElementById("rlHeroVideo");
+if (rlHeroVideo){
+  const rlWantsVideo = window.matchMedia("(min-width: 721px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (rlWantsVideo){
+    const source = document.createElement("source");
+    source.src = "img/hero-loop.mp4";
+    source.type = "video/mp4";
+    rlHeroVideo.appendChild(source);
+    rlHeroVideo.load();
+    rlHeroVideo.play().catch(() => {});
+  }
+}

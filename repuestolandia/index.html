@@ -55,6 +55,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){
+  .hero-video{display:none !important}
   .reveal{transition:opacity .3s ease !important;transform:none !important}
   .lane > *{transition:opacity .3s ease !important;transform:none !important}
   .back:hover,.back:active{transform:none !important}
@@ -68,7 +69,10 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 }
 
 /* hero */
-.hero{background:var(--hero);color:var(--hero-ink);padding:36px 36px 32px;display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:center}
+.hero{position:relative;background:var(--hero);color:var(--hero-ink);padding:36px 36px 32px;display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:center;overflow:hidden}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,10,.72),rgba(7,7,10,.88));z-index:1}
+.hero > *:not(.hero-video):not(.hero-overlay){position:relative;z-index:2}
 .hero .wordmark{grid-column:1/-1;width:min(292px,70%);height:auto;display:block;margin:0 auto 8px;filter:invert(1)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .hero .eyebrow{margin-top:22px}
@@ -320,6 +324,7 @@ footer .wm{width:170px;height:auto;filter:var(--wm-filter);display:block;margin:
 footer a{color:var(--ink)}
 
 @media (max-width:720px){
+  .hero-video{display:none !important}
   .hero{grid-template-columns:1fr;padding:24px 20px}
   .hero .wordmark{width:min(260px,80%)}
   .hero .logo{justify-self:center;max-width:170px;margin:0 auto 8px}
@@ -351,6 +356,8 @@ footer a{color:var(--ink)}
 </div>
 
 <header class="hero">
+  <video class="hero-video" id="rlHeroVideo" muted loop playsinline aria-hidden="true"></video>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <img class="wordmark" src="img/wordmark.png" alt="Repuestolandia" width="600" height="145">
   <div class="hero-text">
     <div class="eyebrow" data-i18n="hero_eyebrow">Caso · Automatización e-commerce · Brasil → Chile</div>
