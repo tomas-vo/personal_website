@@ -4,6 +4,7 @@
 const rlTranslations = {
   es: {
     back_link: "&larr; Volver al portafolio",
+    visit_site_link: "Visitar Repuestolandia.cl &rarr;",
     hero_eyebrow: "Caso · Automatización e-commerce · Brasil → Chile",
     hero_title: "Una tienda de repuestos en piloto automático",
     hero_lede: "Repuestolandia es mi tienda Shopify de repuestos importados desde Brasil. La manejo solo, así que construí un sistema con n8n, la API de Gemini y un servidor Linux de 5 USD al mes que hace el trabajo pesado por mí: catálogo, traducción, filtros, precio con envío incluido, colecciones, metacampos, stock y registro de cada venta. El único paso manual es correr el scraper; desde ahí, todo lo hace n8n.",
@@ -214,6 +215,7 @@ const rlTranslations = {
 
   en: {
     back_link: "&larr; Back to portfolio",
+    visit_site_link: "Visit Repuestolandia.cl &rarr;",
     hero_eyebrow: "Case study · E-commerce automation · Brazil → Chile",
     hero_title: "An auto-parts store on autopilot",
     hero_lede: "Repuestolandia is my Shopify store for auto parts imported from Brazil. I run it alone, so I built a system with n8n, the Gemini API, and a $5/month Linux server that does the heavy lifting for me: catalog, translation, filters, shipping-inclusive pricing, collections, metafields, stock, and a record of every sale. The only manual step is running the scraper; n8n handles everything from there.",
@@ -424,6 +426,7 @@ const rlTranslations = {
 
   pt: {
     back_link: "&larr; Voltar ao portfólio",
+    visit_site_link: "Visitar Repuestolandia.cl &rarr;",
     hero_eyebrow: "Caso · Automação de e-commerce · Brasil → Chile",
     hero_title: "Uma loja de autopeças no piloto automático",
     hero_lede: "Repuestolandia é minha loja Shopify de autopeças importadas do Brasil. Eu cuido dela sozinho, então construí um sistema com n8n, a API do Gemini e um servidor Linux de 5 USD por mês que faz o trabalho pesado por mim: catálogo, tradução, filtros, preço com frete incluído, coleções, metacampos, estoque e registro de cada venda. O único passo manual é rodar o scraper; a partir daí, o n8n faz tudo.",
@@ -634,6 +637,7 @@ const rlTranslations = {
 
   fr: {
     back_link: "&larr; Retour au portfolio",
+    visit_site_link: "Visiter Repuestolandia.cl &rarr;",
     hero_eyebrow: "Étude de cas · Automatisation e-commerce · Brésil → Chili",
     hero_title: "Une boutique de pièces automobiles en pilote automatique",
     hero_lede: "Repuestolandia est ma boutique Shopify de pièces automobiles importées du Brésil. Je la gère seul, alors j'ai construit un système avec n8n, l'API Gemini et un serveur Linux à 5 USD par mois qui fait le gros du travail à ma place : catalogue, traduction, filtres, prix livraison incluse, collections, métachamps, stock et enregistrement de chaque vente. La seule étape manuelle consiste à lancer le scraper ; à partir de là, n8n s'occupe de tout.",

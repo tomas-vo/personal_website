@@ -43,7 +43,8 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:24px 0 18px}
 .back{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:.92rem;font-weight:600;font-family:var(--body);background:transparent;border:1px solid var(--accent);color:var(--accent);text-decoration:none;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s ease,color .3s ease}
-.back-bottom{margin-top:40px}
+.footer-bottom-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
+.back-bottom{margin-top:0}
 .back:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px)}
 .back:active{transform:scale(.97);transition-duration:.12s}
 .lang-switch{display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -748,7 +749,10 @@ footer a{color:var(--ink)}
   </div>
 </footer>
 
-<a class="back back-bottom" href="../index.html" data-i18n="back_link">&larr; Volver al portafolio</a>
+<div class="footer-bottom-bar">
+  <a class="back back-bottom" href="../index.html" data-i18n="back_link">&larr; Volver al portafolio</a>
+  <a class="back back-bottom" href="https://repuestolandia.cl/" target="_blank" rel="noopener noreferrer" data-i18n="visit_site_link">Visitar Repuestolandia.cl &rarr;</a>
+</div>
 </div>
 
 <div id="glossPopover" class="gloss-popover" aria-hidden="true">
