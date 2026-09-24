@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Caso técnico: cómo automaticé Repuestolandia con n8n, Gemini, Google Sheets y Shopify.">
-<link rel="icon" href="img/logo.png">
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
 <title>Repuestolandia en piloto automático</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -230,9 +230,8 @@ tbody tr:hover{background:var(--node)}
 .contact-copied-tip{position:absolute;top:-36px;left:50%;transform:translateX(-50%) translateY(4px);background:var(--ink);color:var(--bg);font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
 .contact-copied-tip.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-footer img.l{width:56px;height:auto}
-footer .wm{width:170px;height:auto;filter:var(--wm-filter);display:block;margin-bottom:6px}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);text-align:center}
+footer .wm{width:170px;height:auto;filter:var(--wm-filter);display:block;margin:0 auto 6px}
 footer a{color:var(--ink)}
 
 @media (max-width:720px){
@@ -395,6 +394,7 @@ footer a{color:var(--ink)}
       <h4 data-i18n="h4_envio">Estimación del envío por producto</h4>
       <p data-i18n="p_envio">Los proveedores no publican peso ni medidas. Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza. Con eso calculo el <strong>peso cobrable</strong> y el flete internacional:</p>
       <div class="formula"><span data-i18n="formula1_l1">peso cobrable = peso real × Factor K</span><span data-i18n="formula1_l2">flete = R$133 fijo por paquete + R$58,7 × kg cobrable</span></div>
+      <p class="note" data-i18n="factor_k_note">¿Qué es el Factor K? Es un multiplicador según el tamaño de la pieza: las piezas grandes ocupan más espacio en el envío aunque pesen poco, así que se les cobra como si pesaran más. Es la forma de aproximar el peso volumétrico sin medir cada paquete.</p>
       <div class="tbl">
         <table>
           <thead><tr><th data-i18n="tbl2_h1">Tamaño</th><th data-i18n="tbl2_h2">Ejemplos</th><th data-i18n="tbl2_h3">Factor K</th></tr></thead>
@@ -589,7 +589,6 @@ footer a{color:var(--ink)}
 </section>
 
 <footer>
-  <img class="l" src="img/logo.png" alt="" width="320" height="314">
   <div>
     <img class="wm" src="img/wordmark.png" alt="Repuestolandia" width="600" height="145">
     <span data-i18n="footer_stack">Stack: n8n · Docker · Ubuntu · Google Sheets API · Gemini API · Shopify Admin API · JavaScript · Cloudflare DNS</span><br>
