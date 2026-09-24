@@ -39,6 +39,8 @@ const rlTranslations = {
     dd_peso_val: "2,4 kg real → 4,32 kg cobrable (×1,8)",
     dd_flete_val: "R$133 + R$58,7 × 4,32 = R$386,58",
     dd_size_label: "tamaño",
+    dd_size_val: "Media",
+    dd_img_val: "de la ficha",
     demo_note: "Ejemplo ilustrativo: los campos y cálculos son los que genera el flujo; el producto y su peso son de muestra.",
 
     h2_arquitectura: "Arquitectura",
@@ -73,8 +75,19 @@ const rlTranslations = {
     wf1_c10: "Wait",
     wf1_c11: "POST producto",
     wf1_caption: "Product Catalog Automation, en n8n. Los nodos desactivados los uso para pruebas: limitar a pocos productos, probar filtros y pausas.",
-    wf1_pt1: "<strong>Paso previo manual: scraping.</strong> Corro un script de JavaScript en la consola de Chrome que recorre todas las páginas del buscador del proveedor (con <code>fetch</code> + <code>DOMParser</code>) y saca título, precio en BRL, link e imagen. Pego el resultado en Google Sheets, y desde ahí el workflow hace todo lo demás. Lo hice en dos fases (listado y después cada ficha) para leer la imagen real desde <code>og:image</code>, porque en el listado se mezclaban las imágenes de productos vecinos. Adapté selectores para proveedores con distinto HTML.",
+    shot_hint: "desliza →",
+    wf1_pt1: "<strong>Paso previo manual: scraping.</strong> Un script de JavaScript en la consola de Chrome recorre el buscador del proveedor y guarda título, precio, link e imagen en Google Sheets. Lo hice en dos fases (primero el listado y luego cada ficha) porque en el listado se mezclaban las imágenes de productos vecinos.",
     wf1_pt2: "<strong>Gemini</strong> devuelve JSON estructurado: título traducido con terminología chilena, descripción HTML, OEM, marcas compatibles, peso estimado, tamaño y estado. Antes, un diccionario de unos 100 términos técnicos PT→ES asegura que la traducción sea consistente.",
+    mba_before_label: "Antes · dato scrapeado",
+    mba_before_1: "Título en portugués, sin traducir",
+    mba_before_2: "Precio en reales (BRL)",
+    mba_before_3: "Sin peso, tamaño ni clasificación",
+    mba_after_label: "Después · JSON de Gemini",
+    mba_after_1: "Título traducido (terminología chilena)",
+    mba_after_2: "Descripción HTML + número OEM",
+    mba_after_3: "Marcas compatibles detectadas",
+    mba_after_4: "Peso y tamaño estimados",
+    mba_after_5: "Estado: aprobado, rechazado o cotizar",
     wf1_pt3: "<strong>Filtro doble.</strong> La IA clasifica por peso y riesgo, y una lista determinística de palabras prohibidas en portugués actúa como respaldo. Sin ella, algunos motores completos se colaban con precios de millones.",
     wf1_pt4: "<strong>Precio:</strong> (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + provisión aduanera (IVA + arancel), dividido por 0,60.",
     tbl1_h1: "Regla", tbl1_h2: "Criterio", tbl1_h3: "Resultado",
@@ -90,7 +103,8 @@ const rlTranslations = {
     p_envio: "Los proveedores no publican peso ni medidas. Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza. Con eso calculo el <strong>peso cobrable</strong> y el flete internacional:",
     formula1_l1: "peso cobrable = peso real × Factor K",
     formula1_l2: "flete = R$133 fijo por paquete + R$58,7 × kg cobrable",
-    factor_k_note: "¿Qué es el Factor K? Es un multiplicador según el tamaño de la pieza: las piezas grandes ocupan más espacio en el envío aunque pesen poco, así que se les cobra como si pesaran más. Es la forma de aproximar el peso volumétrico sin medir cada paquete.",
+    factor_k_title: "¿Qué es el Factor K?",
+    factor_k_body: "Es un multiplicador según el tamaño de la pieza: las piezas grandes ocupan más espacio en el envío aunque pesen poco, así que se les cobra como si pesaran más. Es la forma de aproximar el peso volumétrico sin medir cada paquete.",
     tbl2_h1: "Tamaño", tbl2_h2: "Ejemplos", tbl2_h3: "Factor K",
     tbl2_r1_tamano: "Alta", tbl2_r1_ejemplos: "Parrillas, parachoques, tableros",
     tbl2_r2_tamano: "Media", tbl2_r2_ejemplos: "Focos, mangueras, espejos",
@@ -207,7 +221,7 @@ const rlTranslations = {
     nav_aprendizajes: "Lessons learned",
 
     h2_problema: "The problem",
-    p_problema: "I sell auto parts in Chile that I buy from Brazilian auto-parts stores. Every product arrives in Portuguese, priced in reais, with no clear weight, dimensions, or brand. On top of that, the supplier can run out of stock at any moment. Doing it by hand meant translating, estimating shipping, calculating the landed cost in Chile, and sorting thousands of listings by brand — plus checking daily whether they were still available.",
+    p_problema: "In Chile, finding certain auto parts is hard: specific pieces for Jeep or Fiat that aren't carried by local stores, or that cost far more than they should. In Brazil, on the other hand, those same parts are easy to find, because many of these models are manufactured and sold there. That's where I saw the opportunity for Repuestolandia: importing directly from Brazil the parts that are hard to find in Chile.",
     p_problema_2: "The real challenge was operations. Every product arrived in Portuguese, priced in reais, with no weight or dimensions, and the supplier's stock could change without notice. Publishing and maintaining thousands of listings by hand would have required a team I didn't have. So I decided to automate as much as possible from day one, so a one-person business could operate like a much bigger one, at minimal cost.",
 
     h2_ejemplo: "A product, before and after",
@@ -224,6 +238,8 @@ const rlTranslations = {
     dd_peso_val: "2.4 kg actual → 4.32 kg billable (×1.8)",
     dd_flete_val: "R$133 + R$58.7 × 4.32 = R$386.58",
     dd_size_label: "size",
+    dd_size_val: "Medium",
+    dd_img_val: "from the listing",
     demo_note: "Illustrative example: the fields and calculations are the ones the flow actually generates; the product and its weight are a sample.",
 
     h2_arquitectura: "Architecture",
@@ -258,8 +274,19 @@ const rlTranslations = {
     wf1_c10: "Wait",
     wf1_c11: "POST product",
     wf1_caption: "Product Catalog Automation, in n8n. The disabled nodes are ones I use for testing: capping the run to a few products, trying out filters and pauses.",
-    wf1_pt1: "<strong>Manual step upfront: scraping.</strong> I run a JavaScript script in the Chrome console that walks every page of the supplier's search results (using <code>fetch</code> + <code>DOMParser</code>) and pulls the title, price in BRL, link, and image. I paste the result into Google Sheets, and from there the workflow does everything else. I split it into two passes (listing, then each product page) to read the real image from <code>og:image</code>, because on the listing page neighboring products' images got mixed up. I adapted the selectors for suppliers with different HTML.",
+    shot_hint: "scroll →",
+    wf1_pt1: "<strong>Manual first step: scraping.</strong> A JavaScript script in the Chrome console crawls the supplier's search results and saves title, price, link, and image to Google Sheets. I did it in two passes (first the listing, then each product page) because the listing mixed up neighboring products' images.",
     wf1_pt2: "<strong>Gemini</strong> returns structured JSON: a title translated with Chilean terminology, an HTML description, the OEM number, compatible brands, estimated weight, size, and status. Before that, a dictionary of about 100 technical PT→ES terms keeps the translation consistent.",
+    mba_before_label: "Before · scraped data",
+    mba_before_1: "Title in Portuguese, untranslated",
+    mba_before_2: "Price in reais (BRL)",
+    mba_before_3: "No weight, size, or classification",
+    mba_after_label: "After · Gemini's JSON",
+    mba_after_1: "Translated title (Chilean terminology)",
+    mba_after_2: "HTML description + OEM number",
+    mba_after_3: "Compatible brands detected",
+    mba_after_4: "Estimated weight and size",
+    mba_after_5: "Status: approved, rejected, or quote-needed",
     wf1_pt3: "<strong>Double filter.</strong> The AI classifies by weight and risk, and a deterministic list of banned Portuguese words acts as a backstop. Without it, a few whole engines slipped through priced in the millions.",
     wf1_pt4: "<strong>Price:</strong> (BRL cost + domestic freight) × exchange rate + volumetric international freight + customs provision (VAT + duty), divided by 0.60.",
     tbl1_h1: "Rule", tbl1_h2: "Criterion", tbl1_h3: "Result",
@@ -275,7 +302,8 @@ const rlTranslations = {
     p_envio: "Suppliers don't publish weight or dimensions. Gemini estimates the <strong>actual weight</strong> and classifies the part's size. From that I calculate the <strong>billable weight</strong> and the international freight:",
     formula1_l1: "billable weight = actual weight × Factor K",
     formula1_l2: "freight = R$133 flat per package + R$58.7 × billable kg",
-    factor_k_note: "What's Factor K? It's a multiplier based on the part's size: large parts take up more room in the shipment even if they don't weigh much, so they get charged as if they weighed more. It's a way to approximate volumetric (dimensional) weight without measuring every package.",
+    factor_k_title: "What's Factor K?",
+    factor_k_body: "It's a multiplier based on the part's size: large parts take up more room in the shipment even if they don't weigh much, so they get charged as if they weighed more. It's a way to approximate volumetric (dimensional) weight without measuring every package.",
     tbl2_h1: "Size", tbl2_h2: "Examples", tbl2_h3: "Factor K",
     tbl2_r1_tamano: "Large", tbl2_r1_ejemplos: "Grilles, bumpers, dashboards",
     tbl2_r2_tamano: "Medium", tbl2_r2_ejemplos: "Headlights, hoses, mirrors",
@@ -392,7 +420,7 @@ const rlTranslations = {
     nav_aprendizajes: "Aprendizados",
 
     h2_problema: "O problema",
-    p_problema: "Vendo no Chile autopeças que compro em lojas de autopeças brasileiras. Cada produto chega em português, com preço em reais e sem peso, medidas ou marca clara. Além disso, o fornecedor pode ficar sem estoque a qualquer momento. Fazer isso manualmente significava traduzir, estimar o frete, calcular o custo total no Chile e organizar milhares de fichas por marca, além de checar diariamente se ainda estavam disponíveis.",
+    p_problema: "No Chile, é difícil encontrar certas autopeças: peças específicas para Jeep ou Fiat que não estão nas lojas locais ou que custam muito mais do que deveriam. No Brasil, por outro lado, essas mesmas peças são fáceis de encontrar, porque muitos desses modelos são fabricados e vendidos lá. Foi aí que vi a oportunidade da Repuestolandia: importar diretamente do Brasil as peças difíceis de encontrar.",
     p_problema_2: "O desafio era a operação. Cada produto chega em português, com preço em reais e sem peso nem medidas, e o estoque do fornecedor muda sem aviso. Publicar e manter milhares de produtos manualmente exigiria uma equipe que eu não tinha. Por isso decidi automatizar o máximo possível desde o primeiro dia, para que um negócio de uma só pessoa pudesse operar como um muito maior, com custos mínimos.",
 
     h2_ejemplo: "Um produto, antes e depois",
@@ -409,6 +437,8 @@ const rlTranslations = {
     dd_peso_val: "2,4 kg real → 4,32 kg cobrável (×1,8)",
     dd_flete_val: "R$133 + R$58,7 × 4,32 = R$386,58",
     dd_size_label: "tamanho",
+    dd_size_val: "Média",
+    dd_img_val: "da ficha",
     demo_note: "Exemplo ilustrativo: os campos e cálculos são os que o fluxo realmente gera; o produto e seu peso são de amostra.",
 
     h2_arquitectura: "Arquitetura",
@@ -443,8 +473,19 @@ const rlTranslations = {
     wf1_c10: "Wait",
     wf1_c11: "POST produto",
     wf1_caption: "Product Catalog Automation, no n8n. Os nós desativados eu uso para testes: limitar a poucos produtos, testar filtros e pausas.",
-    wf1_pt1: "<strong>Passo manual prévio: scraping.</strong> Rodo um script JavaScript no console do Chrome que percorre todas as páginas do buscador do fornecedor (com <code>fetch</code> + <code>DOMParser</code>) e extrai título, preço em BRL, link e imagem. Colo o resultado no Google Sheets, e a partir daí o workflow faz todo o resto. Fiz em duas fases (listagem e depois cada ficha) para ler a imagem real a partir de <code>og:image</code>, porque na listagem as imagens de produtos vizinhos se misturavam. Adaptei os seletores para fornecedores com HTML diferente.",
+    shot_hint: "deslize →",
+    wf1_pt1: "<strong>Etapa manual prévia: scraping.</strong> Um script de JavaScript no console do Chrome percorre a busca do fornecedor e salva título, preço, link e imagem no Google Sheets. Fiz isso em duas fases (primeiro a listagem, depois cada ficha) porque na listagem as imagens de produtos vizinhos se misturavam.",
     wf1_pt2: "O <strong>Gemini</strong> devolve um JSON estruturado: título traduzido com terminologia chilena, descrição em HTML, OEM, marcas compatíveis, peso estimado, tamanho e status. Antes disso, um dicionário de cerca de 100 termos técnicos PT→ES garante que a tradução seja consistente.",
+    mba_before_label: "Antes · dado raspado",
+    mba_before_1: "Título em português, sem tradução",
+    mba_before_2: "Preço em reais (BRL)",
+    mba_before_3: "Sem peso, tamanho ou classificação",
+    mba_after_label: "Depois · JSON do Gemini",
+    mba_after_1: "Título traduzido (terminologia chilena)",
+    mba_after_2: "Descrição em HTML + número OEM",
+    mba_after_3: "Marcas compatíveis detectadas",
+    mba_after_4: "Peso e tamanho estimados",
+    mba_after_5: "Status: aprovado, rejeitado ou a cotar",
     wf1_pt3: "<strong>Filtro duplo.</strong> A IA classifica por peso e risco, e uma lista determinística de palavras proibidas em português age como reforço. Sem ela, alguns motores completos passavam com preços na casa dos milhões.",
     wf1_pt4: "<strong>Preço:</strong> (custo em BRL + frete interno) × taxa de câmbio + frete internacional volumétrico + provisão aduaneira (IVA + tarifa), dividido por 0,60.",
     tbl1_h1: "Regra", tbl1_h2: "Critério", tbl1_h3: "Resultado",
@@ -460,7 +501,8 @@ const rlTranslations = {
     p_envio: "Os fornecedores não publicam peso nem medidas. O Gemini estima o <strong>peso real</strong> e classifica o tamanho da peça. Com isso calculo o <strong>peso cobrável</strong> e o frete internacional:",
     formula1_l1: "peso cobrável = peso real × Factor K",
     formula1_l2: "frete = R$133 fixo por pacote + R$58,7 × kg cobrável",
-    factor_k_note: "O que é o Factor K? É um multiplicador conforme o tamanho da peça: peças grandes ocupam mais espaço no envio mesmo pesando pouco, então são cobradas como se pesassem mais. É a forma de aproximar o peso volumétrico sem medir cada pacote.",
+    factor_k_title: "O que é o Factor K?",
+    factor_k_body: "É um multiplicador conforme o tamanho da peça: peças grandes ocupam mais espaço no envio mesmo pesando pouco, então são cobradas como se pesassem mais. É a forma de aproximar o peso volumétrico sem medir cada pacote.",
     tbl2_h1: "Tamanho", tbl2_h2: "Exemplos", tbl2_h3: "Factor K",
     tbl2_r1_tamano: "Alta", tbl2_r1_ejemplos: "Grades, para-choques, painéis",
     tbl2_r2_tamano: "Média", tbl2_r2_ejemplos: "Faróis, mangueiras, espelhos",
@@ -577,7 +619,7 @@ const rlTranslations = {
     nav_aprendizajes: "Leçons apprises",
 
     h2_problema: "Le problème",
-    p_problema: "Je vends au Chili des pièces automobiles que j'achète dans des magasins de pièces détachées brésiliens. Chaque produit arrive en portugais, avec un prix en réaux, sans poids, dimensions ni marque clairs. De plus, le fournisseur peut se retrouver en rupture de stock à tout moment. Le faire à la main signifiait traduire, estimer l'envoi, calculer le coût total au Chili et trier des milliers de fiches par marque, tout en vérifiant chaque jour si elles étaient toujours disponibles.",
+    p_problema: "Au Chili, trouver certaines pièces automobiles est difficile : des pièces spécifiques pour Jeep ou Fiat qui ne sont pas disponibles dans les magasins locaux, ou qui coûtent bien plus cher que de raison. Au Brésil, en revanche, ces mêmes pièces se trouvent facilement, car beaucoup de ces modèles y sont fabriqués et vendus. C'est là que j'ai vu l'opportunité de Repuestolandia : importer directement du Brésil les pièces difficiles à trouver.",
     p_problema_2: "Le vrai défi était l'exploitation. Chaque produit arrivait en portugais, avec un prix en réaux, sans poids ni dimensions, et le stock du fournisseur pouvait changer sans préavis. Publier et maintenir des milliers de produits à la main aurait demandé une équipe que je n'avais pas. J'ai donc décidé d'automatiser le plus possible dès le premier jour, pour qu'une entreprise d'une seule personne puisse fonctionner comme une bien plus grande, avec des coûts minimes.",
 
     h2_ejemplo: "Un produit, avant et après",
@@ -594,6 +636,8 @@ const rlTranslations = {
     dd_peso_val: "2,4 kg réel → 4,32 kg facturable (×1,8)",
     dd_flete_val: "R$133 + R$58,7 × 4,32 = R$386,58",
     dd_size_label: "taille",
+    dd_size_val: "Moyenne",
+    dd_img_val: "de la fiche",
     demo_note: "Exemple illustratif : les champs et calculs sont ceux réellement générés par le flux ; le produit et son poids sont donnés à titre d'exemple.",
 
     h2_arquitectura: "Architecture",
@@ -628,8 +672,19 @@ const rlTranslations = {
     wf1_c10: "Wait",
     wf1_c11: "POST produit",
     wf1_caption: "Product Catalog Automation, dans n8n. Les nœuds désactivés, je les utilise pour les tests : limiter à quelques produits, tester des filtres et des pauses.",
-    wf1_pt1: "<strong>Étape manuelle préalable : le scraping.</strong> Je lance un script JavaScript dans la console Chrome qui parcourt toutes les pages du moteur de recherche du fournisseur (avec <code>fetch</code> + <code>DOMParser</code>) et récupère le titre, le prix en BRL, le lien et l'image. Je colle le résultat dans Google Sheets, et à partir de là, le workflow fait tout le reste. Je l'ai fait en deux passes (le listing, puis chaque fiche) pour lire la vraie image depuis <code>og:image</code>, car sur le listing les images des produits voisins se mélangeaient. J'ai adapté les sélecteurs pour les fournisseurs avec un HTML différent.",
+    shot_hint: "faites défiler →",
+    wf1_pt1: "<strong>Étape manuelle préalable : scraping.</strong> Un script JavaScript dans la console Chrome parcourt le moteur de recherche du fournisseur et enregistre titre, prix, lien et image dans Google Sheets. Je l'ai fait en deux phases (d'abord la liste, puis chaque fiche) car dans la liste, les images des produits voisins se mélangeaient.",
     wf1_pt2: "<strong>Gemini</strong> renvoie un JSON structuré : titre traduit avec une terminologie chilienne, description HTML, référence OEM, marques compatibles, poids estimé, taille et statut. En amont, un dictionnaire d'environ 100 termes techniques PT→ES garantit une traduction cohérente.",
+    mba_before_label: "Avant · donnée scrapée",
+    mba_before_1: "Titre en portugais, non traduit",
+    mba_before_2: "Prix en réaux (BRL)",
+    mba_before_3: "Ni poids, ni taille, ni classification",
+    mba_after_label: "Après · JSON de Gemini",
+    mba_after_1: "Titre traduit (terminologie chilienne)",
+    mba_after_2: "Description HTML + référence OEM",
+    mba_after_3: "Marques compatibles détectées",
+    mba_after_4: "Poids et taille estimés",
+    mba_after_5: "Statut : approuvé, rejeté ou à devis",
     wf1_pt3: "<strong>Double filtre.</strong> L'IA classe par poids et par risque, et une liste déterministe de mots interdits en portugais sert de filet de sécurité. Sans elle, quelques moteurs complets passaient avec des prix à plusieurs millions.",
     wf1_pt4: "<strong>Prix :</strong> (coût en BRL + fret interne) × taux de change + fret international volumétrique + provision douanière (TVA + droits), divisé par 0,60.",
     tbl1_h1: "Règle", tbl1_h2: "Critère", tbl1_h3: "Résultat",
@@ -645,7 +700,8 @@ const rlTranslations = {
     p_envio: "Les fournisseurs ne publient ni le poids ni les dimensions. Gemini estime le <strong>poids réel</strong> et classe la taille de la pièce. À partir de là, je calcule le <strong>poids facturable</strong> et le fret international :",
     formula1_l1: "poids facturable = poids réel × Factor K",
     formula1_l2: "fret = R$133 fixe par colis + R$58,7 × kg facturable",
-    factor_k_note: "Qu'est-ce que le Factor K ? C'est un multiplicateur basé sur la taille de la pièce : les pièces volumineuses prennent plus de place dans l'envoi même si elles pèsent peu, donc elles sont facturées comme si elles pesaient plus. C'est une façon d'approximer le poids volumétrique sans mesurer chaque colis.",
+    factor_k_title: "Qu'est-ce que le Factor K ?",
+    factor_k_body: "C'est un multiplicateur basé sur la taille de la pièce : les pièces volumineuses prennent plus de place dans l'envoi même si elles pèsent peu, donc elles sont facturées comme si elles pesaient plus. C'est une façon d'approximer le poids volumétrique sans mesurer chaque colis.",
     tbl2_h1: "Taille", tbl2_h2: "Exemples", tbl2_h3: "Factor K",
     tbl2_r1_tamano: "Grande", tbl2_r1_ejemplos: "Calandres, pare-chocs, tableaux de bord",
     tbl2_r2_tamano: "Moyenne", tbl2_r2_ejemplos: "Phares, durites, rétroviseurs",
@@ -979,4 +1035,34 @@ if (rlContactEmailBtn && rlContactCopiedTip){
       }, 1600);
     }).catch(() => {});
   });
+}
+
+/* ==========================================================
+   Mini antes/después: secuencia al entrar en pantalla
+   ========================================================== */
+const rlMiniBaEls = document.querySelectorAll(".mini-ba");
+const rlMiniBaObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("is-visible");
+    rlMiniBaObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.35 });
+rlMiniBaEls.forEach(el => rlMiniBaObserver.observe(el));
+
+/* ==========================================================
+   Pista "desliza ->" sobre las capturas de n8n, solo si no caben
+   ========================================================== */
+const rlShotWraps = document.querySelectorAll(".shot-wrap");
+function rlUpdateShotHints(){
+  rlShotWraps.forEach(wrap => {
+    const scrollEl = wrap.querySelector(".shot-scroll");
+    if (!scrollEl) return;
+    wrap.classList.toggle("scrollable", scrollEl.scrollWidth > scrollEl.clientWidth + 1);
+  });
+}
+if (rlShotWraps.length){
+  window.addEventListener("load", rlUpdateShotHints);
+  window.addEventListener("resize", rlUpdateShotHints);
+  rlUpdateShotHints();
 }
