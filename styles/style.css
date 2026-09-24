@@ -569,6 +569,12 @@ body.is-switching-lang [data-i18n]{
 .project-cta{
   margin-top: 24px;
 }
+.project-ctas{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
 .project-two-col{
   display: flex;
   align-items: center;

@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Caso técnico: cómo automaticé Repuestolandia con n8n, Gemini, Google Sheets y Shopify.">
+<link rel="icon" href="img/logo.png">
+<title>Repuestolandia en piloto automático</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#101014; --surface:#16161b; --ink:#f2f1ed; --muted:#98979c; --line:rgba(242,241,237,0.08);
+  --accent:#7c6ff2; --accent-soft:rgba(124,111,242,0.12); --node:#16161b; --ok:#2F7D4F; --bad:#B23B2E;
+  --hero:#07070a; --hero-ink:#f2f1ed; --hero-muted:#98979c;
+  --wm-filter:invert(1);
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:20px 64px}
+.wrap{max-width:920px;margin:0 auto}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.progress-line{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);z-index:1000;transition:width .1s linear}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:24px 0 18px}
+.back{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:.92rem;font-weight:600;font-family:var(--body);background:transparent;border:1px solid var(--accent);color:var(--accent);text-decoration:none;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s ease,color .3s ease}
+.back:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px)}
+.back:active{transform:scale(.97);transition-duration:.12s}
+.lang-switch{display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang-btn{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted);background:transparent;border:none;padding:6px 12px;border-radius:999px;cursor:pointer;transition:color .2s ease,background .2s ease}
+.lang-btn:hover{color:var(--ink)}
+.lang-btn.active{color:var(--bg);background:var(--ink)}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .reveal{transition:opacity .3s ease !important;transform:none !important}
+  .lane > *{transition:opacity .3s ease !important;transform:none !important}
+  .back:hover,.back:active{transform:none !important}
+  .live-dot,.more-coming-dots span,.stat b.counted{animation:none !important;opacity:1 !important;transform:none !important}
+  #rlGrowthPath{transition:none !important;stroke-dashoffset:0 !important}
+  .growth-dot{transition:none !important;opacity:1 !important;transform:scale(1) !important}
+}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding:36px 36px 32px;display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:center}
+.hero .wordmark{width:min(260px,70%);height:auto;filter:invert(1)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.hero .eyebrow{margin-top:22px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.4vw,4rem);line-height:1.02;margin:10px 0 16px;text-wrap:balance;letter-spacing:-.02em}
+.lede{font-size:1.1rem;max-width:56ch;margin:0;color:var(--hero-ink)}
+.by{margin-top:18px;font-size:14px;color:var(--hero-muted)}
+.hero .logo{width:100%;max-width:220px;height:auto;justify-self:end}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
+.stat{background:var(--surface);padding:16px;opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.stats.is-visible .stat{opacity:1;transform:translateY(0)}
+.stats.is-visible .stat:nth-child(1){transition-delay:.05s}
+.stats.is-visible .stat:nth-child(2){transition-delay:.15s}
+.stats.is-visible .stat:nth-child(3){transition-delay:.25s}
+.stats.is-visible .stat:nth-child(4){transition-delay:.35s}
+.stat-icon{width:22px;height:22px;color:var(--accent);margin-bottom:10px;display:block}
+.stat-num-row{display:flex;align-items:center;gap:6px}
+.stat b{display:block;font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat b.counted{animation:rlStatPop .4s cubic-bezier(.22,1,.36,1)}
+@keyframes rlStatPop{0%{transform:scale(1)}45%{transform:scale(1.1);color:var(--accent)}100%{transform:scale(1)}}
+.stat span{font-size:13px;color:var(--muted)}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);vertical-align:middle;margin-left:4px;animation:rlPulseDot 1.6s ease-in-out infinite}
+@keyframes rlPulseDot{0%,80%,100%{opacity:.35;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-family:var(--mono);font-size:12.5px}
+nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s ease,border-color .2s ease}
+nav.toc a:hover{color:var(--ink);border-color:var(--accent)}
+nav.toc a.active{color:var(--accent);border-color:var(--accent)}
+
+h2{font-family:var(--display);font-weight:700;font-size:1.7rem;margin:60px 0 6px;text-wrap:balance;scroll-margin-top:16px}
+h3{font-family:var(--display);font-weight:700;font-size:1.25rem;margin:0}
+h4{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0 0 6px}
+p{max-width:66ch}
+.sub{color:var(--muted);margin-top:0}
+code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 5px}
+
+/* architecture */
+.arch{background:var(--surface);border:1px solid var(--line);padding:20px;margin-top:16px;overflow-x:auto}
+.lane{display:flex;align-items:stretch;gap:10px;min-width:780px}
+.lane > *{opacity:0;transform:translateY(8px);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1)}
+.arch.is-visible .lane > *{opacity:1;transform:translateY(0)}
+.arch.is-visible .lane > *:nth-child(1){transition-delay:.05s}
+.arch.is-visible .lane > *:nth-child(2){transition-delay:.2s}
+.arch.is-visible .lane > *:nth-child(3){transition-delay:.35s}
+.arch.is-visible .lane > *:nth-child(4){transition-delay:.5s}
+.arch.is-visible .lane > *:nth-child(5){transition-delay:.65s}
+.arch.is-visible .lane > *:nth-child(6){transition-delay:.8s}
+.arch.is-visible .lane > *:nth-child(7){transition-delay:.95s}
+.arch.is-visible .lane > *:nth-child(8){transition-delay:1.1s}
+.arch.is-visible .lane > *:nth-child(9){transition-delay:1.25s}
+.box{flex:1;border:1px solid var(--line);background:var(--node);padding:12px;font-size:14px;line-height:1.4}
+.box small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.box.core{background:var(--accent-soft);border-color:var(--accent)}
+.arrow{align-self:center;color:var(--accent);font-family:var(--mono);font-size:18px}
+.loop{min-width:780px;margin-top:10px;border:1px dashed var(--accent);padding:8px 12px;font-size:13.5px;display:flex;gap:10px;align-items:center;opacity:0;transition:opacity .5s ease}
+.arch.is-visible .loop{opacity:1;transition-delay:1.4s}
+.loop span{font-family:var(--mono);color:var(--accent)}
+.host{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--muted);min-width:780px;opacity:0;transition:opacity .5s ease}
+.arch.is-visible .host{opacity:1;transition-delay:1.55s}
+
+/* before / after */
+.ba{display:grid;grid-template-columns:1fr auto 1.25fr;gap:14px;align-items:stretch;margin-top:16px}
+.ba-col{background:var(--surface);border:1px solid var(--line);padding:16px;min-width:0}
+.ba-col .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.ba-mid{align-self:center;font-family:var(--mono);color:var(--accent);font-size:13px;text-align:center;line-height:1.3}
+.raw{font-family:var(--mono);font-size:12.5px;line-height:1.7;overflow-wrap:anywhere}
+.raw div{border-bottom:1px dotted var(--line);padding-block:2px}
+.raw i{font-style:normal;color:var(--muted)}
+.prod dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.prod dt{font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:2px}
+.prod dd{margin:0;overflow-wrap:anywhere}
+.prod .t{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--accent);background:var(--accent-soft);padding:1px 7px}
+.demo-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* workflows */
+.wf{background:var(--surface);border:1px solid var(--line);padding:24px;margin-top:18px}
+.wf-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.chain{display:flex;flex-wrap:wrap;gap:6px 22px;margin:16px 0 4px;padding:0;list-style:none}
+.chain li{position:relative;font-family:var(--mono);font-size:12.5px;background:var(--node);border:1px solid var(--line);padding:4px 9px}
+.chain li:not(:last-child)::after{content:"→";position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.chain li.ai{border-color:var(--accent);background:var(--accent-soft)}
+.pts{margin:14px 0 0;padding-left:1.1em}
+.pts li{margin-bottom:6px;max-width:68ch}
+
+.tbl{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+td.n,td.k{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+td.n{font-variant-numeric:tabular-nums}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:var(--node)}
+.pill{font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--ok)} .pill.bad{color:var(--bad)} .pill.q{color:var(--accent)}
+
+.split{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line)}
+.split p{margin:0 0 10px}
+.formula{display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:13px;background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;margin:6px 0 4px;overflow-x:auto}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+
+/* interactive freight calculator */
+.calc{background:var(--surface);border:1px solid var(--line);padding:18px 20px;margin:20px 0 4px}
+.calc-head h4{margin-bottom:4px}
+.calc-sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.calc-body{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;margin-bottom:16px}
+.calc-field{display:flex;flex-direction:column;gap:6px}
+.calc-field label,.calc-field-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.calc-field input{font-family:var(--mono);font-size:14px;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:8px 10px;width:110px}
+.calc-field input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.calc-sizes{display:flex;gap:6px}
+.calc-size-btn{font-family:var(--mono);font-size:12px;background:var(--bg);border:1px solid var(--line);color:var(--muted);padding:8px 12px;cursor:pointer;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.calc-size-btn:hover{color:var(--ink)}
+.calc-size-btn.active{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.calc-result{display:flex;gap:28px;flex-wrap:wrap;padding-top:14px;border-top:1px dashed var(--line)}
+.calc-result-item{display:flex;flex-direction:column;gap:4px}
+.calc-result-item span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.calc-result-item b{font-family:var(--display);font-size:1.4rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.calc-result-values{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+#calcFreightAlt{font-family:var(--mono);font-size:1rem;font-weight:500;color:var(--ink)}
+.calc-footnote{font-size:12px;color:var(--muted);margin:14px 0 0;max-width:60ch}
+
+.track{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;counter-reset:t}
+.track li{position:relative;padding:22px 8px 0 0;font-size:13.5px;line-height:1.3;counter-increment:t}
+.track li::before{content:"";position:absolute;top:5px;left:0;width:11px;height:11px;border-radius:50%;background:var(--accent)}
+.track li:not(:last-child)::after{content:"";position:absolute;top:10px;left:14px;right:4px;border-top:2px solid var(--line)}
+.track li b{display:block;font-weight:600}
+.track li span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+@media (max-width:720px){.track{grid-template-columns:1fr;gap:10px}.track li{padding:0 0 0 22px}.track li::before{top:4px}.track li:not(:last-child)::after{left:5px;top:18px;right:auto;bottom:-12px;border-top:0;border-left:2px solid var(--line)}}
+.shot{margin:14px 0 4px}
+.shot-scroll{overflow-x:auto;background:#1B1B1B;border:1px solid var(--line)}
+.shot-scroll img{display:block;max-width:none;width:auto}
+.shot figcaption{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
+/* shopify section */
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.shop>*,.lessons>*,.ba>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);padding:20px}
+.panel p{font-size:15px;margin:0 0 12px}
+.panel.wide{grid-column:1 / -1}
+
+/* lessons */
+.lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:16px}
+.lesson{border-top:2px solid var(--ink);padding-top:12px}
+.lesson h3{font-size:1.05rem;margin-bottom:6px}
+.lesson p{margin:0;font-size:15px;color:var(--muted)}
+
+.more-coming{background:var(--accent-soft);border:1px solid var(--accent);padding:76px 32px;margin-top:60px;text-align:center;position:relative;overflow:hidden;transform:scale(.92);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
+.more-coming::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 520px 320px at 50% 25%,rgba(124,111,242,.22),transparent 70%);pointer-events:none}
+.more-coming.is-visible{transform:scale(1)}
+.more-coming-dots{position:relative;display:flex;gap:10px;justify-content:center;max-width:none;margin:0 auto 24px}
+.more-coming-dots span{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;animation:rlPulseDot 1.4s ease-in-out infinite}
+.more-coming-dots span:nth-child(2){animation-delay:.2s}
+.more-coming-dots span:nth-child(3){animation-delay:.4s}
+.more-coming-lead{position:relative;font-family:var(--display);font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:44ch;margin:0 auto 14px;line-height:1.45}
+.more-coming-punch{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,5.6vw,3.6rem);color:var(--ink);letter-spacing:-.02em;line-height:1.05;max-width:17ch;margin:0 auto;text-wrap:balance}
+.more-coming-chart{position:relative;max-width:280px;margin:36px auto 0}
+.more-coming-chart svg{display:block;width:100%;height:auto;overflow:visible}
+#rlGrowthPath{stroke:var(--accent)}
+.growth-dot{fill:var(--ink);opacity:0;transform:scale(0);transform-box:fill-box;transform-origin:center;transition:opacity .35s ease,transform .35s cubic-bezier(.34,1.56,.64,1)}
+.growth-dot.show{opacity:1;transform:scale(1)}
+.growth-dot-end{fill:var(--accent)}
+
+.contact-cta{text-align:center;margin-top:60px;display:flex;flex-direction:column;align-items:center}
+.contact-cta p{color:var(--muted);max-width:46ch;margin:10px 0 32px}
+.contact-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.rl-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-size:14px;font-weight:600;font-family:var(--body);background:transparent;border:none;text-decoration:none;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s ease,border-color .3s ease,color .3s ease}
+.rl-btn-primary{background:var(--ink);color:var(--bg)}
+.rl-btn-primary:hover{transform:translateY(-2px)}
+.rl-btn-ghost{border:1px solid var(--line);color:var(--ink)}
+.rl-btn-ghost:hover{border-color:var(--muted);transform:translateY(-2px)}
+.contact-email{position:relative}
+.contact-copied-tip{position:absolute;top:-36px;left:50%;transform:translateX(-50%) translateY(4px);background:var(--ink);color:var(--bg);font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.contact-copied-tip.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+footer img.l{width:56px;height:auto}
+footer .wm{width:170px;height:auto;filter:var(--wm-filter);display:block;margin-bottom:6px}
+footer a{color:var(--ink)}
+
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr;padding:24px 20px}
+  .hero .logo{grid-row:1;justify-self:start;max-width:120px}
+  .stats{grid-template-columns:1fr 1fr}
+  .ba{grid-template-columns:1fr}
+  .ba-mid{transform:rotate(90deg);justify-self:center}
+  .shop,.lessons{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="rlProgress"></div>
+
+<div class="wrap">
+
+<div class="topbar">
+  <a class="back" href="../index.html" data-i18n="back_link">&larr; Volver al portafolio</a>
+  <div class="lang-switch" id="rlLangSwitch">
+    <button class="lang-btn" data-lang="es" aria-label="Español" aria-pressed="false">ES</button>
+    <button class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">EN</button>
+    <button class="lang-btn" data-lang="pt" aria-label="Português" aria-pressed="false">PT</button>
+    <button class="lang-btn" data-lang="fr" aria-label="Français" aria-pressed="false">FR</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <img class="wordmark" src="img/wordmark.png" alt="Repuestolandia" width="600" height="145">
+    <div class="eyebrow" data-i18n="hero_eyebrow">Caso · Automatización e-commerce · Brasil → Chile</div>
+    <h1 data-i18n="hero_title">Una tienda de repuestos en piloto automático</h1>
+    <p class="lede" data-i18n="hero_lede">Cómo automaticé Repuestolandia, mi tienda Shopify de repuestos importados desde Brasil, con n8n, Gemini y un servidor Linux de 5 USD al mes. Catálogo, traducción, filtros, precio con envío incluido, colecciones, metacampos, stock y registro de cada venta. El único paso manual es correr el scraper; desde ahí, todo lo hace n8n.</p>
+    <div class="by">Tomás Venegas Osses · <span data-i18n="hero_by_role">Fundador, Repuestolandia SpA</span> · <a href="https://www.linkedin.com/in/tomas-venegas-osses-016633320" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+  </div>
+  <img class="logo" src="img/logo.png" alt="Logo de Repuestolandia: mecánico saludando desde una camioneta antigua cargada de repuestos" width="320" height="314">
+</header>
+
+<div class="stats reveal">
+  <div class="stat">
+    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/><circle cx="7.5" cy="7" r="0.6" fill="currentColor" stroke="none"/><circle cx="7.5" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>
+    <b data-count="5" data-suffix=" USD">0 USD</b><span data-i18n="stat1_label">al mes de infraestructura</span>
+  </div>
+  <div class="stat">
+    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
+    <span class="stat-num-row"><b data-count="24" data-suffix="/7">0/7</b><span class="live-dot" aria-hidden="true"></span></span><span data-i18n="stat2_label">n8n en Docker sobre Linux</span>
+  </div>
+  <div class="stat">
+    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4-8 4-8-4z"/><path d="M4 8v8l8 4 8-4V8"/><path d="M12 12v8"/></svg>
+    <b data-count="4" data-prefix="~" data-suffix="k">~0k</b><span data-i18n="stat3_label">productos scrapeados</span>
+  </div>
+  <div class="stat">
+    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.3"/><circle cx="12" cy="6" r="2.3"/><circle cx="19" cy="12" r="2.3"/><path d="M7 11l3.3-3.6M14.7 7.4L17 11"/></svg>
+    <b data-count="3">0</b><span data-i18n="stat4_label">workflows en producción</span>
+  </div>
+</div>
+
+<nav class="toc" aria-label="Secciones">
+  <a href="#problema" data-i18n="nav_problema">El problema</a>
+  <a href="#ejemplo" data-i18n="nav_ejemplo">Antes y después</a>
+  <a href="#arquitectura" data-i18n="nav_arquitectura">Arquitectura</a>
+  <a href="#workflows" data-i18n="nav_workflows">Workflows</a>
+  <a href="#shopify" data-i18n="nav_shopify">Shopify: etiquetas y metacampos</a>
+  <a href="#aprendizajes" data-i18n="nav_aprendizajes">Aprendizajes</a>
+</nav>
+
+<section class="reveal">
+  <h2 id="problema" data-i18n="h2_problema">El problema</h2>
+  <p data-i18n="p_problema">Vendo en Chile repuestos que compro en tiendas de autopartes brasileñas. Cada producto llega en portugués, con precio en reales y sin peso, medidas ni marca clara. Además, el proveedor puede quedarse sin stock en cualquier momento. Hacerlo a mano significaba traducir, estimar el envío, calcular el costo puesto en Chile y ordenar miles de fichas por marca, y además revisar a diario si seguían disponibles.</p>
+</section>
+
+<section class="reveal">
+  <h2 id="ejemplo" data-i18n="h2_ejemplo">Antes y después de un producto</h2>
+  <p class="sub" data-i18n="sub_ejemplo">Qué entra desde el proveedor y qué termina publicado en Shopify.</p>
+  <div class="ba">
+    <div class="ba-col">
+      <div class="lbl" data-i18n="ba_lbl_before">Fila scrapeada · Google Sheets</div>
+      <div class="raw">
+        <div><i>titulo_br:</i> Farol Dianteiro Esquerdo Jeep Renegade 2016 2017 2018 Original 51953126</div>
+        <div><i>precio_br:</i> R$ 1.250,00</div>
+        <div><i>link:</i> autorizadapecas.com.br/…</div>
+        <div><i>imagen:</i> og:image de la ficha</div>
+      </div>
+    </div>
+    <div class="ba-mid" aria-hidden="true">n8n<br>+ Gemini<br>→</div>
+    <div class="ba-col prod">
+      <div class="lbl" data-i18n="ba_lbl_after">Producto en Shopify</div>
+      <dl>
+        <dt data-i18n="dl_titulo">Título</dt><dd class="t">Foco delantero izquierdo Jeep Renegade 2016–2018 (OEM: 51953126)</dd>
+        <dt data-i18n="dl_estado_ia">Estado IA</dt><dd><span class="pill ok">APROBADO</span> · <span data-i18n="dd_size_label">tamaño</span> Media</dd>
+        <dt data-i18n="dl_peso">Peso</dt><dd data-i18n="dd_peso_val">2,4 kg real → 4,32 kg cobrable (×1,8)</dd>
+        <dt data-i18n="dl_flete">Flete int.</dt><dd data-i18n="dd_flete_val">R$133 + R$58,7 × 4,32 = R$386,58</dd>
+        <dt data-i18n="dl_sku">SKU</dt><dd><code>51953126</code></dd>
+        <dt data-i18n="dl_etiquetas">Etiquetas</dt><dd class="chips"><span class="chip">JEEP</span></dd>
+        <dt data-i18n="dl_metacampos">Metacampos</dt><dd class="chips"><span class="chip">link_brasil</span><span class="chip">costo_brl</span><span class="chip">costo_total_landed_clp</span><span class="chip">+4</span></dd>
+      </dl>
+    </div>
+  </div>
+  <p class="demo-note" data-i18n="demo_note">Ejemplo ilustrativo: los campos y cálculos son los que genera el flujo; el producto y su peso son de muestra.</p>
+</section>
+
+<section class="reveal">
+  <h2 id="arquitectura" data-i18n="h2_arquitectura">Arquitectura</h2>
+  <p class="sub" data-i18n="sub_arquitectura">Todo corre en un solo servidor. Google Sheets funciona como base de datos intermedia y como libro de ventas, y Shopify guarda los datos estructurados de cada producto.</p>
+  <div class="arch" role="img" data-i18n-label="arch_aria" aria-label="Flujo: proveedores brasileños a Google Sheets, a n8n con Gemini, a Shopify; cada venta dispara un chequeo de stock contra el proveedor">
+    <div class="lane">
+      <div class="box"><small data-i18n="box1_small">Fuente · manual</small><span data-i18n="box1_body">Webs de proveedores en Brasil<br>(script en Chrome)</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><small data-i18n="box2_small">Staging</small><span data-i18n="box2_body">Google Sheets<br>(catálogo crudo)</span></div>
+      <div class="arrow">→</div>
+      <div class="box core"><small data-i18n="box3_small">Orquestación</small><span data-i18n="box3_body">n8n + API de Gemini</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><small data-i18n="box4_small">Venta</small><span data-i18n="box4_body">Shopify<br>(etiquetas + metacampos)</span></div>
+      <div class="arrow">→</div>
+      <div class="box"><small data-i18n="box5_small">Contabilidad</small><span data-i18n="box5_body">Sheets de ventas<br>(márgenes + seguimiento)</span></div>
+    </div>
+    <div class="loop"><span>↺</span><span data-i18n="loop_text">Cada venta en Shopify dispara dos flujos: el chequeo de stock en la web del proveedor y el registro de la venta con su desglose en Google Sheets.</span></div>
+    <div class="host" data-i18n="host_text">Ubuntu en VPS · Docker Compose · proxy reverso con HTTPS (Let's Encrypt) · subdominio propio vía Cloudflare DNS</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2 id="workflows" data-i18n="h2_workflows">Los tres workflows</h2>
+
+  <article class="wf">
+    <div class="wf-head"><h3 data-i18n="wf1_title">1 · Catálogo: Google Sheets → IA → Shopify</h3><span class="tag" data-i18n="wf1_tag">~4.000 productos · traducción · filtros · envío · precio</span></div>
+    <ul class="chain" aria-label="Pasos del workflow">
+      <li data-i18n="wf1_c1">Inicio manual</li>
+      <li data-i18n="wf1_c2">Leer Sheets</li>
+      <li data-i18n="wf1_c3">Code: diccionario PT→ES</li>
+      <li class="ai" data-i18n="wf1_c4">Gemini (JSON)</li>
+      <li data-i18n="wf1_c5">Code: parser</li>
+      <li data-i18n="wf1_c6">If: ¿rechazado?</li>
+      <li data-i18n="wf1_c7">Code: costo landed</li>
+      <li data-i18n="wf1_c8">Filter</li>
+      <li data-i18n="wf1_c9">Sheets "salida"</li>
+      <li data-i18n="wf1_c10">Wait</li>
+      <li data-i18n="wf1_c11">POST producto</li>
+    </ul>
+    <figure class="shot reveal"><div class="shot-scroll"><img src="img/wf1.png" alt="Captura del workflow Product Catalog Automation en n8n" width="2242" height="126" style="height:84px"></div><figcaption data-i18n="wf1_caption">Product Catalog Automation, en n8n. Los nodos desactivados los uso para pruebas: limitar a pocos productos, probar filtros y pausas.</figcaption></figure>
+    <ul class="pts">
+      <li data-i18n="wf1_pt1"><strong>Paso previo manual: scraping.</strong> Corro un script de JavaScript en la consola de Chrome que recorre todas las páginas del buscador del proveedor (con <code>fetch</code> + <code>DOMParser</code>) y saca título, precio en BRL, link e imagen. Pego el resultado en Google Sheets, y desde ahí el workflow hace todo lo demás. Lo hice en dos fases (listado y después cada ficha) para leer la imagen real desde <code>og:image</code>, porque en el listado se mezclaban las imágenes de productos vecinos. Adapté selectores para proveedores con distinto HTML.</li>
+      <li data-i18n="wf1_pt2"><strong>Gemini</strong> devuelve JSON estructurado: título traducido con terminología chilena, descripción HTML, OEM, marcas compatibles, peso estimado, tamaño y estado. Antes, un diccionario de unos 100 términos técnicos PT→ES asegura que la traducción sea consistente.</li>
+      <li data-i18n="wf1_pt3"><strong>Filtro doble.</strong> La IA clasifica por peso y riesgo, y una lista determinística de palabras prohibidas en portugués actúa como respaldo. Sin ella, algunos motores completos se colaban con precios de millones.</li>
+      <li data-i18n="wf1_pt4"><strong>Precio:</strong> (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + provisión aduanera (IVA + arancel), dividido por 0,60.</li>
+    </ul>
+    <div class="tbl">
+      <table>
+        <thead><tr><th data-i18n="tbl1_h1">Regla</th><th data-i18n="tbl1_h2">Criterio</th><th data-i18n="tbl1_h3">Resultado</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="tbl1_r1_regla">Riesgo</td><td data-i18n="tbl1_r1_criterio">Motores completos, cajas de cambio, piezas usadas, fluidos inflamables</td><td><span class="pill bad">RECHAZADO</span></td></tr>
+          <tr><td data-i18n="tbl1_r2_regla">Peso / tamaño</td><td class="n" data-i18n="tbl1_r2_criterio">&gt; 25 kg o &gt; 120 cm</td><td><span class="pill q">COTIZAR</span> <span data-i18n="tbl1_r2_resultado">borrador con etiqueta</span></td></tr>
+          <tr><td data-i18n="tbl1_r3_regla">Resto</td><td data-i18n="tbl1_r3_criterio">Piezas permitidas</td><td><span class="pill ok">APROBADO</span> <span data-i18n="tbl1_r3_resultado">con flete por Factor K</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="split">
+      <h4 data-i18n="h4_envio">Estimación del envío por producto</h4>
+      <p data-i18n="p_envio">Los proveedores no publican peso ni medidas. Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza. Con eso calculo el <strong>peso cobrable</strong> y el flete internacional:</p>
+      <div class="formula"><span data-i18n="formula1_l1">peso cobrable = peso real × Factor K</span><span data-i18n="formula1_l2">flete = R$133 fijo por paquete + R$58,7 × kg cobrable</span></div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th data-i18n="tbl2_h1">Tamaño</th><th data-i18n="tbl2_h2">Ejemplos</th><th data-i18n="tbl2_h3">Factor K</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="tbl2_r1_tamano">Alta</td><td data-i18n="tbl2_r1_ejemplos">Parrillas, parachoques, tableros</td><td class="n" data-i18n="tbl2_r1_k">× 3,5</td></tr>
+            <tr><td data-i18n="tbl2_r2_tamano">Media</td><td data-i18n="tbl2_r2_ejemplos">Focos, mangueras, espejos</td><td class="n" data-i18n="tbl2_r2_k">× 1,8</td></tr>
+            <tr><td data-i18n="tbl2_r3_tamano">Baja</td><td data-i18n="tbl2_r3_ejemplos">Depósitos, sensores, pernos</td><td class="n" data-i18n="tbl2_r3_k">× 1,1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" data-i18n="note_envio">Calibré la fórmula con boletas reales de envíos por Correios. A propósito, aplico el costo fijo completo a cada producto, aunque en la práctica varios viajan en un mismo paquete. Es un criterio conservador: el margen real sale mejor al consolidar.</p>
+
+      <div class="calc reveal">
+        <div class="calc-head">
+          <h4 data-i18n="calc_title">Prueba tu propio cálculo</h4>
+          <p class="calc-sub" data-i18n="calc_sub">Usa la fórmula real del workflow con tus propios números.</p>
+        </div>
+        <div class="calc-body">
+          <div class="calc-field">
+            <label for="calcWeight" data-i18n="calc_weight_label">Peso real (kg)</label>
+            <input type="number" id="calcWeight" min="0.1" max="200" step="0.1" value="2.4" inputmode="decimal">
+          </div>
+          <div class="calc-field">
+            <span class="calc-field-label" data-i18n="calc_size_label">Tamaño</span>
+            <div class="calc-sizes" role="group" data-i18n-label="calc_size_label" aria-label="Tamaño">
+              <button type="button" class="calc-size-btn" data-factor="3.5" data-i18n="tbl2_r1_tamano">Alta</button>
+              <button type="button" class="calc-size-btn active" data-factor="1.8" data-i18n="tbl2_r2_tamano">Media</button>
+              <button type="button" class="calc-size-btn" data-factor="1.1" data-i18n="tbl2_r3_tamano">Baja</button>
+            </div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-item">
+            <span data-i18n="calc_result_weight">Peso cobrable</span>
+            <b id="calcWeightOut">4,32 kg</b>
+          </div>
+          <div class="calc-result-item">
+            <span data-i18n="calc_result_freight">Flete internacional (Brasil → Chile)</span>
+            <div class="calc-result-values">
+              <b id="calcFreightOut">R$386,58</b>
+              <b id="calcFreightAlt">≈ $66.780 CLP · US$70,29</b>
+            </div>
+          </div>
+        </div>
+        <p class="calc-footnote" data-i18n="calc_footnote">Esto es solo el flete internacional — no incluye el valor del producto ni impuestos. Conversión a CLP/USD referencial, no en tiempo real.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="wf">
+    <div class="wf-head"><h3 data-i18n="wf2_title">2 · Chequeo de stock con proveedores</h3><span class="tag" data-i18n="wf2_tag">se dispara con cada venta</span></div>
+    <ul class="chain" aria-label="Pasos del workflow">
+      <li data-i18n="wf2_c1">Pedido creado</li>
+      <li data-i18n="wf2_c2">Split por producto</li>
+      <li data-i18n="wf2_c3">Leer metacampo link_brasil</li>
+      <li data-i18n="wf2_c4">GET ficha en Brasil</li>
+      <li data-i18n="wf2_c5">¿"Esgotado"?</li>
+      <li data-i18n="wf2_c6">Token OAuth fresco</li>
+      <li data-i18n="wf2_c7">Obtener variante</li>
+      <li data-i18n="wf2_c8">Inventario = 0</li>
+    </ul>
+    <figure class="shot reveal"><div class="shot-scroll"><img src="img/wf2.png" alt="Captura del workflow Inventory Validation en n8n" width="2345" height="201" style="height:96px"></div><figcaption data-i18n="wf2_caption">Inventory Validation, en n8n</figcaption></figure>
+    <ul class="pts">
+      <li data-i18n="wf2_pt1">Al entrar un pedido, revisa en vivo cada producto en la web del proveedor. Si está agotado, deja el inventario en 0 en Shopify para que no se vuelva a vender.</li>
+      <li data-i18n="wf2_pt2">La detección ignora la sección "Produtos relacionados", porque los productos relacionados agotados daban falsos negativos.</li>
+    </ul>
+  </article>
+
+  <article class="wf">
+    <div class="wf-head"><h3 data-i18n="wf3_title">3 · Registro de ventas y seguimiento → Google Sheets</h3><span class="tag" data-i18n="wf2_tag">se dispara con cada venta</span></div>
+    <ul class="chain" aria-label="Pasos del workflow">
+      <li data-i18n="wf2_c1">Pedido creado</li>
+      <li data-i18n="wf2_c2">Split por producto</li>
+      <li data-i18n="wf3_c3">Leer metacampos de costo</li>
+      <li data-i18n="wf3_c4">Code: desglose y márgenes</li>
+      <li data-i18n="wf3_c5">Code: formato de fila</li>
+      <li data-i18n="wf3_c6">Sheets: fila de venta</li>
+    </ul>
+    <figure class="shot reveal"><div class="shot-scroll"><img src="img/wf3.png" alt="Captura del workflow Registro de Ventas Google Sheets en n8n" width="2361" height="292" style="height:110px"></div><figcaption data-i18n="wf3_caption">Registro de Ventas Google Sheets, en n8n</figcaption></figure>
+    <ul class="pts">
+      <li data-i18n="wf3_pt1">Por cada producto vendido registra una fila en el libro de contabilidad con el producto, el link del proveedor, los datos del comprador y el <strong>desglose completo del precio</strong>. Los costos vienen de los metacampos que guardó el workflow 1, así que no se recalcula nada.</li>
+      <li data-i18n="wf3_pt2">La planilla también sirve para <strong>seguir el pedido</strong>, con columnas de fecha y estado para cada tramo del viaje.</li>
+    </ul>
+
+    <div class="split">
+      <h4 data-i18n="h4_desglose">Desglose de cada venta</h4>
+      <div class="tbl">
+        <table>
+          <thead><tr><th data-i18n="tbl3_h1">Columna</th><th data-i18n="tbl3_h2">De dónde sale</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="tbl3_r1">Costo del producto (BRL y CLP) y tipo de cambio</td><td data-i18n="tbl3_r1b">Metacampos del producto</td></tr>
+            <tr><td data-i18n="tbl3_r2">Envío Brasil → casa del socio</td><td data-i18n="tbl3_r2b">Flete interno del proveedor</td></tr>
+            <tr><td data-i18n="tbl3_r3">Envío Brasil → Chile</td><td data-i18n="tbl3_r3b">Flete volumétrico (Factor K)</td></tr>
+            <tr><td data-i18n="tbl3_r4">Provisión aduanera</td><td data-i18n="tbl3_r4b">IVA + arancel sobre el CIF</td></tr>
+            <tr><td data-i18n="tbl3_r5">Precio de venta</td><td data-i18n="tbl3_r5b">Pedido de Shopify</td></tr>
+            <tr><td data-i18n="tbl3_r7">Nombre, correo y teléfono del cliente</td><td data-i18n="tbl3_r7b">Pedido de Shopify</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="split">
+      <h4 data-i18n="h4_seguimiento">Seguimiento del pedido</h4>
+      <p data-i18n="p_seguimiento">La fila de la venta la crea el workflow. Las fechas de cada tramo las voy completando a medida que avanza el paquete:</p>
+      <ol class="track">
+        <li><b data-i18n="track1_b">Venta</b><span data-i18n="track1_s">automático</span></li>
+        <li><b data-i18n="track2_b">Compra en Brasil</b><span data-i18n="track2_s">fecha y hora</span></li>
+        <li><b data-i18n="track3_b">Llega a casa del socio</b><span data-i18n="track3_s">fecha</span></li>
+        <li><b data-i18n="track4_b">Socio lo envía a Chile</b><span data-i18n="track4_s">Correios</span></li>
+        <li><b data-i18n="track5_b">Llega a mi casa</b><span data-i18n="track5_s">aduana lista</span></li>
+        <li><b data-i18n="track6_b">Enviado al cliente</b><span data-i18n="track6_s">entrega final</span></li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<section class="reveal">
+  <h2 id="shopify" data-i18n="h2_shopify">Shopify como base de datos: etiquetas y metacampos</h2>
+  <p class="sub" data-i18n="sub_shopify">No solo publico productos. Cada ficha queda con datos estructurados que ordenan la tienda y alimentan los otros workflows.</p>
+  <div class="shop">
+    <div class="panel">
+      <h4 data-i18n="h4_etiquetas">Etiquetas → colecciones automáticas</h4>
+      <p data-i18n="p_etiquetas">Gemini extrae del título las marcas compatibles, sin inventarlas, como un arreglo. Cada marca se guarda como etiqueta, y las colecciones inteligentes de Shopify (Jeep, Fiat, RAM…) se llenan solas. Una pieza compatible con varias marcas aparece en todas sus colecciones.</p>
+      <div class="chips"><span class="chip">JEEP</span><span class="chip">FIAT</span><span class="chip">RAM</span><span class="chip">COTIZAR</span></div>
+      <p class="note" data-i18n="note_etiquetas">La etiqueta <code>COTIZAR</code> marca las piezas grandes o pesadas. Se publican como borrador con aviso de cotizar el envío, en vez de sacarlas del catálogo.</p>
+    </div>
+    <div class="panel">
+      <h4 data-i18n="h4_variante">Variante lista para operar</h4>
+      <p data-i18n="p_variante">El producto se crea con la API REST de Shopify, no con el nodo nativo de n8n, para controlar la variante completa:</p>
+      <ul class="pts">
+        <li data-i18n="pv1"><strong>SKU</strong> = número OEM, que también va en el título para mejorar la búsqueda.</li>
+        <li data-i18n="pv2"><strong>Peso</strong> real en kg.</li>
+        <li data-i18n="pv3"><strong>Inventario</strong> gestionado por Shopify. Como vendo bajo pedido, parte disponible, y el workflow 2 lo baja a 0 si el proveedor se queda sin stock.</li>
+      </ul>
+    </div>
+    <div class="panel wide">
+      <h4 data-i18n="h4_meta">Metacampos por producto</h4>
+      <p data-i18n="p_meta">Cada producto se publica con siete metacampos. Definí cada uno en Shopify para que se vean en el panel de administración.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th data-i18n="tbl4_h1">Metacampo</th><th data-i18n="tbl4_h2">Tipo</th><th data-i18n="tbl4_h3">Para qué sirve</th></tr></thead>
+          <tbody>
+            <tr><td class="k">custom.link_brasil</td><td>URL</td><td data-i18n="tbl4_r1">Link a la ficha del proveedor. Lo usa el workflow 2 para revisar el stock.</td></tr>
+            <tr><td class="k">repuestolandia.costo_brl</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r2">Precio de compra en reales</td></tr>
+            <tr><td class="k">repuestolandia.tipo_cambio</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r3">Tipo de cambio BRL→CLP usado al calcular</td></tr>
+            <tr><td class="k">repuestolandia.costo_producto_clp</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r4">Costo del producto convertido a pesos</td></tr>
+            <tr><td class="k">repuestolandia.flete_internacional_clp</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r5">Flete Brasil→Chile según peso cobrable</td></tr>
+            <tr><td class="k">repuestolandia.provision_aduanera_clp</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r6">Provisión de IVA + arancel</td></tr>
+            <tr><td class="k">repuestolandia.costo_total_landed_clp</td><td data-i18n="tipo_texto">Texto</td><td data-i18n="tbl4_r7">Costo total puesto en Chile. Con él, el workflow 3 calcula los márgenes de cada venta.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" data-i18n="note_meta">Con esto, cada pedido trae su desglose de costos sin volver a calcular nada, y el workflow 3 lo pasa directo a la contabilidad.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal more-coming">
+  <p class="more-coming-dots" aria-hidden="true"><span></span><span></span><span></span></p>
+  <p class="more-coming-lead" data-i18n="more_coming_lead">Planeo seguir haciendo crecer este proyecto — vienen muchas cosas más.</p>
+  <p class="more-coming-punch" data-i18n="more_coming_punch">Esto es solo el comienzo.</p>
+  <div class="more-coming-chart" aria-hidden="true">
+    <svg viewBox="0 0 280 90" preserveAspectRatio="none">
+      <path id="rlGrowthPath" d="M8,74 C48,70 68,54 98,48 C138,40 158,26 188,20 C218,14 238,10 268,6" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle class="growth-dot" cx="98" cy="48" r="4"/>
+      <circle class="growth-dot" cx="188" cy="20" r="4"/>
+      <circle class="growth-dot growth-dot-end" cx="268" cy="6" r="6"/>
+    </svg>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2 id="aprendizajes" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
+  <div class="lessons">
+    <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Con nodos Filter e If en la cadena, referenciar por índice mezclaba títulos, precios e imágenes de productos distintos. Lo resolví usando el rastreo de items de n8n (<code>.item</code>) en vez de índices.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un error cuesta caro. Por eso toda decisión crítica tiene además una regla determinística.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson3_h">Permisos, tokens y metacampos</h3><p data-i18n="lesson3_p">Configuré los scopes de la app (write_inventory), pido un token nuevo en cada ejecución y agregué pausas entre llamadas para no chocar con el límite de la API de Shopify. Además, los metacampos solo aparecen en el panel si antes creas su definición.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson4_h">Costo mínimo, control máximo</h3><p data-i18n="lesson4_p">Uso n8n self-hosted en lugar de SaaS por ejecución. Con 5 USD al mes corren flujos ilimitados, y solo pago por uso la API de Gemini.</p></div>
+  </div>
+</section>
+
+<section class="reveal contact-cta">
+  <h2 data-i18n="contact_title">Conversemos</h2>
+  <p data-i18n="contact_text">Si quieres conversar sobre una oportunidad, un proyecto o simplemente saludar, escríbeme.</p>
+  <div class="contact-actions">
+    <a href="mailto:venegas.osses.tomas@gmail.com" class="rl-btn rl-btn-primary contact-email" id="rlContactEmailBtn">
+      venegas.osses.tomas@gmail.com
+      <span class="contact-copied-tip" id="rlContactCopiedTip" data-i18n="contact_copied" aria-hidden="true">¡Copiado!</span>
+    </a>
+    <a href="https://www.linkedin.com/in/tomas-venegas-osses-016633320" target="_blank" rel="noopener noreferrer" class="rl-btn rl-btn-ghost">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <img class="l" src="img/logo.png" alt="" width="320" height="314">
+  <div>
+    <img class="wm" src="img/wordmark.png" alt="Repuestolandia" width="600" height="145">
+    <span data-i18n="footer_stack">Stack: n8n · Docker · Ubuntu · Google Sheets API · Gemini API · Shopify Admin API · JavaScript · Cloudflare DNS</span><br>
+    Tomás Venegas Osses · <a href="https://www.linkedin.com/in/tomas-venegas-osses-016633320" target="_blank" rel="noopener noreferrer">linkedin.com/in/tomas-venegas-osses-016633320</a>
+  </div>
+</footer>
+
+<a class="back" href="../index.html" data-i18n="back_link">&larr; Volver al portafolio</a>
+</div>
+
+<script src="../scripts/repuestolandia.js"></script>
+</body>
+</html>
