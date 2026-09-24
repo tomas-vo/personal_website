@@ -24,7 +24,7 @@
   color-scheme:dark;
   --bg:#101014; --surface:#16161b; --ink:#f2f1ed; --muted:#98979c; --line:rgba(242,241,237,0.08);
   --accent:#7c6ff2; --accent-soft:rgba(124,111,242,0.12); --node:#16161b; --ok:#2F7D4F; --bad:#B23B2E;
-  --gloss:#d9a95f;
+  --gloss-hover:#B4ACF8;
   --hero:#07070a; --hero-ink:#f2f1ed; --hero-muted:#98979c;
   --wm-filter:invert(1);
   --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
@@ -102,8 +102,10 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.4vw,4rem)
 .quick{margin-top:72px}
 .quick-heading{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4vw,3rem);line-height:1.2;color:var(--ink);text-align:center;text-transform:uppercase;letter-spacing:.01em;margin:0}
 h2.quick-heading{margin:60px 0 6px}
-.quick-heading-left{text-align:left}
 .quick-subheading{font-size:1.05rem;color:var(--muted);text-align:center;margin:10px auto 0}
+.problema-box{background:var(--surface);border:1px solid var(--line);padding:36px 40px;margin-top:28px}
+.problema-box p{max-width:68ch;margin:0 auto;text-align:left}
+.problema-box p+p{margin-top:22px}
 .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
 .quick-card{background:var(--surface);border:1px solid var(--line);padding:24px 22px;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),border-color .3s ease}
 .quick.is-visible .quick-card{opacity:1;transform:translateY(0)}
@@ -191,9 +193,9 @@ code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 
 .pts-p{max-width:68ch;margin:14px 0 0}
 
 /* glosario interactivo */
-.gloss{display:inline;font:inherit;color:var(--gloss);background:none;border:none;padding:0;margin:0;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--gloss);text-decoration-thickness:1.5px;text-underline-offset:3px}
-.gloss:hover,.gloss:focus-visible,.gloss[aria-expanded="true"]{color:var(--ink);text-decoration-color:var(--ink)}
-.gloss:focus-visible{outline:2px solid var(--gloss);outline-offset:2px;border-radius:2px}
+.gloss{display:inline;font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease,text-decoration-style .2s ease}
+.gloss:hover,.gloss:focus-visible,.gloss[aria-expanded="true"]{color:var(--gloss-hover);text-decoration-style:solid;text-decoration-color:var(--gloss-hover)}
+.gloss:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 .gloss-popover{position:fixed;top:0;left:0;z-index:2000;max-width:320px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 34px 14px 16px;box-shadow:0 16px 40px rgba(0,0,0,.5);opacity:0;pointer-events:none}
 .gloss-popover.show{opacity:1;pointer-events:auto}
 .gloss-popover-term{display:block;font-family:var(--display);font-weight:700;font-size:14px;color:var(--ink);margin-bottom:5px}
@@ -332,6 +334,7 @@ footer a{color:var(--ink)}
   .hero-text{order:1}
   .stats{grid-template-columns:1fr 1fr}
   .quick-grid{grid-template-columns:1fr}
+  .problema-box{padding:22px 20px}
   .ba{grid-template-columns:1fr}
   .ba-mid{transform:rotate(90deg);justify-self:center}
   .shop,.lessons{grid-template-columns:1fr}
@@ -398,9 +401,11 @@ footer a{color:var(--ink)}
 </nav>
 
 <section class="reveal">
-  <h2 id="problema" class="quick-heading quick-heading-left" data-i18n="h2_problema">El problema</h2>
-  <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
-  <p data-i18n="p_problema_2">El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.</p>
+  <h2 id="problema" class="quick-heading" data-i18n="h2_problema">El problema</h2>
+  <div class="problema-box">
+    <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. <strong>Ahí vi la oportunidad de Repuestolandia</strong>: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
+    <p data-i18n="p_problema_2"><strong>El desafío era la operación</strong>. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.</p>
+  </div>
 </section>
 
 <section class="quick reveal">
