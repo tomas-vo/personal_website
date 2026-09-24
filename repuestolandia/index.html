@@ -96,6 +96,7 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.4vw,4rem)
 .quick{margin-top:72px}
 .quick-heading{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4vw,3rem);line-height:1.2;color:var(--ink);text-align:center;text-transform:uppercase;letter-spacing:.01em;margin:0}
 h2.quick-heading{margin:60px 0 6px}
+.quick-heading-left{text-align:left}
 .quick-subheading{font-size:1.05rem;color:var(--muted);text-align:center;margin:10px auto 0}
 .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
 .quick-card{background:var(--surface);border:1px solid var(--line);padding:24px 22px;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),border-color .3s ease}
@@ -405,7 +406,7 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
-  <h2 id="problema" data-i18n="h2_problema">El problema</h2>
+  <h2 id="problema" class="quick-heading quick-heading-left" data-i18n="h2_problema">El problema</h2>
   <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
   <p data-i18n="p_problema_2">El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.</p>
 </section>
