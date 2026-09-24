@@ -22,7 +22,8 @@ const rlTranslations = {
     nav_aprendizajes: "Aprendizajes",
 
     h2_problema: "El problema",
-    p_problema: "Vendo en Chile repuestos que compro en tiendas de autopartes brasileñas. Cada producto llega en portugués, con precio en reales y sin peso, medidas ni marca clara. Además, el proveedor puede quedarse sin stock en cualquier momento. Hacerlo a mano significaba traducir, estimar el envío, calcular el costo puesto en Chile y ordenar miles de fichas por marca, y además revisar a diario si seguían disponibles.",
+    p_problema: "En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.",
+    p_problema_2: "El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.",
 
     h2_ejemplo: "Antes y después de un producto",
     sub_ejemplo: "Qué entra desde el proveedor y qué termina publicado en Shopify.",
@@ -207,6 +208,7 @@ const rlTranslations = {
 
     h2_problema: "The problem",
     p_problema: "I sell auto parts in Chile that I buy from Brazilian auto-parts stores. Every product arrives in Portuguese, priced in reais, with no clear weight, dimensions, or brand. On top of that, the supplier can run out of stock at any moment. Doing it by hand meant translating, estimating shipping, calculating the landed cost in Chile, and sorting thousands of listings by brand — plus checking daily whether they were still available.",
+    p_problema_2: "The real challenge was operations. Every product arrived in Portuguese, priced in reais, with no weight or dimensions, and the supplier's stock could change without notice. Publishing and maintaining thousands of listings by hand would have required a team I didn't have. So I decided to automate as much as possible from day one, so a one-person business could operate like a much bigger one, at minimal cost.",
 
     h2_ejemplo: "A product, before and after",
     sub_ejemplo: "What comes in from the supplier and what ends up published on Shopify.",
@@ -391,6 +393,7 @@ const rlTranslations = {
 
     h2_problema: "O problema",
     p_problema: "Vendo no Chile autopeças que compro em lojas de autopeças brasileiras. Cada produto chega em português, com preço em reais e sem peso, medidas ou marca clara. Além disso, o fornecedor pode ficar sem estoque a qualquer momento. Fazer isso manualmente significava traduzir, estimar o frete, calcular o custo total no Chile e organizar milhares de fichas por marca, além de checar diariamente se ainda estavam disponíveis.",
+    p_problema_2: "O desafio era a operação. Cada produto chega em português, com preço em reais e sem peso nem medidas, e o estoque do fornecedor muda sem aviso. Publicar e manter milhares de produtos manualmente exigiria uma equipe que eu não tinha. Por isso decidi automatizar o máximo possível desde o primeiro dia, para que um negócio de uma só pessoa pudesse operar como um muito maior, com custos mínimos.",
 
     h2_ejemplo: "Um produto, antes e depois",
     sub_ejemplo: "O que entra do fornecedor e o que termina publicado na Shopify.",
@@ -575,6 +578,7 @@ const rlTranslations = {
 
     h2_problema: "Le problème",
     p_problema: "Je vends au Chili des pièces automobiles que j'achète dans des magasins de pièces détachées brésiliens. Chaque produit arrive en portugais, avec un prix en réaux, sans poids, dimensions ni marque clairs. De plus, le fournisseur peut se retrouver en rupture de stock à tout moment. Le faire à la main signifiait traduire, estimer l'envoi, calculer le coût total au Chili et trier des milliers de fiches par marque, tout en vérifiant chaque jour si elles étaient toujours disponibles.",
+    p_problema_2: "Le vrai défi était l'exploitation. Chaque produit arrivait en portugais, avec un prix en réaux, sans poids ni dimensions, et le stock du fournisseur pouvait changer sans préavis. Publier et maintenir des milliers de produits à la main aurait demandé une équipe que je n'avais pas. J'ai donc décidé d'automatiser le plus possible dès le premier jour, pour qu'une entreprise d'une seule personne puisse fonctionner comme une bien plus grande, avec des coûts minimes.",
 
     h2_ejemplo: "Un produit, avant et après",
     sub_ejemplo: "Ce qui arrive du fournisseur et ce qui finit publié sur Shopify.",
