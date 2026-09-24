@@ -182,6 +182,7 @@ code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 
 .chain li.ai{border-color:var(--accent);background:var(--accent-soft)}
 .pts{margin:14px 0 0;padding-left:1.1em}
 .pts li{margin-bottom:6px;max-width:68ch}
+.pts-p{max-width:68ch;margin:14px 0 0}
 
 /* mini before/after: raw scrape -> Gemini's structured output */
 .mini-ba{display:flex;align-items:stretch;justify-content:center;gap:14px;margin:32px 0;flex-wrap:wrap}
@@ -340,7 +341,7 @@ footer a{color:var(--ink)}
   <div class="hero-text">
     <div class="eyebrow" data-i18n="hero_eyebrow">Caso · Automatización e-commerce · Brasil → Chile</div>
     <h1 data-i18n="hero_title">Una tienda de repuestos en piloto automático</h1>
-    <p class="lede" data-i18n="hero_lede">Cómo automaticé Repuestolandia, mi tienda Shopify de repuestos importados desde Brasil, con n8n, Gemini y un servidor Linux de 5 USD al mes. Catálogo, traducción, filtros, precio con envío incluido, colecciones, metacampos, stock y registro de cada venta. El único paso manual es correr el scraper; desde ahí, todo lo hace n8n.</p>
+    <p class="lede" data-i18n="hero_lede">Repuestolandia es mi tienda Shopify de repuestos importados desde Brasil. La manejo solo, así que construí un sistema con n8n, la API de Gemini y un servidor Linux de 5 USD al mes que hace el trabajo pesado por mí: catálogo, traducción, filtros, precio con envío incluido, colecciones, metacampos, stock y registro de cada venta. El único paso manual es correr el scraper; desde ahí, todo lo hace n8n.</p>
     <div class="by">Tomás Venegas Osses · <span data-i18n="hero_by_role">Fundador, Repuestolandia SpA</span> · <a href="https://www.linkedin.com/in/tomas-venegas-osses-016633320" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
   </div>
   <img class="logo" src="img/logo.png" alt="Logo de Repuestolandia: mecánico saludando desde una camioneta antigua cargada de repuestos" width="320" height="314">
@@ -413,7 +414,7 @@ footer a{color:var(--ink)}
 
 <section class="reveal">
   <h2 id="ejemplo" class="txt-center" data-i18n="h2_ejemplo">Antes y después de un producto</h2>
-  <p class="sub txt-center" data-i18n="sub_ejemplo">Qué entra desde el proveedor y qué termina publicado en Shopify.</p>
+  <p class="sub txt-center" data-i18n="sub_ejemplo">Así llega un producto desde la web del proveedor (una fila scrapeada en Google Sheets) y así queda publicado en Shopify después de pasar por n8n y Gemini.</p>
   <div class="ba">
     <div class="ba-col">
       <div class="lbl" data-i18n="ba_lbl_before">Fila scrapeada · Google Sheets</div>
@@ -443,7 +444,7 @@ footer a{color:var(--ink)}
 
 <section class="reveal">
   <h2 id="arquitectura" class="txt-center" data-i18n="h2_arquitectura">Arquitectura</h2>
-  <p class="sub txt-center" data-i18n="sub_arquitectura">Todo corre en un solo servidor. Google Sheets funciona como base de datos intermedia y como libro de ventas, y Shopify guarda los datos estructurados de cada producto.</p>
+  <p class="sub txt-center" data-i18n="sub_arquitectura">Esta es la foto completa antes de entrar en detalle. Todo corre en un solo servidor: Google Sheets funciona como base de datos intermedia (staging) y como libro de ventas, n8n orquesta cada paso, y Shopify guarda los datos estructurados de cada producto.</p>
   <div class="arch" role="img" data-i18n-label="arch_aria" aria-label="Flujo: proveedores brasileños a Google Sheets, a n8n con Gemini, a Shopify; cada venta dispara un chequeo de stock contra el proveedor">
     <div class="lane">
       <div class="box"><small data-i18n="box1_small">Fuente · manual</small><span data-i18n="box1_body">Webs de proveedores en Brasil<br>(script en Chrome)</span></div>
@@ -456,13 +457,14 @@ footer a{color:var(--ink)}
       <div class="arrow">→</div>
       <div class="box"><small data-i18n="box5_small">Contabilidad</small><span data-i18n="box5_body">Sheets de ventas<br>(márgenes + seguimiento)</span></div>
     </div>
-    <div class="loop"><span>↺</span><span data-i18n="loop_text">Cada venta en Shopify dispara dos flujos: el chequeo de stock en la web del proveedor y el registro de la venta con su desglose en Google Sheets.</span></div>
+    <div class="loop"><span>↺</span><span data-i18n="loop_text">Y cada venta en Shopify dispara dos workflows al mismo tiempo: uno hace el chequeo de stock en la web del proveedor, y el otro registra la venta con su desglose de costos en Google Sheets.</span></div>
     <div class="host" data-i18n="host_text">Ubuntu en VPS · Docker Compose · proxy reverso con HTTPS (Let's Encrypt) · subdominio propio vía Cloudflare DNS</div>
   </div>
 </section>
 
 <section class="reveal">
   <h2 id="workflows" class="txt-center" data-i18n="h2_workflows">Los tres workflows</h2>
+  <p class="sub txt-center" data-i18n="sub_workflows">Ahora, paso a paso: qué hace cada workflow, qué problema resuelve y cómo lo construí.</p>
 
   <article class="wf">
     <div class="wf-head"><h3 data-i18n="wf1_title">1 · Catálogo: Google Sheets → IA → Shopify</h3><span class="tag" data-i18n="wf1_tag">~4.000 productos · traducción · filtros · envío · precio</span></div>
@@ -480,10 +482,8 @@ footer a{color:var(--ink)}
       <li data-i18n="wf1_c11">POST producto</li>
     </ul>
     <figure class="shot reveal"><div class="shot-wrap"><div class="shot-scroll"><img src="img/wf1.png" alt="Captura del workflow Product Catalog Automation en n8n" width="2242" height="126" style="height:84px"></div><span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span></div><figcaption data-i18n="wf1_caption">Product Catalog Automation, en n8n. Los nodos desactivados los uso para pruebas: limitar a pocos productos, probar filtros y pausas.</figcaption></figure>
-    <ul class="pts">
-      <li data-i18n="wf1_pt1"><strong>Paso previo manual: scraping.</strong> Un script de JavaScript en la consola de Chrome recorre el buscador del proveedor y guarda título, precio, link e imagen en Google Sheets. Lo hice en dos fases (primero el listado y luego cada ficha) porque en el listado se mezclaban las imágenes de productos vecinos.</li>
-      <li data-i18n="wf1_pt2"><strong>Gemini</strong> devuelve JSON estructurado: título traducido con terminología chilena, descripción HTML, OEM, marcas compatibles, peso estimado, tamaño y estado. Antes, un diccionario de unos 100 términos técnicos PT→ES asegura que la traducción sea consistente.</li>
-    </ul>
+    <p class="pts-p" data-i18n="wf1_pt1">Crear miles de productos a mano no era viable, así que el proceso parte con un <strong>script de JavaScript</strong> que corro en la consola de Chrome. Con <code>fetch</code> + <code>DOMParser</code> recorre todas las páginas del buscador del proveedor y extrae <strong>título, precio en BRL, link e imagen</strong>, que pego en Google Sheets. Es el <em>único paso manual</em> de todo el sistema. Lo hice en dos fases (primero el listado, después cada ficha, leyendo la imagen desde <code>og:image</code>) porque en el listado <em>se mezclaban las imágenes de productos vecinos</em>.</p>
+    <p class="pts-p" data-i18n="wf1_pt2">Pero ese dato crudo todavía no sirve para vender en Chile: el título viene en portugués y no dice cuánto pesa ni para qué auto es. Ahí entra <strong>Gemini</strong>, que devuelve un <strong>JSON estructurado</strong> con el título traducido con terminología chilena, una descripción HTML, el número OEM, las marcas compatibles, el peso estimado, el tamaño y un estado. Antes de llegar a Gemini, un nodo Code aplica <em>mi propio diccionario</em> de unos 100 términos técnicos PT→ES, para que una misma pieza se llame igual en todo el catálogo.</p>
 
     <div class="mini-ba">
       <div class="mini-ba-box">
@@ -510,10 +510,8 @@ footer a{color:var(--ink)}
       </div>
     </div>
 
-    <ul class="pts">
-      <li data-i18n="wf1_pt3"><strong>Filtro doble.</strong> La IA clasifica por peso y riesgo, y una lista determinística de palabras prohibidas en portugués actúa como respaldo. Sin ella, algunos motores completos se colaban con precios de millones.</li>
-      <li data-i18n="wf1_pt4"><strong>Precio:</strong> (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + provisión aduanera (IVA + arancel), dividido por 0,60.</li>
-    </ul>
+    <p class="pts-p" data-i18n="wf1_pt3">No todo se puede o conviene traer por correo: <em>motores completos, cajas de cambio, piezas usadas o fluidos inflamables</em>. Gemini clasifica cada producto por peso y riesgo, pero <strong>a veces fallaba</strong>: se colaron motores completos con precios de millones. Por eso agregué un <strong>respaldo determinístico</strong>: una lista de palabras prohibidas en portugués que fuerza el rechazo sin depender del criterio de la IA.</p>
+    <p class="pts-p" data-i18n="wf1_pt4">Con eso, cada producto aprobado recibe su precio. La idea es que cubra <strong>todo lo que cuesta traer la pieza</strong>, así que primero calculo el <em>costo landed</em>: (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + provisión aduanera (IVA + arancel sobre el CIF). Sobre ese costo aplico mi margen.</p>
     <div class="tbl">
       <table>
         <thead><tr><th data-i18n="tbl1_h1">Regla</th><th data-i18n="tbl1_h2">Criterio</th><th data-i18n="tbl1_h3">Resultado</th></tr></thead>
@@ -526,7 +524,7 @@ footer a{color:var(--ink)}
     </div>
     <div class="split">
       <h4 data-i18n="h4_envio">Estimación del envío por producto</h4>
-      <p data-i18n="p_envio">Los proveedores no publican peso ni medidas. Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza. Con eso calculo el <strong>peso cobrable</strong> y el flete internacional:</p>
+      <p data-i18n="p_envio">El envío es lo más difícil de estimar: los proveedores no publican peso ni medidas, y Correios cobra por peso volumétrico, es decir, también por el espacio que ocupa la caja. Por eso Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza, y con eso calculo el <strong>peso cobrable</strong> y el flete internacional:</p>
       <div class="formula"><span data-i18n="formula1_l1">peso cobrable = peso real × Factor K</span><span data-i18n="formula1_l2">flete = R$133 fijo por paquete + R$58,7 × kg cobrable</span></div>
       <div class="fk-callout">
         <span class="fk-title" data-i18n="factor_k_title">¿Qué es el Factor K?</span>
@@ -542,12 +540,12 @@ footer a{color:var(--ink)}
           </tbody>
         </table>
       </div>
-      <p class="note" data-i18n="note_envio">Calibré la fórmula con boletas reales de envíos por Correios. A propósito, aplico el costo fijo completo a cada producto, aunque en la práctica varios viajan en un mismo paquete. Es un criterio conservador: el margen real sale mejor al consolidar.</p>
+      <p class="note" data-i18n="note_envio">Calibré la fórmula con boletas reales de envíos por Correios. Además, a propósito, aplico el costo fijo completo a cada producto, aunque en la práctica varios viajan en un mismo paquete. Es un criterio conservador: prefiero sobrestimar el envío, y al consolidar paquetes el margen real sale mejor.</p>
 
       <div class="calc reveal">
         <div class="calc-head">
           <h4 data-i18n="calc_title">Prueba tu propio cálculo</h4>
-          <p class="calc-sub" data-i18n="calc_sub">Usa la fórmula real del workflow con tus propios números.</p>
+          <p class="calc-sub" data-i18n="calc_sub">Usa la fórmula real del workflow: cambia el peso y el tamaño y mira cómo se calculan el peso cobrable y el flete.</p>
         </div>
         <div class="calc-body">
           <div class="calc-field">
@@ -594,10 +592,8 @@ footer a{color:var(--ink)}
       <li data-i18n="wf2_c8">Inventario = 0</li>
     </ul>
     <figure class="shot reveal"><div class="shot-wrap"><div class="shot-scroll"><img src="img/wf2.png" alt="Captura del workflow Inventory Validation en n8n" width="2345" height="201" style="height:96px"></div><span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span></div><figcaption data-i18n="wf2_caption">Inventory Validation, en n8n</figcaption></figure>
-    <ul class="pts">
-      <li data-i18n="wf2_pt1">Al entrar un pedido, revisa en vivo cada producto en la web del proveedor. Si está agotado, deja el inventario en 0 en Shopify para que no se vuelva a vender.</li>
-      <li data-i18n="wf2_pt2">La detección ignora la sección "Produtos relacionados", porque los productos relacionados agotados daban falsos negativos.</li>
-    </ul>
+    <p class="pts-p" data-i18n="wf2_pt1">Vendo <strong>bajo pedido</strong>: no tengo stock propio, y el proveedor puede quedarse sin una pieza sin avisarme. Sin un control, podría <em>vender algo que no puedo entregar</em>.</p>
+    <p class="pts-p" data-i18n="wf2_pt2">Para evitarlo, un <strong>Shopify Trigger</strong> activa este workflow con cada pedido creado. El workflow separa el pedido por producto (Split Out), lee el metacampo <code>link_brasil</code> y hace un GET a la ficha del proveedor buscando la palabra <em>"Esgotado"</em> (agotado). Si la encuentra, pide un token OAuth nuevo, obtiene la variante y <strong>deja el inventario en 0</strong> en Shopify. Un detalle que aprendí en el camino: la búsqueda corta el HTML antes de la sección <em>"Produtos relacionados"</em>, porque los productos relacionados agotados daban falsas alarmas.</p>
   </article>
 
   <article class="wf">
@@ -611,10 +607,8 @@ footer a{color:var(--ink)}
       <li data-i18n="wf3_c6">Sheets: fila de venta</li>
     </ul>
     <figure class="shot reveal"><div class="shot-wrap"><div class="shot-scroll"><img src="img/wf3.png" alt="Captura del workflow Registro de Ventas Google Sheets en n8n" width="2361" height="292" style="height:110px"></div><span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span></div><figcaption data-i18n="wf3_caption">Registro de Ventas Google Sheets, en n8n</figcaption></figure>
-    <ul class="pts">
-      <li data-i18n="wf3_pt1">Por cada producto vendido registra una fila en el libro de contabilidad con el producto, el link del proveedor, los datos del comprador y el <strong>desglose completo del precio</strong>. Los costos vienen de los metacampos que guardó el workflow 1, así que no se recalcula nada.</li>
-      <li data-i18n="wf3_pt2">La planilla también sirve para <strong>seguir el pedido</strong>, con columnas de fecha y estado para cada tramo del viaje.</li>
-    </ul>
+    <p class="pts-p" data-i18n="wf3_pt1">En cada venta necesito saber <strong>cuánto costó realmente traer el producto</strong>, cuánto gané y en qué parte del viaje va el paquete. Hacerlo a mano en cada pedido es lento y <em>propenso a errores</em>.</p>
+    <p class="pts-p" data-i18n="wf3_pt2">Por eso, con cada pedido, el workflow separa los productos, lee los metacampos de costo con la API de Shopify y, con dos nodos Code, arma el desglose y le da formato a la fila. Después la agrega (append) al libro de contabilidad en Google Sheets, con el producto, el link del proveedor, los datos del comprador y el <strong>desglose completo del precio</strong>. Lo clave: <em>no recalcula nada</em>, porque usa los costos que el workflow 1 ya guardó en cada producto.</p>
 
     <div class="split">
       <h4 data-i18n="h4_desglose">Desglose de cada venta</h4>
@@ -635,7 +629,7 @@ footer a{color:var(--ink)}
 
     <div class="split">
       <h4 data-i18n="h4_seguimiento">Seguimiento del pedido</h4>
-      <p data-i18n="p_seguimiento">La fila de la venta la crea el workflow. Las fechas de cada tramo las voy completando a medida que avanza el paquete:</p>
+      <p data-i18n="p_seguimiento">La misma fila sirve para <strong>seguir el pedido</strong>. El workflow la crea al momento de la venta, y yo completo la fecha de cada tramo a medida que avanza el paquete:</p>
       <ol class="track">
         <li><b data-i18n="track1_b">Venta</b><span data-i18n="track1_s">automático</span></li>
         <li><b data-i18n="track2_b">Compra en Brasil</b><span data-i18n="track2_s">fecha y hora</span></li>
@@ -650,26 +644,26 @@ footer a{color:var(--ink)}
 
 <section class="reveal">
   <h2 id="shopify" class="txt-center" data-i18n="h2_shopify">Shopify como base de datos: etiquetas y metacampos</h2>
-  <p class="sub txt-center" data-i18n="sub_shopify">No solo publico productos. Cada ficha queda con datos estructurados que ordenan la tienda y alimentan los otros workflows.</p>
+  <p class="sub txt-center" data-i18n="sub_shopify">No solo publico productos. Cada ficha queda con datos estructurados que ordenan la tienda sola y alimentan a los otros workflows.</p>
   <div class="shop">
     <div class="panel">
       <h4 data-i18n="h4_etiquetas">Etiquetas → colecciones automáticas</h4>
-      <p data-i18n="p_etiquetas">Gemini extrae del título las marcas compatibles, sin inventarlas, como un arreglo. Cada marca se guarda como etiqueta, y las colecciones inteligentes de Shopify (Jeep, Fiat, RAM…) se llenan solas. Una pieza compatible con varias marcas aparece en todas sus colecciones.</p>
+      <p data-i18n="p_etiquetas">Quería que alguien con un Jeep encontrara rápido las piezas para su auto. Por eso Gemini extrae del título las marcas compatibles como un arreglo (solo las que aparecen, nunca las inventa) y cada marca se guarda como etiqueta. Así, las colecciones inteligentes de Shopify (Jeep, Fiat, RAM…) se llenan solas, y una pieza compatible con varias marcas aparece en todas sus colecciones.</p>
       <div class="chips"><span class="chip">JEEP</span><span class="chip">FIAT</span><span class="chip">RAM</span><span class="chip">COTIZAR</span></div>
-      <p class="note" data-i18n="note_etiquetas">La etiqueta <code>COTIZAR</code> marca las piezas grandes o pesadas. Se publican como borrador con aviso de cotizar el envío, en vez de sacarlas del catálogo.</p>
+      <p class="note" data-i18n="note_etiquetas">La etiqueta <code>COTIZAR</code> marca las piezas grandes o pesadas. En vez de sacarlas del catálogo, se publican como borrador con un aviso para cotizar el envío caso a caso.</p>
     </div>
     <div class="panel">
       <h4 data-i18n="h4_variante">Variante lista para operar</h4>
-      <p data-i18n="p_variante">El producto se crea con la API REST de Shopify, no con el nodo nativo de n8n, para controlar la variante completa:</p>
+      <p data-i18n="p_variante">El producto se crea con un HTTP Request directo a la API REST de Shopify, no con el nodo nativo de n8n, porque ese nodo no permitía controlar la variante completa (precio, peso y SKU). Así cada producto queda listo para vender:</p>
       <ul class="pts">
-        <li data-i18n="pv1"><strong>SKU</strong> = número OEM, que también va en el título para mejorar la búsqueda.</li>
+        <li data-i18n="pv1"><strong>SKU</strong> = número OEM, que también va en el título para mejorar la búsqueda, porque muchos clientes buscan la pieza por ese número.</li>
         <li data-i18n="pv2"><strong>Peso</strong> real en kg.</li>
-        <li data-i18n="pv3"><strong>Inventario</strong> gestionado por Shopify. Como vendo bajo pedido, parte disponible, y el workflow 2 lo baja a 0 si el proveedor se queda sin stock.</li>
+        <li data-i18n="pv3"><strong>Inventario</strong> gestionado por Shopify. Como vendo bajo pedido, cada producto parte disponible, y el workflow 2 lo baja a 0 si el proveedor se queda sin stock.</li>
       </ul>
     </div>
     <div class="panel wide">
       <h4 data-i18n="h4_meta">Metacampos por producto</h4>
-      <p data-i18n="p_meta">Cada producto se publica con siete metacampos. Definí cada uno en Shopify para que se vean en el panel de administración.</p>
+      <p data-i18n="p_meta">Los metacampos son campos extra que Shopify guarda en cada producto, como notas pegadas a la ficha. Cada producto se publica con siete: el link del proveedor y todo el desglose de costos. Definí cada uno en Shopify para que se vean en el panel de administración.</p>
       <div class="tbl">
         <table>
           <thead><tr><th data-i18n="tbl4_h1">Metacampo</th><th data-i18n="tbl4_h2">Tipo</th><th data-i18n="tbl4_h3">Para qué sirve</th></tr></thead>
@@ -684,7 +678,7 @@ footer a{color:var(--ink)}
           </tbody>
         </table>
       </div>
-      <p class="note" data-i18n="note_meta">Con esto, cada pedido trae su desglose de costos sin volver a calcular nada, y el workflow 3 lo pasa directo a la contabilidad.</p>
+      <p class="note" data-i18n="note_meta">Con esto, cada pedido ya trae su desglose de costos sin volver a calcular nada: el workflow 2 usa el link para revisar el stock, y el workflow 3 pasa los costos directo a la contabilidad.</p>
     </div>
   </div>
 </section>
@@ -706,10 +700,10 @@ footer a{color:var(--ink)}
 <section class="reveal">
   <h2 id="aprendizajes" class="txt-center" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
   <div class="lessons">
-    <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Con nodos Filter e If en la cadena, referenciar por índice mezclaba títulos, precios e imágenes de productos distintos. Lo resolví usando el rastreo de items de n8n (<code>.item</code>) en vez de índices.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un error cuesta caro. Por eso toda decisión crítica tiene además una regla determinística.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson3_h">Permisos, tokens y metacampos</h3><p data-i18n="lesson3_p">Configuré los scopes de la app (write_inventory), pido un token nuevo en cada ejecución y agregué pausas entre llamadas para no chocar con el límite de la API de Shopify. Además, los metacampos solo aparecen en el panel si antes creas su definición.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson4_h">Costo mínimo, control máximo</h3><p data-i18n="lesson4_p">Uso n8n self-hosted en lugar de SaaS por ejecución. Con 5 USD al mes corren flujos ilimitados, y solo pago por uso la API de Gemini.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Al principio, el workflow mezclaba datos: un producto quedaba con el precio o la imagen de otro. La causa era que referenciaba los datos entre nodos por índice, y cuando un Filter o un If descartaba items, los índices dejaban de coincidir. Lo resolví usando el rastreo de items de n8n (<code>.item</code>), que sigue a cada producto a través de toda la cadena.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un solo error cuesta caro, como publicar un motor completo a precio de repuesto. Aprendí a no depender solo de la IA: toda decisión crítica tiene además una regla determinística de respaldo.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson3_h">Permisos, tokens y metacampos</h3><p data-i18n="lesson3_p">Conectarme a la API de Shopify me enseñó cosas que no salen en los tutoriales: la app necesita scopes específicos (como <code>write_inventory</code>) para modificar el inventario, conviene pedir un token nuevo en cada ejecución para que no expire, hay que agregar pausas entre llamadas para no superar el rate limit, y los metacampos solo aparecen en el panel si antes creas su definición.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson4_h">Costo mínimo, control máximo</h3><p data-i18n="lesson4_p">Elegí n8n self-hosted en vez de un SaaS que cobra por ejecución. Con un servidor de 5 USD al mes puedo correr flujos ilimitados, y lo único que pago por uso es la API de Gemini.</p></div>
   </div>
 </section>
 
