@@ -62,6 +62,8 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .growth-dot{transition:none !important;opacity:1 !important;transform:scale(1) !important}
   .shot-hint{transition:none !important}
   .mini-ba-box,.mini-ba-arrow{transition:none !important;opacity:1 !important;transform:none !important}
+  .quick-card{transition:none !important;opacity:1 !important;transform:none !important}
+  .quick-icon,.quick-num{animation:none !important}
 }
 
 /* hero */
@@ -90,6 +92,32 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.4vw,4rem)
 .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);vertical-align:middle;margin-left:4px;animation:rlPulseDot 1.6s ease-in-out infinite}
 @keyframes rlPulseDot{0%,80%,100%{opacity:.35;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
 
+/* quick summary: 3 steps in 30 seconds */
+.quick{margin-top:72px}
+.quick-heading{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4vw,3rem);line-height:1.2;color:var(--ink);text-align:center;text-transform:uppercase;letter-spacing:.01em;margin:0}
+h2.quick-heading{margin:60px 0 6px}
+.quick-subheading{font-size:1.05rem;color:var(--muted);text-align:center;margin:10px auto 0}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.quick-card{background:var(--surface);border:1px solid var(--line);padding:24px 22px;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),border-color .3s ease}
+.quick.is-visible .quick-card{opacity:1;transform:translateY(0)}
+.quick.is-visible .quick-card:nth-child(1){transition-delay:.05s}
+.quick.is-visible .quick-card:nth-child(2){transition-delay:.2s}
+.quick.is-visible .quick-card:nth-child(3){transition-delay:.35s}
+.quick.is-visible .quick-card:hover{transform:translateY(-4px);border-color:var(--accent);transition:transform .25s cubic-bezier(.22,1,.36,1),border-color .25s ease}
+.quick-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.quick-icon{width:24px;height:24px;color:var(--accent);flex-shrink:0}
+.quick-num{font-family:var(--display);font-weight:700;font-size:1.8rem;color:var(--accent);line-height:1}
+.quick.is-visible .quick-card .quick-icon,.quick.is-visible .quick-card .quick-num{animation:qBounce .5s cubic-bezier(.34,1.56,.64,1)}
+.quick.is-visible .quick-card:nth-child(1) .quick-icon{animation-delay:.15s}
+.quick.is-visible .quick-card:nth-child(1) .quick-num{animation-delay:.25s}
+.quick.is-visible .quick-card:nth-child(2) .quick-icon{animation-delay:.3s}
+.quick.is-visible .quick-card:nth-child(2) .quick-num{animation-delay:.4s}
+.quick.is-visible .quick-card:nth-child(3) .quick-icon{animation-delay:.45s}
+.quick.is-visible .quick-card:nth-child(3) .quick-num{animation-delay:.55s}
+@keyframes qBounce{0%{transform:scale(.5)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.quick-title{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.25;margin:0 0 8px;text-wrap:balance}
+.quick-p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;max-width:40ch}
+
 nav.toc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-family:var(--mono);font-size:12.5px}
 nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s ease,border-color .2s ease}
 nav.toc a:hover{color:var(--ink);border-color:var(--accent)}
@@ -99,6 +127,7 @@ h2{font-family:var(--display);font-weight:700;font-size:1.7rem;margin:60px 0 6px
 h3{font-family:var(--display);font-weight:700;font-size:1.25rem;margin:0}
 h4{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0 0 6px}
 p{max-width:66ch}
+.txt-center{text-align:center;margin-left:auto;margin-right:auto}
 .sub{color:var(--muted);margin-top:0}
 code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 5px}
 
@@ -282,6 +311,7 @@ footer a{color:var(--ink)}
   .hero .logo{justify-self:center;max-width:170px;margin:0 auto 8px}
   .hero-text{order:1}
   .stats{grid-template-columns:1fr 1fr}
+  .quick-grid{grid-template-columns:1fr}
   .ba{grid-template-columns:1fr}
   .ba-mid{transform:rotate(90deg);justify-self:center}
   .shop,.lessons{grid-template-columns:1fr}
@@ -343,6 +373,37 @@ footer a{color:var(--ink)}
   <a href="#aprendizajes" data-i18n="nav_aprendizajes">Aprendizajes</a>
 </nav>
 
+<section class="quick reveal">
+  <div class="quick-heading" data-i18n="quick_eyebrow">En 30 segundos</div>
+  <p class="quick-subheading" data-i18n="quick_subheading">¿Qué hacen las automatizaciones que construí?</p>
+  <div class="quick-grid">
+    <div class="quick-card">
+      <div class="quick-top">
+        <svg class="quick-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+        <span class="quick-num">1</span>
+      </div>
+      <h3 class="quick-title" data-i18n="quick1_h">Arma el catálogo solo.</h3>
+      <p class="quick-p" data-i18n="quick1_p">Toma los productos de Brasil, los traduce, calcula cuánto cuesta traerlos y los publica en la tienda con su precio final.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-top">
+        <svg class="quick-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span class="quick-num">2</span>
+      </div>
+      <h3 class="quick-title" data-i18n="quick2_h">Evita vender lo que no hay.</h3>
+      <p class="quick-p" data-i18n="quick2_p">Cada vez que alguien compra, revisa si el proveedor todavía tiene el producto. Si se agotó, lo saca de la venta.</p>
+    </div>
+    <div class="quick-card">
+      <div class="quick-top">
+        <svg class="quick-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <span class="quick-num">3</span>
+      </div>
+      <h3 class="quick-title" data-i18n="quick3_h">Lleva la cuenta de cada venta.</h3>
+      <p class="quick-p" data-i18n="quick3_p">Registra automáticamente cada pedido con sus costos y deja una planilla para seguir el paquete hasta que llega al cliente.</p>
+    </div>
+  </div>
+</section>
+
 <section class="reveal">
   <h2 id="problema" data-i18n="h2_problema">El problema</h2>
   <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
@@ -350,8 +411,8 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
-  <h2 id="ejemplo" data-i18n="h2_ejemplo">Antes y después de un producto</h2>
-  <p class="sub" data-i18n="sub_ejemplo">Qué entra desde el proveedor y qué termina publicado en Shopify.</p>
+  <h2 id="ejemplo" class="txt-center" data-i18n="h2_ejemplo">Antes y después de un producto</h2>
+  <p class="sub txt-center" data-i18n="sub_ejemplo">Qué entra desde el proveedor y qué termina publicado en Shopify.</p>
   <div class="ba">
     <div class="ba-col">
       <div class="lbl" data-i18n="ba_lbl_before">Fila scrapeada · Google Sheets</div>
@@ -376,12 +437,12 @@ footer a{color:var(--ink)}
       </dl>
     </div>
   </div>
-  <p class="demo-note" data-i18n="demo_note">Ejemplo ilustrativo: los campos y cálculos son los que genera el flujo; el producto y su peso son de muestra.</p>
+  <p class="demo-note txt-center" data-i18n="demo_note">Ejemplo ilustrativo: los campos y cálculos son los que genera el flujo; el producto y su peso son de muestra.</p>
 </section>
 
 <section class="reveal">
-  <h2 id="arquitectura" data-i18n="h2_arquitectura">Arquitectura</h2>
-  <p class="sub" data-i18n="sub_arquitectura">Todo corre en un solo servidor. Google Sheets funciona como base de datos intermedia y como libro de ventas, y Shopify guarda los datos estructurados de cada producto.</p>
+  <h2 id="arquitectura" class="txt-center" data-i18n="h2_arquitectura">Arquitectura</h2>
+  <p class="sub txt-center" data-i18n="sub_arquitectura">Todo corre en un solo servidor. Google Sheets funciona como base de datos intermedia y como libro de ventas, y Shopify guarda los datos estructurados de cada producto.</p>
   <div class="arch" role="img" data-i18n-label="arch_aria" aria-label="Flujo: proveedores brasileños a Google Sheets, a n8n con Gemini, a Shopify; cada venta dispara un chequeo de stock contra el proveedor">
     <div class="lane">
       <div class="box"><small data-i18n="box1_small">Fuente · manual</small><span data-i18n="box1_body">Webs de proveedores en Brasil<br>(script en Chrome)</span></div>
@@ -400,7 +461,7 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
-  <h2 id="workflows" data-i18n="h2_workflows">Los tres workflows</h2>
+  <h2 id="workflows" class="txt-center" data-i18n="h2_workflows">Los tres workflows</h2>
 
   <article class="wf">
     <div class="wf-head"><h3 data-i18n="wf1_title">1 · Catálogo: Google Sheets → IA → Shopify</h3><span class="tag" data-i18n="wf1_tag">~4.000 productos · traducción · filtros · envío · precio</span></div>
@@ -587,8 +648,8 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
-  <h2 id="shopify" data-i18n="h2_shopify">Shopify como base de datos: etiquetas y metacampos</h2>
-  <p class="sub" data-i18n="sub_shopify">No solo publico productos. Cada ficha queda con datos estructurados que ordenan la tienda y alimentan los otros workflows.</p>
+  <h2 id="shopify" class="txt-center" data-i18n="h2_shopify">Shopify como base de datos: etiquetas y metacampos</h2>
+  <p class="sub txt-center" data-i18n="sub_shopify">No solo publico productos. Cada ficha queda con datos estructurados que ordenan la tienda y alimentan los otros workflows.</p>
   <div class="shop">
     <div class="panel">
       <h4 data-i18n="h4_etiquetas">Etiquetas → colecciones automáticas</h4>
@@ -642,7 +703,7 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
-  <h2 id="aprendizajes" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
+  <h2 id="aprendizajes" class="txt-center" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
   <div class="lessons">
     <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Con nodos Filter e If en la cadena, referenciar por índice mezclaba títulos, precios e imágenes de productos distintos. Lo resolví usando el rastreo de items de n8n (<code>.item</code>) en vez de índices.</p></div>
     <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un error cuesta caro. Por eso toda decisión crítica tiene además una regla determinística.</p></div>

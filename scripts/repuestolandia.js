@@ -21,6 +21,15 @@ const rlTranslations = {
     nav_shopify: "Shopify: etiquetas y metacampos",
     nav_aprendizajes: "Aprendizajes",
 
+    quick_eyebrow: "En 30 segundos",
+    quick_subheading: "¿Qué hacen las automatizaciones que construí?",
+    quick1_h: "Arma el catálogo solo.",
+    quick1_p: "Toma los productos de Brasil, los traduce, calcula cuánto cuesta traerlos y los publica en la tienda con su precio final.",
+    quick2_h: "Evita vender lo que no hay.",
+    quick2_p: "Cada vez que alguien compra, revisa si el proveedor todavía tiene el producto. Si se agotó, lo saca de la venta.",
+    quick3_h: "Lleva la cuenta de cada venta.",
+    quick3_p: "Registra automáticamente cada pedido con sus costos y deja una planilla para seguir el paquete hasta que llega al cliente.",
+
     h2_problema: "El problema",
     p_problema: "En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.",
     p_problema_2: "El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.",
@@ -219,6 +228,15 @@ const rlTranslations = {
     nav_workflows: "Workflows",
     nav_shopify: "Shopify: tags and metafields",
     nav_aprendizajes: "Lessons learned",
+
+    quick_eyebrow: "In 30 seconds",
+    quick_subheading: "What do the automations I built actually do?",
+    quick1_h: "Builds the catalog on its own.",
+    quick1_p: "Takes the products from Brazil, translates them, works out what it costs to bring them in, and publishes them in the store with a final price.",
+    quick2_h: "Never sells what's out of stock.",
+    quick2_p: "Every time someone buys, it checks whether the supplier still has the product. If it's sold out, it pulls it from sale.",
+    quick3_h: "Tracks every sale.",
+    quick3_p: "Automatically logs each order with its costs and keeps a sheet to follow the package until it reaches the customer.",
 
     h2_problema: "The problem",
     p_problema: "In Chile, finding certain auto parts is hard: specific pieces for Jeep or Fiat that aren't carried by local stores, or that cost far more than they should. In Brazil, on the other hand, those same parts are easy to find, because many of these models are manufactured and sold there. That's where I saw the opportunity for Repuestolandia: importing directly from Brazil the parts that are hard to find in Chile.",
@@ -419,6 +437,15 @@ const rlTranslations = {
     nav_shopify: "Shopify: tags e metacampos",
     nav_aprendizajes: "Aprendizados",
 
+    quick_eyebrow: "Em 30 segundos",
+    quick_subheading: "O que fazem as automações que eu construí?",
+    quick1_h: "Monta o catálogo sozinho.",
+    quick1_p: "Pega os produtos do Brasil, traduz, calcula quanto custa trazê-los e os publica na loja com o preço final.",
+    quick2_h: "Evita vender o que não tem.",
+    quick2_p: "Toda vez que alguém compra, verifica se o fornecedor ainda tem o produto. Se acabou, ele sai da venda.",
+    quick3_h: "Registra cada venda.",
+    quick3_p: "Registra automaticamente cada pedido com seus custos e mantém uma planilha para acompanhar o pacote até chegar ao cliente.",
+
     h2_problema: "O problema",
     p_problema: "No Chile, é difícil encontrar certas autopeças: peças específicas para Jeep ou Fiat que não estão nas lojas locais ou que custam muito mais do que deveriam. No Brasil, por outro lado, essas mesmas peças são fáceis de encontrar, porque muitos desses modelos são fabricados e vendidos lá. Foi aí que vi a oportunidade da Repuestolandia: importar diretamente do Brasil as peças difíceis de encontrar.",
     p_problema_2: "O desafio era a operação. Cada produto chega em português, com preço em reais e sem peso nem medidas, e o estoque do fornecedor muda sem aviso. Publicar e manter milhares de produtos manualmente exigiria uma equipe que eu não tinha. Por isso decidi automatizar o máximo possível desde o primeiro dia, para que um negócio de uma só pessoa pudesse operar como um muito maior, com custos mínimos.",
@@ -617,6 +644,15 @@ const rlTranslations = {
     nav_workflows: "Workflows",
     nav_shopify: "Shopify : tags et métachamps",
     nav_aprendizajes: "Leçons apprises",
+
+    quick_eyebrow: "En 30 secondes",
+    quick_subheading: "Que font les automatisations que j'ai construites ?",
+    quick1_h: "Construit le catalogue tout seul.",
+    quick1_p: "Il récupère les produits du Brésil, les traduit, calcule ce qu'il en coûte de les faire venir, et les publie sur la boutique avec leur prix final.",
+    quick2_h: "Ne vend jamais ce qui est épuisé.",
+    quick2_p: "À chaque achat, il vérifie si le fournisseur a encore le produit. S'il est épuisé, il le retire de la vente.",
+    quick3_h: "Suit chaque vente.",
+    quick3_p: "Il enregistre automatiquement chaque commande avec ses coûts et tient une feuille pour suivre le colis jusqu'à sa livraison.",
 
     h2_problema: "Le problème",
     p_problema: "Au Chili, trouver certaines pièces automobiles est difficile : des pièces spécifiques pour Jeep ou Fiat qui ne sont pas disponibles dans les magasins locaux, ou qui coûtent bien plus cher que de raison. Au Brésil, en revanche, ces mêmes pièces se trouvent facilement, car beaucoup de ces modèles y sont fabriqués et vendus. C'est là que j'ai vu l'opportunité de Repuestolandia : importer directement du Brésil les pièces difficiles à trouver.",
