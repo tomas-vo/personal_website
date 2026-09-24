@@ -375,6 +375,12 @@ footer a{color:var(--ink)}
   <a href="#aprendizajes" data-i18n="nav_aprendizajes">Aprendizajes</a>
 </nav>
 
+<section class="reveal">
+  <h2 id="problema" class="quick-heading quick-heading-left" data-i18n="h2_problema">El problema</h2>
+  <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
+  <p data-i18n="p_problema_2">El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.</p>
+</section>
+
 <section class="quick reveal">
   <div class="quick-heading" data-i18n="quick_eyebrow">En 30 segundos</div>
   <p class="quick-subheading" data-i18n="quick_subheading">¿Qué hacen las automatizaciones que construí?</p>
@@ -404,12 +410,6 @@ footer a{color:var(--ink)}
       <p class="quick-p" data-i18n="quick3_p">Registra automáticamente cada pedido con sus costos y deja una planilla para seguir el paquete hasta que llega al cliente.</p>
     </div>
   </div>
-</section>
-
-<section class="reveal">
-  <h2 id="problema" class="quick-heading quick-heading-left" data-i18n="h2_problema">El problema</h2>
-  <p data-i18n="p_problema">En Chile, conseguir ciertos repuestos es difícil: piezas específicas para Jeep o Fiat que no están en las tiendas locales o que cuestan mucho más de lo razonable. En Brasil, en cambio, esas mismas piezas se consiguen con facilidad, porque muchos de estos modelos se fabrican y se venden allá. Ahí vi la oportunidad de Repuestolandia: traer directamente desde Brasil los repuestos difíciles de encontrar.</p>
-  <p data-i18n="p_problema_2">El desafío era la operación. Cada producto viene en portugués, con precio en reales y sin peso ni medidas, y el stock del proveedor cambia sin aviso. Publicar y mantener miles de productos a mano habría requerido un equipo que no tenía. Por eso decidí automatizar todo lo posible desde el primer día, para que un negocio de una sola persona pudiera operar como uno mucho más grande, con costos mínimos.</p>
 </section>
 
 <section class="reveal">
@@ -683,6 +683,16 @@ footer a{color:var(--ink)}
   </div>
 </section>
 
+<section class="reveal">
+  <h2 id="aprendizajes" class="txt-center" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
+  <div class="lessons">
+    <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Al principio, el workflow mezclaba datos: un producto quedaba con el precio o la imagen de otro. La causa era que referenciaba los datos entre nodos por índice, y cuando un Filter o un If descartaba items, los índices dejaban de coincidir. Lo resolví usando el rastreo de items de n8n (<code>.item</code>), que sigue a cada producto a través de toda la cadena.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un solo error cuesta caro, como publicar un motor completo a precio de repuesto. Aprendí a no depender solo de la IA: toda decisión crítica tiene además una regla determinística de respaldo.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson3_h">Permisos, tokens y metacampos</h3><p data-i18n="lesson3_p">Conectarme a la API de Shopify me enseñó cosas que no salen en los tutoriales: la app necesita scopes específicos (como <code>write_inventory</code>) para modificar el inventario, conviene pedir un token nuevo en cada ejecución para que no expire, hay que agregar pausas entre llamadas para no superar el rate limit, y los metacampos solo aparecen en el panel si antes creas su definición.</p></div>
+    <div class="lesson"><h3 data-i18n="lesson4_h">Costo mínimo, control máximo</h3><p data-i18n="lesson4_p">Elegí n8n self-hosted en vez de un SaaS que cobra por ejecución. Con un servidor de 5 USD al mes puedo correr flujos ilimitados, y lo único que pago por uso es la API de Gemini.</p></div>
+  </div>
+</section>
+
 <section class="reveal more-coming">
   <p class="more-coming-dots" aria-hidden="true"><span></span><span></span><span></span></p>
   <p class="more-coming-lead" data-i18n="more_coming_lead">Planeo seguir haciendo crecer este proyecto — vienen muchas cosas más.</p>
@@ -694,16 +704,6 @@ footer a{color:var(--ink)}
       <circle class="growth-dot" cx="188" cy="20" r="4"/>
       <circle class="growth-dot growth-dot-end" cx="268" cy="6" r="6"/>
     </svg>
-  </div>
-</section>
-
-<section class="reveal">
-  <h2 id="aprendizajes" class="txt-center" data-i18n="h2_aprendizajes">Lo que aprendí resolviendo bugs</h2>
-  <div class="lessons">
-    <div class="lesson"><h3 data-i18n="lesson1_h">Emparejamiento de items en n8n</h3><p data-i18n="lesson1_p">Al principio, el workflow mezclaba datos: un producto quedaba con el precio o la imagen de otro. La causa era que referenciaba los datos entre nodos por índice, y cuando un Filter o un If descartaba items, los índices dejaban de coincidir. Lo resolví usando el rastreo de items de n8n (<code>.item</code>), que sigue a cada producto a través de toda la cadena.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson2_h">La IA no basta sola</h3><p data-i18n="lesson2_p">Gemini clasifica bien casi siempre, pero en e-commerce un solo error cuesta caro, como publicar un motor completo a precio de repuesto. Aprendí a no depender solo de la IA: toda decisión crítica tiene además una regla determinística de respaldo.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson3_h">Permisos, tokens y metacampos</h3><p data-i18n="lesson3_p">Conectarme a la API de Shopify me enseñó cosas que no salen en los tutoriales: la app necesita scopes específicos (como <code>write_inventory</code>) para modificar el inventario, conviene pedir un token nuevo en cada ejecución para que no expire, hay que agregar pausas entre llamadas para no superar el rate limit, y los metacampos solo aparecen en el panel si antes creas su definición.</p></div>
-    <div class="lesson"><h3 data-i18n="lesson4_h">Costo mínimo, control máximo</h3><p data-i18n="lesson4_p">Elegí n8n self-hosted en vez de un SaaS que cobra por ejecución. Con un servidor de 5 USD al mes puedo correr flujos ilimitados, y lo único que pago por uso es la API de Gemini.</p></div>
   </div>
 </section>
 
