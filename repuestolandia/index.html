@@ -219,13 +219,6 @@ code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 
 .mini-ba-box-after li::before{content:"✓ ";color:var(--accent)}
 .mini-ba-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:var(--mono);font-size:11px;color:var(--accent);flex-shrink:0;padding:0 4px;opacity:0;transform:scale(.6);transition:opacity .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1)}
 .mini-ba.is-visible .mini-ba-arrow{opacity:1;transform:scale(1);transition-delay:.3s}
-@media (max-width:600px){
-  .mini-ba{flex-direction:column;align-items:center}
-  .mini-ba-box{width:100%;transform:translateY(-10px)}
-  .mini-ba-box-after{transform:translateY(10px)}
-  .mini-ba-arrow{flex-direction:row;padding:6px 0}
-  .mini-ba-arrow svg{transform:rotate(90deg)}
-}
 
 .tbl{overflow-x:auto;margin-top:14px}
 table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
@@ -245,6 +238,13 @@ tbody tr:hover{background:var(--node)}
 .fk-callout{background:#3b366d;border-radius:14px;padding:22px 24px;margin:16px 0 4px;text-align:center}
 .fk-title{display:block;font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
 .fk-callout .fk-body{font-size:13.5px;line-height:1.65;color:var(--ink);opacity:.85;max-width:56ch;margin:0 auto}
+@media (max-width: 850px){
+  .mini-ba{flex-direction:column;align-items:center}
+  .mini-ba-box{width:100%;transform:translateY(-10px)}
+  .mini-ba-box-after{transform:translateY(10px)}
+  .mini-ba-arrow{flex-direction:row;padding:6px 0}
+  .mini-ba-arrow svg{transform:rotate(90deg)}
+}
 
 /* interactive freight calculator */
 .calc{background:var(--surface);border:1px solid var(--line);padding:18px 20px;margin:20px 0 4px}
@@ -327,7 +327,6 @@ footer .wm{width:170px;height:auto;filter:var(--wm-filter);display:block;margin:
 footer a{color:var(--ink)}
 
 @media (max-width:720px){
-  .hero-video{display:none !important}
   .hero{grid-template-columns:1fr;padding:24px 20px}
   .hero .wordmark{width:min(260px,80%)}
   .hero .logo{justify-self:center;max-width:170px;margin:0 auto 8px}
@@ -339,7 +338,6 @@ footer a{color:var(--ink)}
   .ba-mid{transform:rotate(90deg);justify-self:center}
   .shop,.lessons{grid-template-columns:1fr}
 }
-
 
 </style>
 </head>
@@ -489,11 +487,13 @@ footer a{color:var(--ink)}
   </div>
 </section>
 
-<section class="reveal">
-  <h2 id="workflows" class="txt-center" data-i18n="h2_workflows">Los tres workflows</h2>
-  <p class="sub txt-center" data-i18n="sub_workflows">Ahora, paso a paso: qué hace cada <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button>, qué problema resuelve y cómo lo construí.</p>
+<section>
+  <div class="reveal">
+    <h2 id="workflows" class="txt-center" data-i18n="h2_workflows">Los tres workflows</h2>
+    <p class="sub txt-center" data-i18n="sub_workflows">Ahora, paso a paso: qué hace cada <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button>, qué problema resuelve y cómo lo construí.</p>
+  </div>
 
-  <article class="wf">
+  <article class="wf reveal">
     <div class="wf-head"><h3 data-i18n="wf1_title">1 · Catálogo: Google Sheets → IA → Shopify</h3><span class="tag" data-i18n="wf1_tag">~4.000 productos · traducción · filtros · envío · precio</span></div>
     <ul class="chain" aria-label="Pasos del workflow">
       <li data-i18n="wf1_c1">Inicio manual</li>
@@ -606,7 +606,7 @@ footer a{color:var(--ink)}
     </div>
   </article>
 
-  <article class="wf">
+  <article class="wf reveal">
     <div class="wf-head"><h3 data-i18n="wf2_title">2 · Chequeo de stock con proveedores</h3><span class="tag" data-i18n="wf2_tag">se dispara con cada venta</span></div>
     <ul class="chain" aria-label="Pasos del workflow">
       <li data-i18n="wf2_c1">Pedido creado</li>
@@ -623,7 +623,7 @@ footer a{color:var(--ink)}
     <p class="pts-p" data-i18n="wf2_pt2">Para evitarlo, un <strong>Shopify Trigger</strong> activa este workflow con cada pedido creado. El workflow separa el pedido por producto (Split Out), lee el <button class='gloss' type='button' data-term='metafields' aria-expanded='false' aria-controls='glossPopover'>metacampo</button> <code>link_brasil</code> y hace un GET a la ficha del proveedor buscando la palabra <em>"Esgotado"</em> (agotado). Si la encuentra, pide un <button class='gloss' type='button' data-term='oauthtoken' aria-expanded='false' aria-controls='glossPopover'>token OAuth</button> nuevo, obtiene la variante y <strong>deja el inventario en 0</strong> en Shopify. Un detalle que aprendí en el camino: la búsqueda corta el HTML antes de la sección <em>"Produtos relacionados"</em>, porque los productos relacionados agotados daban falsas alarmas.</p>
   </article>
 
-  <article class="wf">
+  <article class="wf reveal">
     <div class="wf-head"><h3 data-i18n="wf3_title">3 · Registro de ventas y seguimiento → Google Sheets</h3><span class="tag" data-i18n="wf2_tag">se dispara con cada venta</span></div>
     <ul class="chain" aria-label="Pasos del workflow">
       <li data-i18n="wf2_c1">Pedido creado</li>

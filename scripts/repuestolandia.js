@@ -1326,13 +1326,14 @@ if (rlGlossPopover){
 }
 
 /* ==========================================================
-   Video de fondo del hero: solo se carga en pantallas anchas
-   y si el usuario no pide reducir movimiento
+   Video de fondo del hero: se carga en todos los tamaños de
+   pantalla, salvo que el usuario pida reducir movimiento o
+   tenga activado el ahorro de datos del navegador
    ========================================================== */
 const rlHeroVideo = document.getElementById("rlHeroVideo");
 if (rlHeroVideo){
-  const rlWantsVideo = window.matchMedia("(min-width: 721px)").matches &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rlWantsVideo = !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !(navigator.connection && navigator.connection.saveData);
   if (rlWantsVideo){
     const source = document.createElement("source");
     source.src = "img/hero-loop.mp4";
