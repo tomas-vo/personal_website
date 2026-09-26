@@ -140,30 +140,6 @@ p{max-width:66ch}
 .sub{color:var(--muted);margin-top:0}
 code{font-family:var(--mono);font-size:.86em;background:var(--node);padding:1px 5px}
 
-/* architecture */
-.arch{background:var(--surface);border:1px solid var(--line);padding:20px;margin-top:16px;overflow-x:auto}
-.lane{display:flex;align-items:stretch;gap:10px;min-width:780px}
-.lane > *{opacity:0;transform:translateY(8px);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1)}
-.arch.is-visible .lane > *{opacity:1;transform:translateY(0)}
-.arch.is-visible .lane > *:nth-child(1){transition-delay:.05s}
-.arch.is-visible .lane > *:nth-child(2){transition-delay:.2s}
-.arch.is-visible .lane > *:nth-child(3){transition-delay:.35s}
-.arch.is-visible .lane > *:nth-child(4){transition-delay:.5s}
-.arch.is-visible .lane > *:nth-child(5){transition-delay:.65s}
-.arch.is-visible .lane > *:nth-child(6){transition-delay:.8s}
-.arch.is-visible .lane > *:nth-child(7){transition-delay:.95s}
-.arch.is-visible .lane > *:nth-child(8){transition-delay:1.1s}
-.arch.is-visible .lane > *:nth-child(9){transition-delay:1.25s}
-.box{flex:1;border:1px solid var(--line);background:var(--node);padding:12px;font-size:14px;line-height:1.4}
-.box small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.box.core{background:var(--accent-soft);border-color:var(--accent)}
-.arrow{align-self:center;color:var(--accent);font-family:var(--mono);font-size:18px}
-.loop{min-width:780px;margin-top:10px;border:1px dashed var(--accent);padding:8px 12px;font-size:13.5px;display:flex;gap:10px;align-items:center;opacity:0;transition:opacity .5s ease}
-.arch.is-visible .loop{opacity:1;transition-delay:1.4s}
-.loop span{font-family:var(--mono);color:var(--accent)}
-.host{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--muted);min-width:780px;opacity:0;transition:opacity .5s ease}
-.arch.is-visible .host{opacity:1;transition-delay:1.55s}
-
 /* before / after */
 .ba{display:grid;grid-template-columns:1fr auto 1.25fr;gap:14px;align-items:stretch;margin-top:16px}
 .ba-col{background:var(--surface);border:1px solid var(--line);padding:16px;min-width:0}
@@ -281,6 +257,11 @@ tbody tr:hover{background:var(--node)}
 .shot-hint{display:block;text-align:right;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:6px;opacity:0;transition:opacity .3s ease}
 .shot-wrap.scrollable + .shot-hint{opacity:1}
 .shot figcaption{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
+/* diagramas SVG inline */
+.diagram{margin:16px 0 4px}
+.diagram .shot-scroll{background:var(--surface);border:1px solid var(--line);padding:16px}
+.diagram svg{display:block;width:100%;height:auto}
+@media (max-width:720px){.diagram svg{width:640px;max-width:none}}
 /* shopify section */
 .shop{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
 .shop>*,.lessons>*,.ba>*{min-width:0}
@@ -373,26 +354,26 @@ footer a{color:var(--ink)}
 <div class="stats reveal">
   <div class="stat">
     <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/><circle cx="7.5" cy="7" r="0.6" fill="currentColor" stroke="none"/><circle cx="7.5" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>
-    <b data-count="5" data-suffix=" USD">0 USD</b><span data-i18n="stat1_label">al mes de infraestructura</span>
+    <b data-count="5" data-suffix=" USD">5 USD</b><span data-i18n="stat1_label">al mes de infraestructura</span>
   </div>
   <div class="stat">
     <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
-    <span class="stat-num-row"><b data-count="24" data-suffix="/7">0/7</b><span class="live-dot" aria-hidden="true"></span></span><span data-i18n="stat2_label">n8n en Docker sobre Linux</span>
+    <span class="stat-num-row"><b data-count="24" data-suffix="/7">24/7</b><span class="live-dot" aria-hidden="true"></span></span><span data-i18n="stat2_label">n8n en Docker sobre Linux</span>
   </div>
   <div class="stat">
     <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4-8 4-8-4z"/><path d="M4 8v8l8 4 8-4V8"/><path d="M12 12v8"/></svg>
-    <b data-count="4" data-prefix="~" data-suffix="k">~0k</b><span data-i18n="stat3_label">productos scrapeados</span>
+    <b data-count="4" data-prefix="~" data-suffix="k">~4k</b><span data-i18n="stat3_label">productos scrapeados</span>
   </div>
   <div class="stat">
     <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.3"/><circle cx="12" cy="6" r="2.3"/><circle cx="19" cy="12" r="2.3"/><path d="M7 11l3.3-3.6M14.7 7.4L17 11"/></svg>
-    <b data-count="3">0</b><span data-i18n="stat4_label">workflows en producción</span>
+    <b data-count="3">3</b><span data-i18n="stat4_label">workflows en producción</span>
   </div>
 </div>
 
 <nav class="toc" aria-label="Secciones">
   <a href="#problema" data-i18n="nav_problema">El problema</a>
-  <a href="#ejemplo" data-i18n="nav_ejemplo">Antes y después</a>
   <a href="#arquitectura" data-i18n="nav_arquitectura">Arquitectura</a>
+  <a href="#ejemplo" data-i18n="nav_ejemplo">Antes y después</a>
   <a href="#workflows" data-i18n="nav_workflows">Workflows</a>
   <a href="#shopify" data-i18n="nav_shopify">Shopify: etiquetas y metacampos</a>
   <a href="#aprendizajes" data-i18n="nav_aprendizajes">Aprendizajes</a>
@@ -438,6 +419,27 @@ footer a{color:var(--ink)}
 </section>
 
 <section class="reveal">
+  <h2 id="arquitectura" class="txt-center" data-i18n="h2_arquitectura">Arquitectura</h2>
+  <p class="sub txt-center" data-i18n="sub_arquitectura">Esta es la foto completa antes de entrar en detalle. Todo corre en un solo servidor: Google Sheets funciona como base de datos intermedia (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) y como libro de ventas, <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orquesta cada paso, y Shopify guarda los datos estructurados de cada producto.</p>
+  <figure class="diagram">
+    <div class="shot-wrap"><div class="shot-scroll"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 530" role="img" aria-labelledby="archSvgTitle archSvgDesc"><title id="archSvgTitle" data-i18n="svg_arch_title">Arquitectura de Repuestolandia</title><desc id="archSvgDesc" data-i18n="svg_arch_desc">Del scraper a Shopify; cada venta dispara en paralelo el chequeo de stock y el registro de ventas.</desc><style>
+.th{font:500 14px -apple-system,"Segoe UI",Roboto,sans-serif}
+.ts{font:400 12px -apple-system,"Segoe UI",Roboto,sans-serif}
+.arr{stroke:#888780;stroke-width:1.5;fill:none}
+.gray rect{fill:#444441;stroke:#B4B2A9}.gray .th{fill:#F1EFE8}.gray .ts{fill:#D3D1C7}
+.purple rect{fill:#3C3489;stroke:#AFA9EC}.purple .th{fill:#EEEDFE}.purple .ts{fill:#CECBF6}
+.teal rect{fill:#085041;stroke:#5DCAA5}.teal .th{fill:#E1F5EE}.teal .ts{fill:#9FE1CB}
+.lbl{fill:#F1EFE8}.lbls{fill:#D3D1C7}
+</style>
+<defs><marker id="archArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="gray"><rect x="220" y="30" width="240" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b1_t" x="340.0" y="48" text-anchor="middle" dominant-baseline="central">Scraper en Chrome</text><text class="ts" data-i18n="svg_arch_b1_s" x="340.0" y="68" text-anchor="middle" dominant-baseline="central">Único paso manual</text></g><line x1="340" y1="86" x2="340" y2="118" class="arr" marker-end="url(#archArrow)"/><g class="gray"><rect x="220" y="120" width="240" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b2_t" x="340.0" y="138" text-anchor="middle" dominant-baseline="central">Google Sheets</text><text class="ts" data-i18n="svg_arch_b2_s" x="340.0" y="158" text-anchor="middle" dominant-baseline="central">Catálogo crudo</text></g><line x1="340" y1="176" x2="340" y2="208" class="arr" marker-end="url(#archArrow)"/><g class="purple"><rect x="190" y="210" width="300" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b3_t" x="340.0" y="228" text-anchor="middle" dominant-baseline="central">Workflow 1 · n8n + Gemini</text><text class="ts" data-i18n="svg_arch_b3_s" x="340.0" y="248" text-anchor="middle" dominant-baseline="central">Traduce, filtra y pone precio</text></g><line x1="340" y1="266" x2="340" y2="298" class="arr" marker-end="url(#archArrow)"/><g class="gray"><rect x="220" y="300" width="240" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b4_t" x="340.0" y="318" text-anchor="middle" dominant-baseline="central">Shopify</text><text class="ts" data-i18n="svg_arch_b4_s" x="340.0" y="338" text-anchor="middle" dominant-baseline="central">Cliente hace un pedido</text></g><path d="M340 356 L340 382 L210 382 L210 406" class="arr" marker-end="url(#archArrow)"/><path d="M340 382 L470 382 L470 406" class="arr" marker-end="url(#archArrow)"/><g class="teal"><rect x="80" y="410" width="260" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b5_t" x="210.0" y="428" text-anchor="middle" dominant-baseline="central">Workflow 2 · stock</text><text class="ts" data-i18n="svg_arch_b5_s" x="210.0" y="448" text-anchor="middle" dominant-baseline="central">Si se agotó, inventario 0</text></g><g class="teal"><rect x="360" y="410" width="260" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_arch_b6_t" x="490.0" y="428" text-anchor="middle" dominant-baseline="central">Workflow 3 · ventas</text><text class="ts" data-i18n="svg_arch_b6_s" x="490.0" y="448" text-anchor="middle" dominant-baseline="central">Fila con costos en Sheets</text></g><g class="purple"><rect x="170" y="492" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_arch_leg1" x="192" y="499" dominant-baseline="central">Arma el catálogo</text><g class="teal"><rect x="360" y="492" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_arch_leg2" x="382" y="499" dominant-baseline="central">Corre con cada venta</text></svg></div></div>
+    <span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span>
+    <figcaption data-i18n="arch_caption">Cada venta en Shopify dispara los workflows 2 y 3 en paralelo.</figcaption>
+  </figure>
+  <p class="note txt-center" data-i18n="host_text">Ubuntu en <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · proxy reverso con HTTPS (Let's Encrypt) · subdominio propio vía Cloudflare DNS</p>
+</section>
+
+<section class="reveal">
   <h2 id="ejemplo" class="txt-center" data-i18n="h2_ejemplo">Antes y después de un producto</h2>
   <p class="sub txt-center" data-i18n="sub_ejemplo">Así llega un producto desde la web del proveedor (una fila <button class='gloss' type='button' data-term='scraping' aria-expanded='false' aria-controls='glossPopover'>scrapeada</button> en Google Sheets) y así queda publicado en Shopify después de pasar por <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> y <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button>.</p>
   <div class="ba">
@@ -465,26 +467,6 @@ footer a{color:var(--ink)}
     </div>
   </div>
   <p class="demo-note txt-center" data-i18n="demo_note">Ejemplo ilustrativo: los campos y cálculos son los que genera el flujo; el producto y su peso son de muestra.</p>
-</section>
-
-<section class="reveal">
-  <h2 id="arquitectura" class="txt-center" data-i18n="h2_arquitectura">Arquitectura</h2>
-  <p class="sub txt-center" data-i18n="sub_arquitectura">Esta es la foto completa antes de entrar en detalle. Todo corre en un solo servidor: Google Sheets funciona como base de datos intermedia (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) y como libro de ventas, <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orquesta cada paso, y Shopify guarda los datos estructurados de cada producto.</p>
-  <div class="arch" role="img" data-i18n-label="arch_aria" aria-label="Flujo: proveedores brasileños a Google Sheets, a n8n con Gemini, a Shopify; cada venta dispara un chequeo de stock contra el proveedor">
-    <div class="lane">
-      <div class="box"><small data-i18n="box1_small">Fuente · manual</small><span data-i18n="box1_body">Webs de proveedores en Brasil<br>(script en Chrome)</span></div>
-      <div class="arrow">→</div>
-      <div class="box"><small data-i18n="box2_small">Staging</small><span data-i18n="box2_body">Google Sheets<br>(catálogo crudo)</span></div>
-      <div class="arrow">→</div>
-      <div class="box core"><small data-i18n="box3_small">Orquestación</small><span data-i18n="box3_body">n8n + <button class='gloss' type='button' data-term='api' aria-expanded='false' aria-controls='glossPopover'>API</button> de <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button></span></div>
-      <div class="arrow">→</div>
-      <div class="box"><small data-i18n="box4_small">Venta</small><span data-i18n="box4_body">Shopify<br>(etiquetas + metacampos)</span></div>
-      <div class="arrow">→</div>
-      <div class="box"><small data-i18n="box5_small">Contabilidad</small><span data-i18n="box5_body">Sheets de ventas<br>(márgenes + seguimiento)</span></div>
-    </div>
-    <div class="loop"><span>↺</span><span data-i18n="loop_text">Y cada venta en Shopify dispara dos <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflows</button> al mismo tiempo: uno hace el chequeo de stock en la web del proveedor, y el otro registra la venta con su desglose de costos en Google Sheets.</span></div>
-    <div class="host" data-i18n="host_text">Ubuntu en <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · proxy reverso con HTTPS (Let's Encrypt) · subdominio propio vía Cloudflare DNS</div>
-  </div>
 </section>
 
 <section>
@@ -538,7 +520,40 @@ footer a{color:var(--ink)}
     </div>
 
     <p class="pts-p" data-i18n="wf1_pt3">No todo se puede o conviene traer por correo: <em>motores completos, cajas de cambio, piezas usadas o fluidos inflamables</em>. Gemini clasifica cada producto por peso y riesgo, pero <strong>a veces fallaba</strong>: se colaron motores completos con precios de millones. Por eso agregué un <strong>respaldo <button class='gloss' type='button' data-term='deterministic' aria-expanded='false' aria-controls='glossPopover'>determinístico</button></strong>: una lista de palabras prohibidas en portugués que fuerza el rechazo sin depender del criterio de la IA.</p>
+
+    <figure class="diagram">
+      <div class="shot-wrap"><div class="shot-scroll"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 440" role="img" aria-labelledby="iaSvgTitle iaSvgDesc"><title id="iaSvgTitle" data-i18n="svg_ia_title">Filtro de productos</title><desc id="iaSvgDesc" data-i18n="svg_ia_desc">Gemini clasifica cada producto y una regla fija de palabras prohibidas fuerza el rechazo; el resultado es rechazado, cotizar o aprobado.</desc><style>
+.th{font:500 14px -apple-system,"Segoe UI",Roboto,sans-serif}
+.ts{font:400 12px -apple-system,"Segoe UI",Roboto,sans-serif}
+.arr{stroke:#888780;stroke-width:1.5;fill:none}
+.gray rect{fill:#444441;stroke:#B4B2A9}.gray .th{fill:#F1EFE8}.gray .ts{fill:#D3D1C7}
+.purple rect{fill:#3C3489;stroke:#AFA9EC}.purple .th{fill:#EEEDFE}.purple .ts{fill:#CECBF6}
+.red rect{fill:#791F1F;stroke:#F09595}.red .th{fill:#FCEBEB}.red .ts{fill:#F7C1C1}
+.amber rect{fill:#633806;stroke:#EF9F27}.amber .th{fill:#FAEEDA}.amber .ts{fill:#FAC775}
+.green rect{fill:#27500A;stroke:#97C459}.green .th{fill:#EAF3DE}.green .ts{fill:#C0DD97}
+.lbls{fill:#D3D1C7}
+</style>
+<defs><marker id="iaArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="gray"><rect x="240" y="30" width="200" height="44" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_scraped" x="340.0" y="52.0" text-anchor="middle" dominant-baseline="central">Producto scrapeado</text></g><line x1="340" y1="74" x2="340" y2="106" class="arr" marker-end="url(#iaArrow)"/><g class="purple"><rect x="210" y="110" width="260" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_gemini_t" x="340.0" y="128" text-anchor="middle" dominant-baseline="central">Gemini clasifica</text><text class="ts" data-i18n="svg_ia_gemini_s" x="340.0" y="148" text-anchor="middle" dominant-baseline="central">Peso, tamaño y riesgo</text></g><line x1="340" y1="166" x2="340" y2="198" class="arr" marker-end="url(#iaArrow)"/><g class="gray"><rect x="190" y="202" width="300" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_backstop_t" x="340.0" y="220" text-anchor="middle" dominant-baseline="central">Respaldo determinístico</text><text class="ts" data-i18n="svg_ia_backstop_s" x="340.0" y="240" text-anchor="middle" dominant-baseline="central">Palabra prohibida: rechazo forzado</text></g><path d="M340 258 L340 286 L140 286 L140 314" class="arr" marker-end="url(#iaArrow)"/><line x1="340" y1="258" x2="340" y2="314" class="arr" marker-end="url(#iaArrow)"/><path d="M340 286 L540 286 L540 314" class="arr" marker-end="url(#iaArrow)"/><g class="red"><rect x="50" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_rejected_t" x="140.0" y="336" text-anchor="middle" dominant-baseline="central">Rechazado</text><text class="ts" data-i18n="svg_ia_rejected_s" x="140.0" y="356" text-anchor="middle" dominant-baseline="central">Motores, cajas, usados</text></g><g class="amber"><rect x="250" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_quote_t" x="340.0" y="336" text-anchor="middle" dominant-baseline="central">Cotizar</text><text class="ts" data-i18n="svg_ia_quote_s" x="340.0" y="356" text-anchor="middle" dominant-baseline="central">Más de 25 kg o 120 cm</text></g><g class="green"><rect x="450" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_approved_t" x="540.0" y="336" text-anchor="middle" dominant-baseline="central">Aprobado</text><text class="ts" data-i18n="svg_ia_approved_s" x="540.0" y="356" text-anchor="middle" dominant-baseline="central">Flete por Factor K</text></g><g class="purple"><rect x="190" y="400" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_ia_leg1" x="212" y="407" dominant-baseline="central">Criterio de la IA</text><g class="gray"><rect x="370" y="400" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_ia_leg2" x="392" y="407" dominant-baseline="central">Regla fija</text></svg></div></div>
+      <span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span>
+      <figcaption data-i18n="ia_caption">Gemini clasifica cada producto; una regla fija de respaldo puede forzar el rechazo aunque la IA no lo detecte.</figcaption>
+    </figure>
+
     <p class="pts-p" data-i18n="wf1_pt4">Con eso, cada producto aprobado recibe su precio. La idea es que cubra <strong>todo lo que cuesta traer la pieza</strong>, así que primero calculo el <em><button class='gloss' type='button' data-term='landedcost' aria-expanded='false' aria-controls='glossPopover'>costo landed</button></em>: (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + <button class='gloss' type='button' data-term='customsprovision' aria-expanded='false' aria-controls='glossPopover'>provisión aduanera</button> (IVA + arancel sobre el <button class='gloss' type='button' data-term='cif' aria-expanded='false' aria-controls='glossPopover'>CIF</button>). Sobre ese costo aplico mi margen.</p>
+
+    <figure class="diagram">
+      <div class="shot-wrap"><div class="shot-scroll"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 480" role="img" aria-labelledby="clSvgTitle clSvgDesc"><title id="clSvgTitle" data-i18n="svg_cl_title">Cómo se arma el precio</title><desc id="clSvgDesc" data-i18n="svg_cl_desc">Barra apilada: producto, flete interno, flete internacional y provisión aduanera forman el costo landed; encima va el margen.</desc><style>
+.th{font:500 14px -apple-system,"Segoe UI",Roboto,sans-serif}
+.ts{font:400 12px -apple-system,"Segoe UI",Roboto,sans-serif}
+.teal rect{fill:#085041;stroke:#5DCAA5}
+.coral rect{fill:#712B13;stroke:#F0997B}
+.lbl{fill:#F1EFE8}.lbls{fill:#D3D1C7}
+</style>
+<text class="th lbl" data-i18n="svg_cl_top" x="320" y="22" text-anchor="middle" dominant-baseline="central">Precio de venta</text><g class="teal"><rect x="240" y="40" width="160" height="60" stroke-width="0.5"/></g><line x1="404" y1="70.0" x2="428" y2="70.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_margin_t" x="436" y="61.0" dominant-baseline="central">Tu margen</text><text class="ts lbls" data-i18n="svg_cl_margin_s" x="436" y="79.0" dominant-baseline="central">Sobre el costo landed</text><g class="coral"><rect x="240" y="100" width="160" height="50" stroke-width="0.5"/></g><line x1="404" y1="125.0" x2="428" y2="125.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_customs_t" x="436" y="116.0" dominant-baseline="central">Provisión aduanera</text><text class="ts lbls" data-i18n="svg_cl_customs_s" x="436" y="134.0" dominant-baseline="central">IVA + arancel sobre el CIF</text><g class="coral"><rect x="240" y="150" width="160" height="70" stroke-width="0.5"/></g><line x1="404" y1="185.0" x2="428" y2="185.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_intl_t" x="436" y="176.0" dominant-baseline="central">Flete internacional</text><text class="ts lbls" data-i18n="svg_cl_intl_s" x="436" y="194.0" dominant-baseline="central">Peso cobrable × Factor K</text><g class="coral"><rect x="240" y="220" width="160" height="30" stroke-width="0.5"/></g><line x1="404" y1="235.0" x2="428" y2="235.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_local_t" x="436" y="226.0" dominant-baseline="central">Flete interno</text><text class="ts lbls" data-i18n="svg_cl_local_s" x="436" y="244.0" dominant-baseline="central">Proveedor → casa del socio</text><g class="coral"><rect x="240" y="250" width="160" height="180" stroke-width="0.5"/></g><line x1="404" y1="340.0" x2="428" y2="340.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_product_t" x="436" y="331.0" dominant-baseline="central">Producto</text><text class="ts lbls" data-i18n="svg_cl_product_s" x="436" y="349.0" dominant-baseline="central">Precio BRL × tipo de cambio</text><path d="M228 102 L220 102 L220 428 L228 428" fill="none" stroke="#888780" stroke-width="1"/><text class="th lbl" data-i18n="svg_cl_bracket_t" x="208" y="256" text-anchor="end" dominant-baseline="central">Costo landed</text><text class="ts lbls" data-i18n="svg_cl_bracket_s1" x="208" y="274" text-anchor="end" dominant-baseline="central">Todo lo que cuesta</text><text class="ts lbls" data-i18n="svg_cl_bracket_s2" x="208" y="290" text-anchor="end" dominant-baseline="central">traer la pieza</text><text class="ts lbls" data-i18n="svg_cl_footnote" x="320" y="456" text-anchor="middle" dominant-baseline="central">Proporciones ilustrativas</text></svg></div></div>
+      <span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span>
+      <figcaption data-i18n="cl_caption">El costo landed suma producto, fletes y provisión aduanera; el margen va encima.</figcaption>
+    </figure>
+
     <div class="tbl">
       <table>
         <thead><tr><th data-i18n="tbl1_h1">Regla</th><th data-i18n="tbl1_h2">Criterio</th><th data-i18n="tbl1_h3">Resultado</th></tr></thead>

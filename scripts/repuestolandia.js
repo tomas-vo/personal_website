@@ -55,19 +55,58 @@ const rlTranslations = {
 
     h2_arquitectura: "Arquitectura",
     sub_arquitectura: "Esta es la foto completa antes de entrar en detalle. Todo corre en un solo servidor: Google Sheets funciona como base de datos intermedia (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) y como libro de ventas, <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orquesta cada paso, y Shopify guarda los datos estructurados de cada producto.",
-    arch_aria: "Flujo: proveedores brasileños a Google Sheets, a n8n con Gemini, a Shopify; cada venta dispara un chequeo de stock contra el proveedor",
-    box1_small: "Fuente · manual",
-    box1_body: "Webs de proveedores en Brasil<br>(script en Chrome)",
-    box2_small: "Staging",
-    box2_body: "Google Sheets<br>(catálogo crudo)",
-    box3_small: "Orquestación",
-    box3_body: "n8n + <button class='gloss' type='button' data-term='api' aria-expanded='false' aria-controls='glossPopover'>API</button> de <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button>",
-    box4_small: "Venta",
-    box4_body: "Shopify<br>(etiquetas + metacampos)",
-    box5_small: "Contabilidad",
-    box5_body: "Sheets de ventas<br>(márgenes + seguimiento)",
-    loop_text: "Y cada venta en Shopify dispara dos <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflows</button> al mismo tiempo: uno hace el chequeo de stock en la web del proveedor, y el otro registra la venta con su desglose de costos en Google Sheets.",
+    svg_arch_title: "Arquitectura de Repuestolandia",
+    svg_arch_desc: "Del scraper a Shopify; cada venta dispara en paralelo el chequeo de stock y el registro de ventas.",
+    svg_arch_b1_t: "Scraper en Chrome",
+    svg_arch_b1_s: "Único paso manual",
+    svg_arch_b2_t: "Google Sheets",
+    svg_arch_b2_s: "Catálogo crudo",
+    svg_arch_b3_t: "Workflow 1 · n8n + Gemini",
+    svg_arch_b3_s: "Traduce, filtra y pone precio",
+    svg_arch_b4_t: "Shopify",
+    svg_arch_b4_s: "Cliente hace un pedido",
+    svg_arch_b5_t: "Workflow 2 · stock",
+    svg_arch_b5_s: "Si se agotó, inventario 0",
+    svg_arch_b6_t: "Workflow 3 · ventas",
+    svg_arch_b6_s: "Fila con costos en Sheets",
+    svg_arch_leg1: "Arma el catálogo",
+    svg_arch_leg2: "Corre con cada venta",
+    arch_caption: "Cada venta en Shopify dispara los workflows 2 y 3 en paralelo.",
     host_text: "Ubuntu en <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · proxy reverso con HTTPS (Let's Encrypt) · subdominio propio vía Cloudflare DNS",
+    svg_ia_title: "Filtro de productos",
+    svg_ia_desc: "Gemini clasifica cada producto y una regla fija de palabras prohibidas fuerza el rechazo; el resultado es rechazado, cotizar o aprobado.",
+    svg_ia_scraped: "Producto scrapeado",
+    svg_ia_gemini_t: "Gemini clasifica",
+    svg_ia_gemini_s: "Peso, tamaño y riesgo",
+    svg_ia_backstop_t: "Respaldo determinístico",
+    svg_ia_backstop_s: "Palabra prohibida: rechazo forzado",
+    svg_ia_rejected_t: "Rechazado",
+    svg_ia_rejected_s: "Motores, cajas, usados",
+    svg_ia_quote_t: "Cotizar",
+    svg_ia_quote_s: "Más de 25 kg o 120 cm",
+    svg_ia_approved_t: "Aprobado",
+    svg_ia_approved_s: "Flete por Factor K",
+    svg_ia_leg1: "Criterio de la IA",
+    svg_ia_leg2: "Regla fija",
+    ia_caption: "Gemini clasifica cada producto; una regla fija de respaldo puede forzar el rechazo aunque la IA no lo detecte.",
+    svg_cl_title: "Cómo se arma el precio",
+    svg_cl_desc: "Barra apilada: producto, flete interno, flete internacional y provisión aduanera forman el costo landed; encima va el margen.",
+    svg_cl_top: "Precio de venta",
+    svg_cl_margin_t: "Tu margen",
+    svg_cl_margin_s: "Sobre el costo landed",
+    svg_cl_customs_t: "Provisión aduanera",
+    svg_cl_customs_s: "IVA + arancel sobre el CIF",
+    svg_cl_intl_t: "Flete internacional",
+    svg_cl_intl_s: "Peso cobrable × Factor K",
+    svg_cl_local_t: "Flete interno",
+    svg_cl_local_s: "Proveedor → casa del socio",
+    svg_cl_product_t: "Producto",
+    svg_cl_product_s: "Precio BRL × tipo de cambio",
+    svg_cl_bracket_t: "Costo landed",
+    svg_cl_bracket_s1: "Todo lo que cuesta",
+    svg_cl_bracket_s2: "traer la pieza",
+    svg_cl_footnote: "Proporciones ilustrativas",
+    cl_caption: "El costo landed suma producto, fletes y provisión aduanera; el margen va encima.",
 
     h2_workflows: "Los tres workflows",
     sub_workflows: "Ahora, paso a paso: qué hace cada <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button>, qué problema resuelve y cómo lo construí.",
@@ -266,19 +305,58 @@ const rlTranslations = {
 
     h2_arquitectura: "Architecture",
     sub_arquitectura: "This is the full picture before getting into detail. Everything runs on a single server: Google Sheets works as the intermediate database (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) and as the sales ledger, <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orchestrates every step, and Shopify stores the structured data for each product.",
-    arch_aria: "Flow: Brazilian suppliers to Google Sheets, to n8n with Gemini, to Shopify; every sale triggers a stock check against the supplier",
-    box1_small: "Source · manual",
-    box1_body: "Brazilian supplier websites<br>(Chrome script)",
-    box2_small: "Staging",
-    box2_body: "Google Sheets<br>(raw catalog)",
-    box3_small: "Orchestration",
-    box3_body: "n8n + <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button> <button class='gloss' type='button' data-term='api' aria-expanded='false' aria-controls='glossPopover'>API</button>",
-    box4_small: "Sale",
-    box4_body: "Shopify<br>(tags + metafields)",
-    box5_small: "Accounting",
-    box5_body: "Sales sheet<br>(margins + tracking)",
-    loop_text: "And every sale on Shopify triggers two <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflows</button> at the same time: one checks stock on the supplier's website, and the other logs the sale with its cost breakdown in Google Sheets.",
+    svg_arch_title: "Repuestolandia's architecture",
+    svg_arch_desc: "From the scraper to Shopify; every sale triggers the stock check and the sales log in parallel.",
+    svg_arch_b1_t: "Chrome scraper",
+    svg_arch_b1_s: "Only manual step",
+    svg_arch_b2_t: "Google Sheets",
+    svg_arch_b2_s: "Raw catalog",
+    svg_arch_b3_t: "Workflow 1 · n8n + Gemini",
+    svg_arch_b3_s: "Translates, filters, sets price",
+    svg_arch_b4_t: "Shopify",
+    svg_arch_b4_s: "Customer places an order",
+    svg_arch_b5_t: "Workflow 2 · stock",
+    svg_arch_b5_s: "If sold out, inventory to 0",
+    svg_arch_b6_t: "Workflow 3 · sales",
+    svg_arch_b6_s: "Row with costs in Sheets",
+    svg_arch_leg1: "Builds the catalog",
+    svg_arch_leg2: "Runs on every sale",
+    arch_caption: "Every sale on Shopify triggers workflows 2 and 3 in parallel.",
     host_text: "Ubuntu on a <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · reverse proxy with HTTPS (Let's Encrypt) · own subdomain via Cloudflare DNS",
+    svg_ia_title: "Product filter",
+    svg_ia_desc: "Gemini classifies every product and a fixed banned-words rule can force a rejection; the outcome is rejected, quote, or approved.",
+    svg_ia_scraped: "Scraped product",
+    svg_ia_gemini_t: "Gemini classifies",
+    svg_ia_gemini_s: "Weight, size, and risk",
+    svg_ia_backstop_t: "Deterministic backstop",
+    svg_ia_backstop_s: "Banned word: forced rejection",
+    svg_ia_rejected_t: "Rejected",
+    svg_ia_rejected_s: "Engines, transmissions, used parts",
+    svg_ia_quote_t: "Quote",
+    svg_ia_quote_s: "Over 25 kg or 120 cm",
+    svg_ia_approved_t: "Approved",
+    svg_ia_approved_s: "Freight via Factor K",
+    svg_ia_leg1: "AI's judgment",
+    svg_ia_leg2: "Fixed rule",
+    ia_caption: "Gemini classifies every product; a fixed backstop rule can force a rejection even if the AI misses it.",
+    svg_cl_title: "How the price is built",
+    svg_cl_desc: "Stacked bar: product, domestic freight, international freight, and customs provision make up the landed cost; the margin sits on top.",
+    svg_cl_top: "Sale price",
+    svg_cl_margin_t: "Your margin",
+    svg_cl_margin_s: "On top of the landed cost",
+    svg_cl_customs_t: "Customs provision",
+    svg_cl_customs_s: "VAT + duty on the CIF value",
+    svg_cl_intl_t: "International freight",
+    svg_cl_intl_s: "Billable weight × Factor K",
+    svg_cl_local_t: "Domestic freight",
+    svg_cl_local_s: "Supplier → partner's home",
+    svg_cl_product_t: "Product",
+    svg_cl_product_s: "BRL price × exchange rate",
+    svg_cl_bracket_t: "Landed cost",
+    svg_cl_bracket_s1: "Everything it costs",
+    svg_cl_bracket_s2: "to bring the part in",
+    svg_cl_footnote: "Illustrative proportions",
+    cl_caption: "The landed cost adds up the product, both freights, and customs provision; the margin sits on top.",
 
     h2_workflows: "The three workflows",
     sub_workflows: "Now, step by step: what each <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button> does, what problem it solves, and how I built it.",
@@ -477,19 +555,58 @@ const rlTranslations = {
 
     h2_arquitectura: "Arquitetura",
     sub_arquitectura: "Esta é a foto completa antes de entrar em detalhes. Tudo roda em um único servidor: o Google Sheets funciona como banco de dados intermediário (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) e como livro de vendas, o <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orquestra cada etapa, e a Shopify guarda os dados estruturados de cada produto.",
-    arch_aria: "Fluxo: fornecedores brasileiros para o Google Sheets, para o n8n com Gemini, para a Shopify; cada venda dispara uma checagem de estoque contra o fornecedor",
-    box1_small: "Fonte · manual",
-    box1_body: "Sites de fornecedores no Brasil<br>(script no Chrome)",
-    box2_small: "Staging",
-    box2_body: "Google Sheets<br>(catálogo bruto)",
-    box3_small: "Orquestração",
-    box3_body: "n8n + <button class='gloss' type='button' data-term='api' aria-expanded='false' aria-controls='glossPopover'>API</button> do <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button>",
-    box4_small: "Venda",
-    box4_body: "Shopify<br>(tags + metacampos)",
-    box5_small: "Contabilidade",
-    box5_body: "Sheets de vendas<br>(margens + acompanhamento)",
-    loop_text: "E cada venda na Shopify dispara dois <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflows</button> ao mesmo tempo: um faz a checagem de estoque no site do fornecedor, e o outro registra a venda com seu detalhamento de custos no Google Sheets.",
+    svg_arch_title: "Arquitetura da Repuestolandia",
+    svg_arch_desc: "Do scraper até a Shopify; cada venda dispara em paralelo a checagem de estoque e o registro de vendas.",
+    svg_arch_b1_t: "Scraper no Chrome",
+    svg_arch_b1_s: "Único passo manual",
+    svg_arch_b2_t: "Google Sheets",
+    svg_arch_b2_s: "Catálogo bruto",
+    svg_arch_b3_t: "Workflow 1 · n8n + Gemini",
+    svg_arch_b3_s: "Traduz, filtra e define o preço",
+    svg_arch_b4_t: "Shopify",
+    svg_arch_b4_s: "Cliente faz um pedido",
+    svg_arch_b5_t: "Workflow 2 · estoque",
+    svg_arch_b5_s: "Se esgotou, estoque em 0",
+    svg_arch_b6_t: "Workflow 3 · vendas",
+    svg_arch_b6_s: "Linha com custos no Sheets",
+    svg_arch_leg1: "Monta o catálogo",
+    svg_arch_leg2: "Roda a cada venda",
+    arch_caption: "Cada venda na Shopify dispara os workflows 2 e 3 em paralelo.",
     host_text: "Ubuntu em <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · proxy reverso com HTTPS (Let's Encrypt) · subdomínio próprio via Cloudflare DNS",
+    svg_ia_title: "Filtro de produtos",
+    svg_ia_desc: "O Gemini classifica cada produto e uma regra fixa de palavras proibidas força a rejeição; o resultado é rejeitado, cotar ou aprovado.",
+    svg_ia_scraped: "Produto raspado",
+    svg_ia_gemini_t: "Gemini classifica",
+    svg_ia_gemini_s: "Peso, tamanho e risco",
+    svg_ia_backstop_t: "Respaldo determinístico",
+    svg_ia_backstop_s: "Palavra proibida: rejeição forçada",
+    svg_ia_rejected_t: "Rejeitado",
+    svg_ia_rejected_s: "Motores, câmbios, usados",
+    svg_ia_quote_t: "Cotar",
+    svg_ia_quote_s: "Mais de 25 kg ou 120 cm",
+    svg_ia_approved_t: "Aprovado",
+    svg_ia_approved_s: "Frete pelo Fator K",
+    svg_ia_leg1: "Critério da IA",
+    svg_ia_leg2: "Regra fixa",
+    ia_caption: "O Gemini classifica cada produto; uma regra fixa de respaldo pode forçar a rejeição mesmo que a IA não perceba.",
+    svg_cl_title: "Como o preço é montado",
+    svg_cl_desc: "Barra empilhada: produto, frete interno, frete internacional e provisão aduaneira formam o custo landed; a margem fica em cima.",
+    svg_cl_top: "Preço de venda",
+    svg_cl_margin_t: "Sua margem",
+    svg_cl_margin_s: "Sobre o custo landed",
+    svg_cl_customs_t: "Provisão aduaneira",
+    svg_cl_customs_s: "IVA + tarifa sobre o CIF",
+    svg_cl_intl_t: "Frete internacional",
+    svg_cl_intl_s: "Peso cobrável × Fator K",
+    svg_cl_local_t: "Frete interno",
+    svg_cl_local_s: "Fornecedor → casa do sócio",
+    svg_cl_product_t: "Produto",
+    svg_cl_product_s: "Preço em BRL × câmbio",
+    svg_cl_bracket_t: "Custo landed",
+    svg_cl_bracket_s1: "Tudo o que custa",
+    svg_cl_bracket_s2: "trazer a peça",
+    svg_cl_footnote: "Proporções ilustrativas",
+    cl_caption: "O custo landed soma o produto, os fretes e a provisão aduaneira; a margem fica em cima.",
 
     h2_workflows: "Os três workflows",
     sub_workflows: "Agora, passo a passo: o que cada <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button> faz, que problema resolve e como eu o construí.",
@@ -688,19 +805,58 @@ const rlTranslations = {
 
     h2_arquitectura: "Architecture",
     sub_arquitectura: "Voici la vue d'ensemble avant d'entrer dans le détail. Tout tourne sur un seul serveur : Google Sheets sert de base de données intermédiaire (<button class='gloss' type='button' data-term='staging' aria-expanded='false' aria-controls='glossPopover'>staging</button>) et de livre de ventes, <button class='gloss' type='button' data-term='n8n' aria-expanded='false' aria-controls='glossPopover'>n8n</button> orchestre chaque étape, et Shopify stocke les données structurées de chaque produit.",
-    arch_aria: "Flux : fournisseurs brésiliens vers Google Sheets, vers n8n avec Gemini, vers Shopify ; chaque vente déclenche une vérification de stock auprès du fournisseur",
-    box1_small: "Source · manuel",
-    box1_body: "Sites des fournisseurs au Brésil<br>(script Chrome)",
-    box2_small: "Staging",
-    box2_body: "Google Sheets<br>(catalogue brut)",
-    box3_small: "Orchestration",
-    box3_body: "n8n + <button class='gloss' type='button' data-term='api' aria-expanded='false' aria-controls='glossPopover'>API</button> <button class='gloss' type='button' data-term='gemini' aria-expanded='false' aria-controls='glossPopover'>Gemini</button>",
-    box4_small: "Vente",
-    box4_body: "Shopify<br>(tags + métachamps)",
-    box5_small: "Comptabilité",
-    box5_body: "Sheets des ventes<br>(marges + suivi)",
-    loop_text: "Et chaque vente sur Shopify déclenche deux <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflows</button> en même temps : l'un vérifie le stock sur le site du fournisseur, et l'autre enregistre la vente avec son détail de coûts dans Google Sheets.",
+    svg_arch_title: "Architecture de Repuestolandia",
+    svg_arch_desc: "Du scraper à Shopify ; chaque vente déclenche en parallèle la vérification de stock et l'enregistrement de la vente.",
+    svg_arch_b1_t: "Scraper Chrome",
+    svg_arch_b1_s: "Seule étape manuelle",
+    svg_arch_b2_t: "Google Sheets",
+    svg_arch_b2_s: "Catalogue brut",
+    svg_arch_b3_t: "Workflow 1 · n8n + Gemini",
+    svg_arch_b3_s: "Traduit, filtre et fixe le prix",
+    svg_arch_b4_t: "Shopify",
+    svg_arch_b4_s: "Le client passe commande",
+    svg_arch_b5_t: "Workflow 2 · stock",
+    svg_arch_b5_s: "Si épuisé, stock à 0",
+    svg_arch_b6_t: "Workflow 3 · ventes",
+    svg_arch_b6_s: "Ligne avec coûts dans Sheets",
+    svg_arch_leg1: "Construit le catalogue",
+    svg_arch_leg2: "S'exécute à chaque vente",
+    arch_caption: "Chaque vente sur Shopify déclenche les workflows 2 et 3 en parallèle.",
     host_text: "Ubuntu sur un <button class='gloss' type='button' data-term='vps' aria-expanded='false' aria-controls='glossPopover'>VPS</button> · <button class='gloss' type='button' data-term='docker' aria-expanded='false' aria-controls='glossPopover'>Docker</button> Compose · proxy inverse avec HTTPS (Let's Encrypt) · sous-domaine propre via Cloudflare DNS",
+    svg_ia_title: "Filtre de produits",
+    svg_ia_desc: "Gemini classe chaque produit et une règle fixe de mots interdits peut forcer le rejet ; le résultat est rejeté, à devis, ou approuvé.",
+    svg_ia_scraped: "Produit scrapé",
+    svg_ia_gemini_t: "Gemini classe",
+    svg_ia_gemini_s: "Poids, taille et risque",
+    svg_ia_backstop_t: "Filet déterministe",
+    svg_ia_backstop_s: "Mot interdit : rejet forcé",
+    svg_ia_rejected_t: "Rejeté",
+    svg_ia_rejected_s: "Moteurs, boîtes, pièces usagées",
+    svg_ia_quote_t: "Sur devis",
+    svg_ia_quote_s: "Plus de 25 kg ou 120 cm",
+    svg_ia_approved_t: "Approuvé",
+    svg_ia_approved_s: "Fret selon le Facteur K",
+    svg_ia_leg1: "Jugement de l'IA",
+    svg_ia_leg2: "Règle fixe",
+    ia_caption: "Gemini classe chaque produit ; une règle fixe de secours peut forcer le rejet même si l'IA ne le détecte pas.",
+    svg_cl_title: "Comment le prix est construit",
+    svg_cl_desc: "Barre empilée : produit, fret interne, fret international et provision douanière forment le coût landed ; la marge vient au-dessus.",
+    svg_cl_top: "Prix de vente",
+    svg_cl_margin_t: "Votre marge",
+    svg_cl_margin_s: "Sur le coût landed",
+    svg_cl_customs_t: "Provision douanière",
+    svg_cl_customs_s: "TVA + droits sur la valeur CIF",
+    svg_cl_intl_t: "Fret international",
+    svg_cl_intl_s: "Poids facturable × Facteur K",
+    svg_cl_local_t: "Fret interne",
+    svg_cl_local_s: "Fournisseur → domicile du partenaire",
+    svg_cl_product_t: "Produit",
+    svg_cl_product_s: "Prix en BRL × taux de change",
+    svg_cl_bracket_t: "Coût landed",
+    svg_cl_bracket_s1: "Tout ce que coûte",
+    svg_cl_bracket_s2: "l'importation de la pièce",
+    svg_cl_footnote: "Proportions illustratives",
+    cl_caption: "Le coût landed additionne le produit, les deux frets et la provision douanière ; la marge vient au-dessus.",
 
     h2_workflows: "Les trois workflows",
     sub_workflows: "Maintenant, étape par étape : ce que fait chaque <button class='gloss' type='button' data-term='workflow' aria-expanded='false' aria-controls='glossPopover'>workflow</button>, quel problème il résout et comment je l'ai construit.",
@@ -922,7 +1078,9 @@ function setRlLanguage(lang){
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (dict[key] !== undefined) el.innerHTML = dict[key];
+    if (dict[key] === undefined) return;
+    if (el.namespaceURI === "http://www.w3.org/2000/svg") el.textContent = dict[key];
+    else el.innerHTML = dict[key];
   });
   document.querySelectorAll("[data-i18n-label]").forEach(el => {
     const key = el.getAttribute("data-i18n-label");
@@ -969,7 +1127,7 @@ const rlRevealObserver = new IntersectionObserver((entries) => {
       rlRevealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.01 });
 rlRevealEls.forEach(el => rlRevealObserver.observe(el));
 
 /* ==========================================================
@@ -977,36 +1135,43 @@ rlRevealEls.forEach(el => rlRevealObserver.observe(el));
    ========================================================== */
 const rlStatEls = document.querySelectorAll(".stat b[data-count]");
 const rlStatElList = Array.from(rlStatEls);
-const rlStatObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    // Delay start so the count kicks in right as the tile's own fade-in
-    // settles, instead of racing it — makes the growth easy to catch.
-    const delay = 250 + rlStatElList.indexOf(el) * 130;
-    window.setTimeout(() => {
-      const target = parseInt(el.getAttribute("data-count"), 10);
-      const prefix = el.getAttribute("data-prefix") || "";
-      const suffix = el.getAttribute("data-suffix") || "";
-      const duration = 1500;
-      const start = performance.now();
-      function tick(now){
-        const t = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        const value = Math.round(target * eased);
-        el.textContent = prefix + value + suffix;
-        if (t < 1){
-          requestAnimationFrame(tick);
-        } else {
-          el.classList.add("counted");
+const rlPrefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!rlPrefersReducedMotion){
+  const rlStatObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      // Delay start so the count kicks in right as the tile's own fade-in
+      // settles, instead of racing it — makes the growth easy to catch.
+      const delay = 250 + rlStatElList.indexOf(el) * 130;
+      window.setTimeout(() => {
+        const target = parseInt(el.getAttribute("data-count"), 10);
+        const prefix = el.getAttribute("data-prefix") || "";
+        const suffix = el.getAttribute("data-suffix") || "";
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now){
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const value = Math.round(target * eased);
+          el.textContent = prefix + value + suffix;
+          if (t < 1){
+            requestAnimationFrame(tick);
+          } else {
+            el.classList.add("counted");
+          }
         }
-      }
-      requestAnimationFrame(tick);
-    }, delay);
-    rlStatObserver.unobserve(el);
-  });
-}, { threshold: 0.4 });
-rlStatEls.forEach(el => rlStatObserver.observe(el));
+        // Empieza desde 0 recién ahora: hasta este punto el HTML ya
+        // mostraba el valor final, para lectores de pantalla y vistas
+        // previas sin JS.
+        el.textContent = prefix + "0" + suffix;
+        requestAnimationFrame(tick);
+      }, delay);
+      rlStatObserver.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  rlStatEls.forEach(el => rlStatObserver.observe(el));
+}
 
 /* ==========================================================
    Diagrama de arquitectura: secuencia al entrar en pantalla
