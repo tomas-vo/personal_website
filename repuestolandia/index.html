@@ -259,8 +259,9 @@ tbody tr:hover{background:var(--node)}
 .shot figcaption{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:6px}
 /* diagramas SVG inline */
 .diagram{margin:16px 0 4px}
-.diagram .shot-scroll{background:var(--surface);border:1px solid var(--line);padding:16px}
-.diagram svg{display:block;width:100%;height:auto}
+.diagram .shot-wrap{max-width:600px;margin-inline:auto}
+.diagram .shot-scroll{background:var(--surface);border:1px solid var(--line);padding:12px}
+.diagram svg{display:block;width:100%;height:auto;pointer-events:none}
 @media (max-width:720px){.diagram svg{width:640px;max-width:none}}
 /* shopify section */
 .shop{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
@@ -519,6 +520,8 @@ footer a{color:var(--ink)}
       </div>
     </div>
 
+    <div class="split">
+    <h4 data-i18n="h4_filtro">Filtro de productos</h4>
     <p class="pts-p" data-i18n="wf1_pt3">No todo se puede o conviene traer por correo: <em>motores completos, cajas de cambio, piezas usadas o fluidos inflamables</em>. Gemini clasifica cada producto por peso y riesgo, pero <strong>a veces fallaba</strong>: se colaron motores completos con precios de millones. Por eso agregué un <strong>respaldo <button class='gloss' type='button' data-term='deterministic' aria-expanded='false' aria-controls='glossPopover'>determinístico</button></strong>: una lista de palabras prohibidas en portugués que fuerza el rechazo sin depender del criterio de la IA.</p>
 
     <figure class="diagram">
@@ -536,9 +539,11 @@ footer a{color:var(--ink)}
 <defs><marker id="iaArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
 <g class="gray"><rect x="240" y="30" width="200" height="44" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_scraped" x="340.0" y="52.0" text-anchor="middle" dominant-baseline="central">Producto scrapeado</text></g><line x1="340" y1="74" x2="340" y2="106" class="arr" marker-end="url(#iaArrow)"/><g class="purple"><rect x="210" y="110" width="260" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_gemini_t" x="340.0" y="128" text-anchor="middle" dominant-baseline="central">Gemini clasifica</text><text class="ts" data-i18n="svg_ia_gemini_s" x="340.0" y="148" text-anchor="middle" dominant-baseline="central">Peso, tamaño y riesgo</text></g><line x1="340" y1="166" x2="340" y2="198" class="arr" marker-end="url(#iaArrow)"/><g class="gray"><rect x="190" y="202" width="300" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_backstop_t" x="340.0" y="220" text-anchor="middle" dominant-baseline="central">Respaldo determinístico</text><text class="ts" data-i18n="svg_ia_backstop_s" x="340.0" y="240" text-anchor="middle" dominant-baseline="central">Palabra prohibida: rechazo forzado</text></g><path d="M340 258 L340 286 L140 286 L140 314" class="arr" marker-end="url(#iaArrow)"/><line x1="340" y1="258" x2="340" y2="314" class="arr" marker-end="url(#iaArrow)"/><path d="M340 286 L540 286 L540 314" class="arr" marker-end="url(#iaArrow)"/><g class="red"><rect x="50" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_rejected_t" x="140.0" y="336" text-anchor="middle" dominant-baseline="central">Rechazado</text><text class="ts" data-i18n="svg_ia_rejected_s" x="140.0" y="356" text-anchor="middle" dominant-baseline="central">Motores, cajas, usados</text></g><g class="amber"><rect x="250" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_quote_t" x="340.0" y="336" text-anchor="middle" dominant-baseline="central">Cotizar</text><text class="ts" data-i18n="svg_ia_quote_s" x="340.0" y="356" text-anchor="middle" dominant-baseline="central">Más de 25 kg o 120 cm</text></g><g class="green"><rect x="450" y="318" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" data-i18n="svg_ia_approved_t" x="540.0" y="336" text-anchor="middle" dominant-baseline="central">Aprobado</text><text class="ts" data-i18n="svg_ia_approved_s" x="540.0" y="356" text-anchor="middle" dominant-baseline="central">Flete por Factor K</text></g><g class="purple"><rect x="190" y="400" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_ia_leg1" x="212" y="407" dominant-baseline="central">Criterio de la IA</text><g class="gray"><rect x="370" y="400" width="14" height="14" rx="3" stroke-width="0.5"/></g><text class="ts lbls" data-i18n="svg_ia_leg2" x="392" y="407" dominant-baseline="central">Regla fija</text></svg></div></div>
       <span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span>
-      <figcaption data-i18n="ia_caption">Gemini clasifica cada producto; una regla fija de respaldo puede forzar el rechazo aunque la IA no lo detecte.</figcaption>
     </figure>
+    </div>
 
+    <div class="split">
+    <h4 data-i18n="h4_costo">Cómo se arma el precio</h4>
     <p class="pts-p" data-i18n="wf1_pt4">Con eso, cada producto aprobado recibe su precio. La idea es que cubra <strong>todo lo que cuesta traer la pieza</strong>, así que primero calculo el <em><button class='gloss' type='button' data-term='landedcost' aria-expanded='false' aria-controls='glossPopover'>costo landed</button></em>: (costo BRL + flete interno) × tipo de cambio + flete internacional volumétrico + <button class='gloss' type='button' data-term='customsprovision' aria-expanded='false' aria-controls='glossPopover'>provisión aduanera</button> (IVA + arancel sobre el <button class='gloss' type='button' data-term='cif' aria-expanded='false' aria-controls='glossPopover'>CIF</button>). Sobre ese costo aplico mi margen.</p>
 
     <figure class="diagram">
@@ -551,19 +556,9 @@ footer a{color:var(--ink)}
 </style>
 <text class="th lbl" data-i18n="svg_cl_top" x="320" y="22" text-anchor="middle" dominant-baseline="central">Precio de venta</text><g class="teal"><rect x="240" y="40" width="160" height="60" stroke-width="0.5"/></g><line x1="404" y1="70.0" x2="428" y2="70.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_margin_t" x="436" y="61.0" dominant-baseline="central">Tu margen</text><text class="ts lbls" data-i18n="svg_cl_margin_s" x="436" y="79.0" dominant-baseline="central">Sobre el costo landed</text><g class="coral"><rect x="240" y="100" width="160" height="50" stroke-width="0.5"/></g><line x1="404" y1="125.0" x2="428" y2="125.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_customs_t" x="436" y="116.0" dominant-baseline="central">Provisión aduanera</text><text class="ts lbls" data-i18n="svg_cl_customs_s" x="436" y="134.0" dominant-baseline="central">IVA + arancel sobre el CIF</text><g class="coral"><rect x="240" y="150" width="160" height="70" stroke-width="0.5"/></g><line x1="404" y1="185.0" x2="428" y2="185.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_intl_t" x="436" y="176.0" dominant-baseline="central">Flete internacional</text><text class="ts lbls" data-i18n="svg_cl_intl_s" x="436" y="194.0" dominant-baseline="central">Peso cobrable × Factor K</text><g class="coral"><rect x="240" y="220" width="160" height="30" stroke-width="0.5"/></g><line x1="404" y1="235.0" x2="428" y2="235.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_local_t" x="436" y="226.0" dominant-baseline="central">Flete interno</text><text class="ts lbls" data-i18n="svg_cl_local_s" x="436" y="244.0" dominant-baseline="central">Proveedor → casa del socio</text><g class="coral"><rect x="240" y="250" width="160" height="180" stroke-width="0.5"/></g><line x1="404" y1="340.0" x2="428" y2="340.0" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/><text class="th lbl" data-i18n="svg_cl_product_t" x="436" y="331.0" dominant-baseline="central">Producto</text><text class="ts lbls" data-i18n="svg_cl_product_s" x="436" y="349.0" dominant-baseline="central">Precio BRL × tipo de cambio</text><path d="M228 102 L220 102 L220 428 L228 428" fill="none" stroke="#888780" stroke-width="1"/><text class="th lbl" data-i18n="svg_cl_bracket_t" x="208" y="256" text-anchor="end" dominant-baseline="central">Costo landed</text><text class="ts lbls" data-i18n="svg_cl_bracket_s1" x="208" y="274" text-anchor="end" dominant-baseline="central">Todo lo que cuesta</text><text class="ts lbls" data-i18n="svg_cl_bracket_s2" x="208" y="290" text-anchor="end" dominant-baseline="central">traer la pieza</text><text class="ts lbls" data-i18n="svg_cl_footnote" x="320" y="456" text-anchor="middle" dominant-baseline="central">Proporciones ilustrativas</text></svg></div></div>
       <span class="shot-hint" data-i18n="shot_hint" aria-hidden="true">desliza →</span>
-      <figcaption data-i18n="cl_caption">El costo landed suma producto, fletes y provisión aduanera; el margen va encima.</figcaption>
     </figure>
-
-    <div class="tbl">
-      <table>
-        <thead><tr><th data-i18n="tbl1_h1">Regla</th><th data-i18n="tbl1_h2">Criterio</th><th data-i18n="tbl1_h3">Resultado</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="tbl1_r1_regla">Riesgo</td><td data-i18n="tbl1_r1_criterio">Motores completos, cajas de cambio, piezas usadas, fluidos inflamables</td><td><span class="pill bad">RECHAZADO</span></td></tr>
-          <tr><td data-i18n="tbl1_r2_regla">Peso / tamaño</td><td class="n" data-i18n="tbl1_r2_criterio">&gt; 25 kg o &gt; 120 cm</td><td><span class="pill q">COTIZAR</span> <span data-i18n="tbl1_r2_resultado">borrador con etiqueta</span></td></tr>
-          <tr><td data-i18n="tbl1_r3_regla">Resto</td><td data-i18n="tbl1_r3_criterio">Piezas permitidas</td><td><span class="pill ok">APROBADO</span> <span data-i18n="tbl1_r3_resultado">con flete por <button class='gloss' type='button' data-term='factork' aria-expanded='false' aria-controls='glossPopover'>Factor K</button></span></td></tr>
-        </tbody>
-      </table>
     </div>
+
     <div class="split">
       <h4 data-i18n="h4_envio">Estimación del envío por producto</h4>
       <p data-i18n="p_envio">El envío es lo más difícil de estimar: los proveedores no publican peso ni medidas, y Correios cobra por peso volumétrico, es decir, también por el espacio que ocupa la caja. Por eso Gemini estima el <strong>peso real</strong> y clasifica el tamaño de la pieza, y con eso calculo el <strong><button class='gloss' type='button' data-term='billableweight' aria-expanded='false' aria-controls='glossPopover'>peso cobrable</button></strong> y el flete internacional:</p>
